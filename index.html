@@ -190,8 +190,9 @@ label{display:block;margin:8px 0 3px}
 @keyframes flash{0%{opacity:0}25%{opacity:1}100%{opacity:0}}
 
 /* ---------- the 2026 site (every rule scoped under #modern) ---------- */
-#modern{position:fixed;inset:0;z-index:9000;display:none;overflow-y:auto;overflow-x:hidden;background:#0b0b0c;color:#ededed;font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.6;user-select:text;-webkit-user-select:text;scroll-behavior:smooth;--acc:#c6ff3a;--mut:#9d9da6;--line:rgba(255,255,255,.1);--card:#141416;--paper:#ecebe3;--ink:#16160f;--olive:#3d5700}
+#modern{position:fixed;inset:0;z-index:9100;display:none;overflow-y:auto;overflow-x:hidden;background:#0b0b0c;color:#ededed;font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.6;user-select:text;-webkit-user-select:text;scroll-behavior:smooth;--acc:#c6ff3a;--mut:#9d9da6;--line:rgba(255,255,255,.1);--card:#141416;--paper:#ecebe3;--ink:#16160f;--olive:#3d5700}
 #modern.on{display:block}
+#modern:focus{outline:none}
 #modern a{color:inherit;text-decoration:none}
 #modern :focus-visible{outline:2px solid var(--acc);outline-offset:3px;border-radius:6px}
 #modern .skip{position:absolute;left:16px;top:-80px;z-index:60;background:var(--acc);color:#0b0b0c;padding:10px 16px;border-radius:8px;font-weight:600}
@@ -370,8 +371,6 @@ label{display:block;margin:8px 0 3px}
 #modern footer a:hover{color:#fff}
 #modern .rv{opacity:0;transform:translateY(32px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
 #modern .rv.seen{opacity:1;transform:none}
-#back96{position:fixed;left:20px;bottom:20px;z-index:30;font-family:Tahoma,sans-serif;font-size:12px;background:#c0c0c0;color:#000;border:none;padding:7px 12px;cursor:pointer;box-shadow:inset -1px -1px #000,inset 1px 1px #fff,inset -2px -2px #808080,inset 2px 2px #dfdfdf}
-#back96:active{box-shadow:inset 1px 1px #000,inset -1px -1px #fff}
 /* case study drawer */
 #mcase{position:fixed;inset:0;z-index:50;display:none;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 #mcase.open{display:block}
@@ -420,7 +419,6 @@ label{display:block;margin:8px 0 3px}
   #modern .lab{grid-template-columns:1fr}
   #modern .lx dl div,#modern .pbe div{grid-template-columns:1fr;gap:2px}
   #mcase .sheet{padding:24px 20px}
-  #back96{left:12px;bottom:12px;padding:6px 10px}
 }
 @media (prefers-reduced-motion:reduce){
   #modern{scroll-behavior:auto}
@@ -429,6 +427,330 @@ label{display:block;margin:8px 0 3px}
   #modern h1 .w span{transform:none;transition:none}
   #modern .card,#modern .card:hover,#modern .card:hover .mark{transform:none}
 }
+
+/* =====================================================================
+   UmarOS 2026 desktop (every rule scoped under #os26): wallpaper, menu
+   bar, widgets, desktop icons, dock and light app windows. Inspired by
+   current desktop conventions; all drawings are original CSS/SVG.
+   Avoid bare class names that the 1996 CSS styles globally (.body, .icon,
+   .files, .file, .status, .tags, .stats, .btn, .in, .out, .win, .menubar).
+   ===================================================================== */
+#os26{position:fixed;inset:0;z-index:9000;display:none;overflow:hidden;font-family:Inter,system-ui,sans-serif;font-size:14px;line-height:1.5;color:#1d1d1f;--acc:#c6ff3a;--accd:#3b6a00;--ink:#1d1d1f;--mut:#6b6b73;--line:rgba(0,0,0,.09);--win:#fbfbfc;--side:#f1f1f5;user-select:none;-webkit-user-select:none}
+#os26.on{display:block}
+#os26 button,#os26 input,#os26 textarea{font-family:inherit;font-size:inherit;color:inherit}
+#os26 input,#os26 textarea{box-shadow:none;width:auto;background:transparent}
+#os26 a{color:inherit;text-decoration:none}
+#os26 p{margin:0 0 10px}
+#os26 h1,#os26 h2,#os26 h3{margin:0;font-size:inherit}
+#os26 label{margin:0}
+#os26 fieldset{box-shadow:none;border:0;padding:0;margin:0;min-width:0}
+#os26 :focus-visible{outline:2px solid #111;outline-offset:1px;box-shadow:0 0 0 4px rgba(198,255,58,.95);border-radius:6px}
+#os26 em{font-style:normal;background:linear-gradient(transparent 58%,rgba(198,255,58,.95) 58%);padding:0 .06em}
+#os26 .mut{color:var(--mut)}
+/* wallpaper */
+#os26 .wall{position:absolute;inset:0;background:#1b2560;transition:background .6s}
+#os26 .wall svg{position:absolute;inset:0;width:100%;height:100%;opacity:.5;mix-blend-mode:soft-light}
+/* generic app tile (dock, desktop, files) */
+#os26 .tile{position:relative;display:grid;place-items:center;flex:none;width:48px;height:48px;border-radius:13px;background:linear-gradient(160deg,var(--c1),var(--c2));color:#fff;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.4),inset 0 -1px 0 rgba(0,0,0,.18),0 3px 8px rgba(0,0,0,.22)}
+#os26 .tile:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.3),transparent 55%);pointer-events:none}
+#os26 .tile svg{position:relative;width:54%;height:54%}
+#os26 .tile.dk{color:#1d1d1f}
+#os26 .tile.lime{color:#c6ff3a}
+#os26 .tile .mk{position:relative;font-family:Archivo,sans-serif;font-weight:900;letter-spacing:-.04em;line-height:1}
+#os26 .tile .em{position:relative;font-size:26px}
+#os26 .tile.big{width:64px;height:64px;border-radius:17px}
+/* menu bar */
+#os26 .mb{position:absolute;top:0;left:0;right:0;height:30px;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 8px;background:rgba(20,20,40,.22);backdrop-filter:blur(30px) saturate(1.6);-webkit-backdrop-filter:blur(30px) saturate(1.6);color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.3);font-size:13px;z-index:4000}
+#os26 .mb .l,#os26 .mb .r{display:flex;align-items:center;gap:2px;min-width:0}
+#os26 .mb button{border:0;background:transparent;color:inherit;padding:3px 9px;border-radius:6px;cursor:pointer;font-weight:500;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
+#os26 .mb button:hover,#os26 .mb button[aria-expanded=true]{background:rgba(255,255,255,.22)}
+#os26 .mb .logo i{width:14px;height:14px;border-radius:4px;background:conic-gradient(from 210deg,#c6ff3a,#2de2e6,#9b7bff,#c6ff3a);box-shadow:0 0 0 1px rgba(255,255,255,.6)}
+#os26 .mb .app{font-weight:700;padding:0 8px;white-space:nowrap}
+#os26 .mb .deco{display:flex;gap:2px;opacity:.95}
+#os26 .mb .deco span{padding:3px 8px;border-radius:6px}
+#os26 .mb .ic{display:grid;place-items:center;padding:0 5px;opacity:.95}
+#os26 .mb .clock{padding:0 6px;font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:500}
+#os26 .dd{position:absolute;top:32px;left:6px;z-index:4500;min-width:240px;padding:5px;border-radius:10px;background:rgba(246,246,248,.9);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border:1px solid rgba(0,0,0,.12);box-shadow:0 12px 40px rgba(0,0,0,.28);display:flex;flex-direction:column;color:var(--ink)}
+#os26 .dd[hidden]{display:none}
+#os26 .dd button{text-align:left;border:0;background:transparent;padding:6px 10px;border-radius:6px;cursor:pointer;font-size:13.5px}
+#os26 .dd button:hover,#os26 .dd button:focus-visible{background:var(--acc);outline:none;box-shadow:none}
+#os26 .dd hr{border:0;border-top:1px solid rgba(0,0,0,.12);margin:4px 8px}
+/* widgets */
+#os26 .wgs{position:absolute;top:46px;left:18px;width:250px;display:flex;flex-direction:column;gap:14px;z-index:1}
+#os26 .wg{border-radius:22px;padding:16px 18px;background:rgba(255,255,255,.18);backdrop-filter:blur(30px) saturate(1.5);-webkit-backdrop-filter:blur(30px) saturate(1.5);border:1px solid rgba(255,255,255,.3);color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.25);box-shadow:0 8px 30px rgba(0,0,0,.12)}
+#os26 .wg .tm{font-family:Archivo,sans-serif;font-weight:800;font-size:46px;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+#os26 .wg .dt{font-weight:500;margin-top:6px;opacity:.95}
+#os26 .wg b{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.9;margin-bottom:6px}
+#os26 .wg ul{list-style:none;margin:0;padding:0}
+#os26 .wg li{padding:5px 0;border-top:1px solid rgba(255,255,255,.22);font-size:13px;line-height:1.35}
+#os26 .wg li:first-child{border-top:0}
+#os26 .wg p{font-size:13px;font-weight:600;line-height:1.35;margin-bottom:8px}
+#os26 .wg .pl{display:inline-block;font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:999px;background:rgba(198,255,58,.9);color:#1d1d1f;text-shadow:none}
+/* desktop icons */
+#os26 .dicons{position:absolute;top:44px;right:12px;bottom:112px;display:flex;flex-direction:column;flex-wrap:wrap-reverse;align-content:flex-start;gap:6px;z-index:1}
+#os26 .di{width:92px;display:flex;flex-direction:column;align-items:center;gap:6px;padding:6px 4px;border:0;border-radius:10px;background:transparent;color:#fff;cursor:default}
+#os26 .di .tile{width:56px;height:56px;border-radius:15px}
+#os26 .di .lab{font-size:12px;font-weight:500;text-shadow:0 1px 3px rgba(0,0,0,.65);padding:1px 6px;border-radius:5px;line-height:1.3;text-align:center}
+#os26 .di.sel{background:rgba(255,255,255,.14)}
+#os26 .di.sel .lab{background:rgba(30,30,45,.6);text-shadow:none}
+#os26 .di:focus-visible{outline:none;box-shadow:none}
+#os26 .di:focus-visible .lab{background:#1d1d1f;box-shadow:0 0 0 2px var(--acc);text-shadow:none}
+/* windows */
+#os26 .wins{position:absolute;inset:0;z-index:2;pointer-events:none}
+#os26 .mw{position:absolute;pointer-events:auto;display:flex;flex-direction:column;background:var(--win);border-radius:12px;box-shadow:0 0 0 .5px rgba(0,0,0,.4),0 24px 70px rgba(0,0,0,.38),0 2px 8px rgba(0,0,0,.14);overflow:hidden;min-width:320px;min-height:200px;color:var(--ink);animation:mwIn .26s cubic-bezier(.2,.9,.3,1.15)}
+@keyframes mwIn{from{opacity:0;transform:scale(.94)}}
+#os26 .mw:not(.active){box-shadow:0 0 0 .5px rgba(0,0,0,.3),0 12px 40px rgba(0,0,0,.24)}
+#os26 .mw:focus{outline:none;box-shadow:0 0 0 .5px rgba(0,0,0,.4),0 24px 70px rgba(0,0,0,.38)}
+#os26 .mw.max{left:0!important;top:30px!important;width:100%!important;height:calc(100% - 30px - 92px)!important;border-radius:0}
+#os26 .mw.min{display:none}
+#os26 .mbar{height:40px;display:flex;align-items:center;padding:0 12px;flex:none;touch-action:none;background:linear-gradient(#f4f4f7,#ebebef);border-bottom:1px solid rgba(0,0,0,.1);position:relative;cursor:default}
+#os26 .mbar .t{position:absolute;left:96px;right:96px;text-align:center;font-weight:600;font-size:13px;color:#3a3a40;pointer-events:none;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+#os26 .mw:not(.active) .mbar .t{color:#a0a0a6}
+#os26 .lights{display:flex;gap:8px;position:relative;z-index:1}
+#os26 .lights button{width:13px;height:13px;border-radius:50%;border:0;padding:0;display:grid;place-items:center;cursor:pointer;box-shadow:inset 0 0 0 .5px rgba(0,0,0,.25)}
+#os26 .lights .l-close{background:#ff5f57}
+#os26 .lights .l-min{background:#febc2e}
+#os26 .lights .l-max{background:#28c840}
+#os26 .mw:not(.active) .lights button{background:#d6d6dc}
+#os26 .lights svg{width:9px;height:9px;opacity:0;color:rgba(0,0,0,.6)}
+#os26 .lights:hover svg,#os26 .lights button:focus-visible svg{opacity:1}
+#os26 .lights button:focus-visible{box-shadow:0 0 0 2px #111}
+#os26 .mbody{flex:1;min-height:0;overflow:auto;user-select:text;-webkit-user-select:text;container-type:inline-size;display:flex;flex-direction:column}
+#os26 .mgrip{position:absolute;right:0;bottom:0;width:16px;height:16px;cursor:nwse-resize;touch-action:none}
+#os26 .mw.dark{background:#17171b;color:#e8e8ea;box-shadow:0 0 0 .5px rgba(255,255,255,.12),0 24px 70px rgba(0,0,0,.45)}
+#os26 .mw.dark .mbar{background:linear-gradient(#303036,#28282e);border-color:#000}
+#os26 .mw.dark .mbar .t{color:#cfcfd4}
+/* shared app parts */
+#os26 .split{display:flex;flex:1;min-height:0}
+#os26 .sb{width:210px;flex:none;background:var(--side);border-right:1px solid var(--line);padding:10px 8px;overflow:auto}
+#os26 .sb .h{font-size:11px;font-weight:600;color:#8a8a92;padding:10px 10px 4px;margin:0}
+#os26 .sb button,#os26 .sb a,#os26 .sb .cur{display:flex;align-items:center;gap:8px;width:100%;text-align:left;border:0;background:transparent;padding:6px 10px;border-radius:7px;cursor:pointer;color:var(--ink);font-size:13.5px}
+#os26 .sb svg{color:#5c5c66;flex:none}
+#os26 .sb .on,#os26 .sb .cur{background:rgba(0,0,0,.08);font-weight:600}
+#os26 .sb button:hover,#os26 .sb a:hover{background:rgba(0,0,0,.05)}
+#os26 .pane{flex:1;min-width:0;overflow:auto;padding:26px 30px}
+#os26 .b{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(0,0,0,.14);background:#fff;padding:6px 14px;border-radius:8px;font-weight:500;cursor:pointer;box-shadow:0 1px 1px rgba(0,0,0,.05);white-space:nowrap;color:var(--ink)}
+#os26 .b:hover{background:#f3f3f6}
+#os26 .b.pri{background:var(--acc);border-color:#9bd41c;font-weight:600}
+#os26 .b.pri:hover{background:#b9f52c}
+#os26 .btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+#os26 .tag{display:inline-block;font-size:11.5px;font-weight:600;padding:2px 9px;border-radius:999px;background:#eef9d4;color:#335a00;border:1px solid #d5f08f;white-space:nowrap}
+#os26 .chipx{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 4px}
+#os26 .kv{display:grid;grid-template-columns:130px 1fr;margin:16px 0 0;border-top:1px solid var(--line)}
+#os26 .kv dt,#os26 .kv dd{padding:9px 0;border-bottom:1px solid var(--line);margin:0}
+#os26 .kv dt{color:var(--mut);font-size:12.5px;padding-right:12px}
+#os26 .ah1{font-family:Archivo,sans-serif;font-weight:800;font-size:clamp(22px,4cqi,30px);letter-spacing:-.02em;line-height:1.15;margin-bottom:6px}
+#os26 .h3{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--accd);font-weight:700;margin:22px 0 8px}
+#os26 .ul{margin:6px 0 0;padding-left:18px}
+#os26 .ul li{margin-bottom:4px}
+/* About Me */
+#os26 .ab{padding:26px 32px 32px}
+#os26 .ab-hero{display:flex;gap:18px;align-items:center;margin-bottom:16px}
+#os26 .avatar{width:84px;height:84px;border-radius:50%;flex:none;display:grid;place-items:center;font-family:Archivo,sans-serif;font-weight:800;font-size:30px;color:#111;background:conic-gradient(from 200deg,#c6ff3a,#2de2e6,#9b7bff,#ff8a5c,#c6ff3a);box-shadow:0 0 0 4px #fff,0 6px 18px rgba(0,0,0,.2)}
+#os26 .ab-hero h1{font-family:Archivo,sans-serif;font-weight:800;font-size:clamp(20px,3.8cqi,28px);letter-spacing:-.02em;line-height:1.1}
+#os26 .ab-hero .role{color:var(--mut);margin:4px 0 0}
+#os26 .seg{display:inline-flex;padding:2px;border-radius:9px;background:rgba(0,0,0,.06);margin:4px 0 22px;flex-wrap:wrap}
+#os26 .seg button{border:0;background:transparent;padding:5px 14px;border-radius:7px;cursor:pointer;font-weight:500;font-size:13px}
+#os26 .seg button[aria-selected=true]{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.16);font-weight:600}
+#os26 .tabp .headline{font-family:Archivo,sans-serif;font-weight:800;font-size:clamp(24px,5cqi,40px);line-height:1.08;letter-spacing:-.025em;margin:0 0 12px}
+#os26 .tabp .lede2{color:#4a4a52;font-size:15.5px;max-width:580px}
+#os26 .tabp .lead2{font-family:Archivo,sans-serif;font-weight:700;font-size:clamp(18px,3cqi,23px);line-height:1.3;letter-spacing:-.01em;margin-bottom:16px}
+#os26 .tabp p{font-size:14.5px;line-height:1.65;color:#2c2c32}
+#os26 .rowx{padding:14px 0;border-bottom:1px solid var(--line)}
+#os26 .rowx h3{font-size:15px;font-weight:700;margin:6px 0 2px}
+#os26 .rowx p{margin:0;color:#45454c}
+#os26 .lnk{display:inline-block;margin-top:6px;color:var(--accd);font-weight:600;font-size:13px}
+/* Projects (file browser) */
+#os26 .fmain{flex:1;min-width:0;display:flex;flex-direction:column}
+#os26 .ftool{height:42px;flex:none;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 18px;border-bottom:1px solid var(--line);font-weight:600}
+#os26 .ftool span{display:inline-flex;align-items:center;gap:8px}
+#os26 .fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(122px,1fr));gap:12px;padding:18px;align-content:start;overflow:auto;flex:1}
+#os26 .fi{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 6px;border:0;background:transparent;border-radius:10px;cursor:default;text-align:center}
+#os26 .fi .tile{width:66px;height:66px;border-radius:17px}
+#os26 .fi .fn{font-size:12.5px;font-weight:500;line-height:1.25;padding:1px 6px;border-radius:5px;max-width:100%;overflow-wrap:anywhere}
+#os26 .fi .fst{font-size:11px;color:var(--mut)}
+#os26 .fi.sel{background:rgba(0,0,0,.06)}
+#os26 .fi.sel .fn{background:var(--acc)}
+#os26 .fhint{font-size:12px;color:var(--mut);padding:8px 18px;border-top:1px solid var(--line);margin:0;flex:none}
+#os26 .fprev{width:290px;flex:none;border-left:1px solid var(--line);padding:22px 20px;overflow:auto;background:#fdfdfe}
+#os26 .fprev h3{font-family:Archivo,sans-serif;font-size:20px;font-weight:800;letter-spacing:-.01em;margin:12px 0 2px}
+#os26 .fprev .kv{grid-template-columns:1fr;font-size:13px}
+#os26 .fprev .kv dt{border-bottom:0;padding-bottom:0;font-size:11px;text-transform:uppercase;letter-spacing:.1em}
+#os26 .fprev .b{margin-top:16px}
+/* documents (case studies) */
+#os26 .doc{max-width:740px;width:100%;margin:0 auto;padding:30px 36px 40px}
+#os26 .dh{display:flex;gap:16px;align-items:center;margin-bottom:6px}
+#os26 .doc h1{font-family:Archivo,sans-serif;font-weight:800;font-size:clamp(24px,5cqi,34px);letter-spacing:-.02em;line-height:1.1}
+#os26 .doc .sub{color:var(--mut);margin:3px 0 0}
+#os26 .doc h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accd);margin:26px 0 6px;font-weight:700}
+#os26 .doc p{color:#2c2c32;font-size:15px;line-height:1.65;margin:0}
+#os26 .facts2{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:20px 0 4px}
+#os26 .facts2 div{background:#f5f5f8;padding:10px 14px}
+#os26 .facts2 dt{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}
+#os26 .facts2 dd{margin:2px 0 0;font-weight:500}
+#os26 .doc .shot{margin:20px 0 0;border-radius:12px;overflow:hidden;box-shadow:0 0 0 1px var(--line)}
+#os26 .doc .shot img{width:100%;display:block}
+/* Research (document viewer) */
+#os26 .pvmain{flex:1;min-width:0;overflow:auto;background:#e6e6eb;padding:26px}
+#os26 .page{max-width:780px;margin:0 auto;background:#fff;border-radius:4px;box-shadow:0 2px 14px rgba(0,0,0,.13);padding:44px 52px 48px}
+#os26 .page .eyebrow{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accd);font-weight:700}
+#os26 .page h1{font-family:Archivo,sans-serif;font-weight:800;font-size:clamp(24px,4.4cqi,34px);line-height:1.12;letter-spacing:-.02em;margin:8px 0 22px}
+#os26 .page .rq{border:1.5px solid var(--ink);border-radius:12px;padding:18px 20px;margin-bottom:28px;background:#fafaf4}
+#os26 .page .rq p{font-family:Archivo,sans-serif;font-weight:700;font-size:18px;line-height:1.35;margin:0}
+#os26 .page .lbl{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accd);font-weight:700;margin-bottom:4px}
+#os26 .page .flow{list-style:none;margin:0;padding:0}
+#os26 .page .flow>li{padding:0 0 20px 18px;border-left:2px solid #e3e3e8;margin-left:4px}
+#os26 .page .flow>li.key{border-color:var(--acc)}
+#os26 .page .flow p,#os26 .page .flow ul{font-size:15px;line-height:1.6;color:#2c2c32;margin:0}
+#os26 .page .flow ul{padding-left:18px}
+#os26 .page .flow ul li{margin-bottom:4px}
+#os26 .page .caveat{font-size:13px!important;color:var(--mut)!important;font-style:italic;margin-top:6px!important}
+#os26 .page .rater{margin-top:10px;background:#f5f8ec;border:1px solid #dde8c0;border-radius:14px;padding:20px 22px}
+#os26 .page .rater h3{font-family:Archivo,sans-serif;font-size:20px;font-weight:800;margin:0 0 4px}
+#os26 .page .rater>p{color:#55555c;font-size:13.5px}
+#os26 .page .rt fieldset{border-top:1px solid #e0e8cc;padding:12px 0}
+#os26 .page .rt legend{font-weight:600;font-size:14px;margin-bottom:8px;float:left;width:100%;padding:0}
+#os26 .page .opts{display:flex;flex-wrap:wrap;gap:6px;clear:both}
+#os26 .page .opts label{position:relative;display:block}
+#os26 .page .opts input{position:absolute;opacity:0;width:1px;height:1px}
+#os26 .page .opts span{display:inline-block;font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid rgba(0,0,0,.18);background:#fff;cursor:pointer}
+#os26 .page .opts input:checked+span{background:var(--acc);border-color:#9bd41c;font-weight:600}
+#os26 .page .opts input:focus-visible+span{outline:2px solid #111;outline-offset:1px}
+#os26 .page .pat{font-size:13px;color:#335a00;margin:8px 0 0;font-weight:600}
+#os26 .page .pat:empty{display:none}
+#os26 .page .pill{display:inline-flex;border:1px solid rgba(0,0,0,.14);background:#fff;padding:6px 14px;border-radius:8px;font-weight:500}
+/* Notes */
+#os26 .notes .sb{width:250px;background:#f6f5ef}
+#os26 .nitem{display:block!important;padding:8px 12px!important}
+#os26 .nitem b{display:block;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#os26 .nitem span{display:block;font-size:12px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:400}
+#os26 .notes .sb .nitem.on{background:#ffe27a}
+#os26 .note{flex:1;min-width:0;overflow:auto;padding:30px 36px;background:#fffef9}
+#os26 .note h1{font-family:Archivo,sans-serif;font-weight:800;font-size:clamp(22px,4cqi,28px);letter-spacing:-.02em;line-height:1.15;margin-bottom:14px}
+#os26 .note h3{font-size:15px;font-weight:700;margin:18px 0 4px}
+#os26 .note p,#os26 .note li{font-size:15px;line-height:1.7;color:#2c2c32}
+/* Journey */
+#os26 .jr{padding:28px 34px}
+#os26 .tl2{list-style:none;padding:0;margin:20px 0 0}
+#os26 .tl2 li{position:relative;padding:0 0 22px 26px;border-left:2px solid #e2e2e7;margin-left:6px}
+#os26 .tl2 li:last-child{border-left-color:transparent}
+#os26 .tl2 li:before{content:"";position:absolute;left:-8px;top:2px;width:14px;height:14px;border-radius:50%;background:#fff;border:2.5px solid #8fcb16}
+#os26 .tl2 li.nx:before{background:var(--acc);box-shadow:0 0 0 4px rgba(198,255,58,.35)}
+#os26 .tl2 .when{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accd);font-weight:700}
+#os26 .tl2 h3{font-size:16px;font-weight:700;margin:2px 0}
+#os26 .tl2 p{color:#45454c;margin:0}
+/* Mail */
+#os26 .mail{display:flex;flex-direction:column;flex:1;min-height:0}
+#os26 .mtool{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);background:#f6f6f9}
+#os26 .mf{display:grid;grid-template-columns:72px 1fr;align-items:center;border-bottom:1px solid var(--line);padding:0 18px}
+#os26 .mf label{color:var(--mut)}
+#os26 .mf input{border:0;padding:11px 0;outline:none;width:100%}
+#os26 .mail textarea{flex:1;border:0;resize:none;padding:16px 18px;outline:none;min-height:140px;width:100%;line-height:1.6}
+#os26 .mlinks{padding:14px 18px 18px;border-top:1px solid var(--line)}
+#os26 .mlinks .h{font-size:11px;font-weight:600;color:#8a8a92;margin:0}
+#os26 .mlinks .btns{margin-top:8px}
+#os26 .mempty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px}
+#os26 .mempty h2{font-family:Archivo,sans-serif;font-weight:800;font-size:22px;margin:14px 0 6px}
+#os26 .mempty p{max-width:420px}
+/* Terminal */
+#os26 .term{flex:1;background:#131317;color:#e4e4e7;font-family:"Cascadia Mono",Consolas,"SFMono-Regular",Menlo,"Courier New",monospace;font-size:13px;line-height:1.55;padding:12px 14px;overflow:auto;cursor:text}
+#os26 .term .o{white-space:pre-wrap;word-break:break-word}
+#os26 .term .pr{color:#c6ff3a}
+#os26 .term .dim{color:#8e8e98}
+#os26 .term form{display:flex;gap:8px}
+#os26 .term input{flex:1;border:0;outline:none;color:#e4e4e7;font:inherit;caret-color:#c6ff3a;padding:0}
+#os26 .term input:focus-visible{box-shadow:none}
+/* Browser */
+#os26 .bz{display:flex;flex-direction:column;flex:1;min-height:0}
+#os26 .btb{display:flex;align-items:center;gap:4px;padding:6px 10px;border-bottom:1px solid var(--line);background:#f1f1f4}
+#os26 .nv{width:30px;height:30px;border:0;border-radius:7px;background:transparent;display:grid;place-items:center;cursor:pointer;color:#4a4a52}
+#os26 .nv:disabled{color:#b4b4bb;cursor:default}
+#os26 .nv:not(:disabled):hover{background:rgba(0,0,0,.06)}
+#os26 .url{flex:1;min-width:0;display:flex;align-items:center;gap:6px;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:8px;padding:5px 10px;color:#3a3a40;font-size:13px;white-space:nowrap;overflow:hidden;margin:0 6px}
+#os26 .url svg{color:#3b8a00;flex:none}
+#os26 .bz iframe{flex:1;border:0;width:100%;background:#0b0b0c}
+/* Settings */
+#os26 .osinfo{display:flex;gap:18px;align-items:center;margin-bottom:8px}
+#os26 .osinfo .lg{position:relative;font-family:Archivo,sans-serif;font-weight:900;font-size:30px}
+#os26 .wps{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px;margin-top:18px}
+#os26 .wp{border:0;padding:0;background:transparent;cursor:pointer;text-align:left}
+#os26 .wp i{display:block;height:92px;border-radius:10px;box-shadow:0 0 0 1px rgba(0,0,0,.12)}
+#os26 .wp[aria-pressed=true] i{box-shadow:0 0 0 3px var(--acc),0 0 0 4px #111}
+#os26 .wp span{display:block;font-size:12.5px;margin-top:7px;font-weight:500}
+/* Trash */
+#os26 .trash{display:flex;flex-direction:column;flex:1}
+#os26 .tfoot{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-top:1px solid var(--line);background:#f6f6f9}
+#os26 .tempty{flex:1;display:grid;place-items:center;color:var(--mut);padding:30px;text-align:center}
+/* dock */
+#os26 .dock{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);z-index:4000;display:flex;align-items:flex-end;gap:4px;padding:7px 9px;border-radius:22px;background:rgba(255,255,255,.24);backdrop-filter:blur(30px) saturate(1.6);-webkit-backdrop-filter:blur(30px) saturate(1.6);border:1px solid rgba(255,255,255,.38);box-shadow:0 10px 40px rgba(0,0,0,.25);max-width:calc(100% - 16px)}
+#os26 .dock button{position:relative;border:0;background:transparent;padding:0;cursor:pointer;display:grid;place-items:center;flex:none;--s:1;transform:scale(var(--s)) translateY(calc((var(--s) - 1) * -12px));transform-origin:50% 100%;margin:0 calc((var(--s) - 1) * 24px);transition:transform .14s ease-out,margin .14s ease-out}
+#os26 .dock .tile{width:52px;height:52px;border-radius:14px}
+#os26 .dock button:focus-visible{outline:none;box-shadow:none}
+#os26 .dock button:focus-visible .tile{box-shadow:0 0 0 2px #111,0 0 0 5px var(--acc)}
+#os26 .dock button.open:after{content:"";position:absolute;bottom:-6px;left:50%;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:rgba(20,20,30,.75)}
+#os26 .dock .tip{position:absolute;bottom:calc(100% + 12px);left:50%;transform:translateX(-50%) scale(calc(1 / var(--s)));transform-origin:50% 100%;padding:4px 10px;border-radius:7px;background:rgba(240,240,244,.92);color:#1d1d1f;font-size:12.5px;font-weight:500;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.2);opacity:0;pointer-events:none;transition:opacity .12s}
+#os26 .dock button:hover .tip,#os26 .dock button:focus-visible .tip{opacity:1}
+#os26 .dock .sep{width:1px;height:46px;background:rgba(255,255,255,.5);margin:0 4px;align-self:center;flex:none}
+/* notification + search */
+#os26 .toast{position:absolute;top:40px;right:14px;z-index:4600;width:350px;display:flex;gap:12px;padding:14px;border-radius:16px;background:rgba(246,246,248,.9);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);box-shadow:0 12px 40px rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.6);animation:toastIn .45s cubic-bezier(.2,.9,.3,1.1)}
+#os26 .toast[hidden]{display:none}
+@keyframes toastIn{from{transform:translateX(calc(100% + 30px))}}
+#os26 .toast .tile{width:38px;height:38px;border-radius:10px}
+#os26 .toast b{display:block;font-size:13.5px}
+#os26 .toast p{font-size:13px;color:#3a3a40;margin:2px 0 0}
+#os26 .toast .btns{margin-top:10px}
+#os26 .toast .b{padding:4px 11px;font-size:12.5px}
+#os26 .toast .tx{position:absolute;top:6px;right:8px;width:24px;height:24px;border:0;border-radius:50%;background:transparent;cursor:pointer;color:#6b6b73;font-size:16px;line-height:1}
+#os26 .spot{position:absolute;inset:0;z-index:4800;display:flex;justify-content:center;align-items:flex-start;padding-top:15vh;background:rgba(0,0,0,.12)}
+#os26 .spot[hidden]{display:none}
+#os26 .spotbox{width:min(640px,92vw);border-radius:16px;background:rgba(246,246,248,.92);backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px);box-shadow:0 24px 70px rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.6);overflow:hidden}
+#os26 .spotin{display:flex;align-items:center;gap:10px;padding:12px 16px;color:#6b6b73}
+#os26 .spotin input{flex:1;border:0;font-size:20px;outline:none;color:var(--ink);padding:2px 0}
+#os26 .spotin input:focus-visible{box-shadow:none}
+#os26 .spotres{list-style:none;margin:0;padding:6px;border-top:1px solid var(--line);max-height:50vh;overflow:auto}
+#os26 .spotres:empty{display:none}
+#os26 .spotres li{display:flex;align-items:center;gap:10px;padding:6px 10px;border-radius:9px;cursor:pointer}
+#os26 .spotres li .tile{width:28px;height:28px;border-radius:7px}
+#os26 .spotres li .tile .mk{font-size:10px!important}
+#os26 .spotres li.on{background:var(--acc)}
+#os26 .spotres small{margin-left:auto;color:var(--mut);font-size:12px}
+#os26 .spotres li.on small{color:#2c3a10}
+/* responsive: windows adapt to their own width */
+@container (max-width:780px){
+  #os26 .fprev{display:none}
+}
+@container (max-width:560px){
+  #os26 .sb{display:none}
+  #os26 .page{padding:26px 22px}
+  #os26 .pvmain{padding:12px}
+  #os26 .kv{grid-template-columns:1fr}
+  #os26 .kv dt{border-bottom:0;padding-bottom:0}
+  #os26 .doc,#os26 .ab,#os26 .jr,#os26 .note{padding:22px 20px}
+}
+@media (max-width:1100px){#os26 .wgs{display:none}}
+@media (max-width:900px){#os26 .mb .deco{display:none}}
+@media (max-width:700px){
+  #os26 .mw{left:0!important;top:30px!important;width:100%!important;height:calc(100% - 30px - 84px)!important;border-radius:0;min-width:0}
+  #os26 .mgrip,#os26 .lights .l-max{display:none}
+  #os26 .lights button{width:18px;height:18px}
+  #os26 .lights svg{opacity:1}
+  #os26 .dicons{left:10px;right:10px;bottom:auto;flex-direction:row;flex-wrap:wrap;justify-content:center}
+  #os26 .dock{left:6px;right:6px;bottom:6px;transform:none;max-width:none;overflow-x:auto;justify-content:flex-start;scrollbar-width:none}
+  #os26 .dock::-webkit-scrollbar{display:none}
+  #os26 .dock .tile{width:46px;height:46px}
+  #os26 .toast{left:10px;right:10px;width:auto}
+  #os26 .mb .clock span{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  #os26 .mw,#os26 .toast{animation:none}
+  #os26 .wall{transition:none}
+  #os26 .dock button{transition:none}
+}
+#mBack{position:fixed;left:20px;bottom:20px;z-index:30;font-family:Inter,system-ui,sans-serif;font-size:13px;font-weight:600;background:rgba(20,20,24,.8);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#ededed;border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:9px 16px;cursor:pointer}
+#mBack:hover{border-color:#c6ff3a;color:#c6ff3a}
+#mBack:focus-visible{outline:2px solid #c6ff3a;outline-offset:3px}
+#modern.framed #mBack{display:none}
+@media (max-width:860px){#mBack{left:12px;bottom:12px;padding:8px 13px}}
 </style>
 </head>
 <body>
@@ -494,7 +816,8 @@ label{display:block;margin:8px 0 3px}
   <div class="flash" id="warpFlash"></div>
 </div>
 
-<div id="modern" aria-label="2026 version"></div>
+<div id="os26" aria-label="2026 desktop"></div>
+<div id="modern" aria-label="2026, as a web page"></div>
 
 <script>
 /* =====================================================================
@@ -784,6 +1107,14 @@ const ME = {
     { name: "Fergana Dusk", css: "linear-gradient(160deg,#ff9a5a,#6a3093)" },
     { name: "Midnight",     css: "radial-gradient(circle at 30% 20%,#223 0,#000 70%)" },
     { name: "Terminal",     css: "repeating-linear-gradient(0deg,#031 0 2px,#052 2px 4px)" }
+  ],
+  siteUrl: "https://umar-toirov.vercel.app",
+  /* UmarOS 2026 wallpapers (Settings → Wallpaper). Original CSS gradients. */
+  wallpapers26: [
+    { name: "Fergana Bloom", css: "radial-gradient(55vmax 45vmax at 55% 82%,rgba(198,255,58,.72),transparent 62%),radial-gradient(60vmax 55vmax at 100% 8%,rgba(45,226,230,.7),transparent 60%),radial-gradient(60vmax 55vmax at 96% 100%,rgba(255,122,89,.8),transparent 60%),radial-gradient(70vmax 60vmax at 0% 100%,rgba(150,90,255,.85),transparent 60%),linear-gradient(160deg,#16275e 0%,#2a1d6b 55%,#123a5a 100%)" },
+    { name: "Silk Road",     css: "radial-gradient(60vmax 50vmax at 80% 92%,rgba(255,196,77,.85),transparent 60%),radial-gradient(60vmax 50vmax at 8% 92%,rgba(255,90,95,.8),transparent 60%),radial-gradient(60vmax 50vmax at 92% 0%,rgba(255,140,60,.6),transparent 60%),linear-gradient(160deg,#3b1433,#6b1f3a 50%,#8a3b1f)" },
+    { name: "Aral Sky",      css: "radial-gradient(70vmax 50vmax at 20% 105%,rgba(255,255,255,.6),transparent 60%),radial-gradient(60vmax 50vmax at 92% 92%,rgba(198,255,58,.55),transparent 60%),linear-gradient(170deg,#1f5fb8,#4f9be0 60%,#9fd2ff)" },
+    { name: "Midnight",      css: "radial-gradient(60vmax 50vmax at 70% 92%,rgba(198,255,58,.3),transparent 60%),radial-gradient(60vmax 50vmax at 8% 8%,rgba(80,110,255,.4),transparent 60%),linear-gradient(160deg,#0b0d1a,#161c38)" }
   ]
 };
 /* ===================================================================== */
@@ -855,7 +1186,7 @@ const APPS = {
       <h2>Limitations</h2><ul>${R.limitations.map(f => `<li>${esc(f)}</li>`).join("")}</ul>
       ${R.learned ? `<h2>What I learned</h2><p>${esc(R.learned)}</p>` : ""}
       <h2>What I'd study next</h2><ul>${R.next.map(f => `<li>${esc(f)}</li>`).join("")}</ul>
-      <p style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" data-jump="m-research">Try the scenarios in 2026 →</button>${R.paperUrl ? `<a class="btn" href="${esc(R.paperUrl)}" ${EXT}>Read the paper</a>` : ""}</p>
+      <p style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" data-jump="research">Try the scenarios in 2026 →</button>${R.paperUrl ? `<a class="btn" href="${esc(R.paperUrl)}" ${EXT}>Read the paper</a>` : ""}</p>
     </div>`; } },
   games:    { icon: "🎮", title: "Games", w: 360, h: 220, desk: true, render: () => `
     <div class="body in"><div class="files">
@@ -882,7 +1213,7 @@ const APPS = {
     <div class="body pad upd" id="updBody">
       <h2 style="margin-top:0">🛡️ ${esc(ME.osName)} 2026 is ready to install</h2>
       <p>This update moves ${esc(ME.shortName)}'s portfolio from 1996 to 2026. It includes:</p>
-      <ul><li>Case studies: problem, build and evidence</li><li>The full research project</li><li>A timeline of how the pieces connect</li><li>Zero floppy disks required</li></ul>
+      <ul><li>A modern desktop with glass windows and a dock</li><li>Case studies: problem, build and evidence</li><li>The full research project, with scenarios to try</li><li>A web-page version for quick reading</li><li>Zero floppy disks required</li></ul>
       <div class="prog in"><i id="updBar"></i></div>
       <div id="updStatus" aria-live="polite">Download size: 1.44 MB · Estimated time: 30 years</div>
       <div class="log in" id="updLog"></div>
@@ -1157,7 +1488,7 @@ document.addEventListener("click", e => {
 });
 document.addEventListener("dblclick", e => { const o = e.target.closest(".icon[data-open]"); if (o && !mobile()) openApp(o.dataset.open); });
 document.addEventListener("keydown", e => {
-  if ($("#modern").classList.contains("on")) return;
+  if (era26()) return;
   if (e.key === "Enter" && e.target.matches(".icon,[role=menuitem],#trayUpd")) { e.preventDefault(); toggleStart(false); openApp(e.target.dataset.open); return; }
   if (e.target.matches("[role=menuitem]") && /Arrow(Up|Down)|Home|End/.test(e.key)) {
     e.preventDefault(); const it = startItems(), i = it.indexOf(e.target);
@@ -1191,7 +1522,7 @@ $("#bsod").onclick = hideBsod;
 let idle, saverRAF, saverStarted = 0;
 function startSaver(manual) {
   const ov = $("#saver"), cv = $("#saverCv"), ctx = cv.getContext("2d");
-  if (ov.classList.contains("show") || $("#boot").style.display !== "none" || $("#modern").classList.contains("on")) return;
+  if (ov.classList.contains("show") || $("#boot").style.display !== "none" || era26()) return;
   if (!manual && matchMedia("(prefers-reduced-motion:reduce)").matches) return;
   ov.classList.add("show"); saverStarted = Date.now(); cv.width = innerWidth; cv.height = innerHeight;
   const stars = Array.from({ length: 300 }, () => ({ x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: Math.random() }));
@@ -1242,7 +1573,7 @@ function boot() {
     if (done) return; done = true; clearInterval(iv); b.style.display = "none";
     removeEventListener("keydown", finish); b.removeEventListener("click", finish);
     if (store.get("noWelcome") !== "1") openApp("welcome");
-    setTimeout(() => { if (!mobile() && !$("#modern").classList.contains("on")) { tip = 0; helper(true); } }, 2500);
+    setTimeout(() => { if (!mobile() && !era26()) { tip = 0; helper(true); } }, 2500);
     wake();
   };
   iv = setInterval(() => {
@@ -1323,11 +1654,542 @@ function timeTravel() {
   warpRAF = requestAnimationFrame(frame);
 }
 
-/* ---------- the modern 2026 site ---------- */
-let modernBuilt = false, revealObs, lastFocus = null;
-const NAV = [["m-work", "Work"], ["m-research", "Research"], ["m-thinking", "Thinking"], ["m-journey", "Journey"], ["m-lab", "Lab"], ["m-contact", "Contact"]];
+/* =====================================================================
+   2026: shared content builders. The UmarOS 2026 desktop windows and the
+   "read as a web page" view both render from these, so content stays in ME.
+   ===================================================================== */
+let modernBuilt = false, revealObs, lastFocus = null, osBuilt = false;
+const era26 = () => $("#os26").classList.contains("on") || $("#modern").classList.contains("on");
 const pill = (l, cls = "") => `<a class="pill${cls}" href="${esc(l.url)}" ${EXT}>${esc(l.label)} ↗</a>`;
 const dl = (rows, cls) => { const r = rows.filter(x => x[1]); return r.length ? `<dl class="${cls}">${r.map(([k, v]) => `<div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>` : ""; };
+const glanceHTML = () => `<dl class="glance rv" aria-label="At a glance">${ME.glance.map(g => `<div><dt>${esc(g.k)}</dt><dd>${esc(g.v)}</dd></div>`).join("")}</dl>`;
+const aboutRightHTML = () => `${ME.about.map(p => `<p>${esc(p)}</p>`).join("")}
+  <h3 class="mini">Where I want to go</h3><p>${esc(ME.goal)}</p>
+  <p style="font-size:14px;margin-bottom:0">${esc(ME.directionNote)}</p>
+  <div class="chips">${ME.directions.map(d => `<span>${esc(d)}</span>`).join("")}</div>
+  <h3 class="mini">Skills, honestly</h3>${ME.skills.map(g => `<div class="sk"><span>${esc(g.level)}</span><p>${g.items.map(esc).join(" · ")}</p></div>`).join("")}`;
+const cardsHTML = () => `<div class="grid">${ME.projects.map((p, i) => `
+  <article class="card rv${i === 0 ? " feat" : ""}" ${p.anchor ? `data-anchor="${esc(p.anchor)}"` : `data-mcase="${esc(p.id)}"`} tabindex="0" role="button" aria-label="${p.anchor ? "Go to research" : "Open case study"}: ${esc(p.title)}">
+    <div class="media">${p.image ? `<img src="${esc(p.image)}" alt="" loading="lazy">` : `<span class="mark" aria-hidden="true">${esc(p.mark)}</span>`}${p.status ? `<span class="stat">${esc(p.status)}</span>` : ""}</div>
+    <div class="txt"><div class="meta"><div><h3>${esc(p.title)}</h3><p class="tg">${esc(p.tagline)}</p></div><span class="arr" aria-hidden="true">${p.anchor ? "↓" : "→"}</span></div>
+    ${dl([["Problem", p.card.problem], ["Build", p.card.build], ["Evidence", p.card.evidence]], "pbe")}</div>
+  </article>`).join("")}</div>`;
+const alsoHTML = () => ME.alsoOnWeb.length ? `<p class="also rv">Also on the web:${ME.alsoOnWeb.map(l => `<a href="${esc(l.url)}" ${EXT}>${esc(l.label)}</a>`).join("")}${GH ? `<a href="${esc(GH.url)}" ${EXT}>GitHub</a>` : ""}</p>` : "";
+const principlesHTML = () => `<div class="princ">${ME.principles.map((p, i) => `<div class="pr rv"><span class="n">0${i + 1}</span><h3>${esc(p.title)}</h3><p>${esc(p.text)}</p></div>`).join("")}</div>`;
+function researchHTML(px) {
+  const R = ME.research;
+  return `<div class="rq rv"><span class="lbl">Research question</span><p>${esc(R.question)}</p></div>
+  <div class="rgrid">
+    <ol class="flow">
+      <li class="rv"><span class="lbl">Why it matters</span><p>${esc(R.why)}</p></li>
+      ${R.method.map(s => `<li class="rv"><span class="lbl">${esc(s.k)}</span><p>${esc(s.v)}</p></li>`).join("")}
+      <li class="rv key"><span class="lbl">Early patterns</span><ul>${R.findings.map(f => `<li>${esc(f)}</li>`).join("")}</ul><p class="caveat">${esc(R.findingsNote)}</p></li>
+      <li class="rv"><span class="lbl">Limitations</span><ul>${R.limitations.map(f => `<li>${esc(f)}</li>`).join("")}</ul></li>
+      ${R.learned ? `<li class="rv"><span class="lbl">What I learned</span><p>${esc(R.learned)}</p></li>` : ""}
+      <li class="rv"><span class="lbl">Next questions</span><ul>${R.next.map(f => `<li>${esc(f)}</li>`).join("")}</ul></li>
+    </ol>
+    <aside class="rater rv" aria-labelledby="${px}RaterH">
+      <h3 id="${px}RaterH">Try the scenarios</h3><p>${esc(R.raterIntro)}</p>
+      <form class="rt" onsubmit="return false">${R.scenarios.map((s, i) => `
+        <fieldset><legend>${esc(s.text)}</legend><div class="opts">${R.scaleShort.map((l, j) => `<label><input type="radio" name="sc${i}" value="${j}" aria-label="${esc(R.scale[j])}"><span aria-hidden="true">${esc(l)}</span></label>`).join("")}</div>
+        <p class="pat" data-pat="${esc(s.pattern)}" aria-live="polite"></p></fieldset>`).join("")}</form>
+    </aside>
+  </div>
+  ${R.paperUrl ? `<p class="rv" style="margin-top:40px"><a class="pill" href="${esc(R.paperUrl)}" ${EXT}>Read the paper ↗</a></p>` : ""}`;
+}
+// research scenario rater: local only, nothing is stored or sent
+const bindRater = root => root.querySelectorAll(".rt").forEach(f => f.addEventListener("change", e => {
+  const p = e.target.closest("fieldset").querySelector(".pat");
+  p.textContent = ME.research.patternText[p.dataset.pat] || ME.research.patternText.none;
+}));
+const journeyHTML = () => `<ol class="tl">${ME.journey.map((j, i, a) => `<li class="rv${i === a.length - 1 ? " nx" : ""}"><span class="when">${esc(j.when)}</span><div><h3>${esc(j.title)}</h3><p>${esc(j.text)}</p></div></li>`).join("")}</ol>`;
+const labHTML = () => `<div class="lab">${ME.lab.map(x => `<article class="lx rv"><div class="lh"><h3>${esc(x.title)}</h3>${x.status ? `<span class="stat">${esc(x.status)}</span>` : ""}</div>
+  ${dl([["Question", x.question], ["Experiment", x.experiment], ["Result", x.result], ["Next", x.next]], "")}</article>`).join("")}</div>`;
+const beyondHTML = () => `<div class="bey">${ME.beyond.map(b => `<article class="bx rv"><span class="when">${esc(b.when)}</span><h3>${esc(b.title)}</h3><p>${esc(b.text)}</p>${b.url ? `<a href="${esc(b.url)}" ${EXT}>${esc(b.urlLabel || b.url)} ↗</a>` : ""}</article>`).join("")}</div>
+  <div class="extra rv"><div><h3 class="mini">Also</h3><div class="chips">${ME.additional.map(a => `<span>${esc(a)}</span>`).join("")}</div></div>
+    <div><h3 class="mini">Academic</h3><div class="chips">${ME.academics.map(a => `<span>${esc(a)}</span>`).join("")}</div></div></div>`;
+const contactPills = () => `${ME.email ? `<a class="pill acc" href="mailto:${esc(ME.email)}">${esc(ME.email)}</a>` : ""}${LINKS.map(l => pill(l)).join("")}`;
+const talkHTML = () => ME.email ? `<a href="mailto:${esc(ME.email)}">Let's talk.</a>` : GH ? `<a href="${esc(GH.url)}" ${EXT}>Let's talk.</a>` : "Let's talk.";
+const CONTACT_NOTE = "Working on learning, AI or research, or curious about something here? I'd like to hear from you.";
+const caseHTML = p => `
+  ${dl([["Project", p.title], ["Year", p.year], ["Role", p.role], ["Technology", (p.tech || []).join(", ")], ["Status", p.status]], "facts")}
+  ${p.image ? `<div class="shot"><img src="${esc(p.image)}" alt="Screenshot of ${esc(p.title)}" loading="lazy"></div>` : ""}
+  ${CASE_FIELDS.filter(([k]) => p[k]).map(([k, l]) => `<h4>${l}</h4><p>${esc(p[k])}</p>`).join("")}
+  ${(p.links || []).filter(l => l.url).length ? `<div class="lk">${p.links.filter(l => l.url).map(l => pill(l, " acc")).join("")}</div>` : ""}`;
+
+/* =====================================================================
+   UmarOS 2026: a modern desktop. Menu bar, widgets, desktop icons, a dock
+   and light app windows: About Me, Projects (file browser), Research
+   (document viewer), Notes, Journey, Mail, Terminal, Browser, Settings,
+   Trash. Inspired by current desktop conventions; all drawings original.
+   ===================================================================== */
+const SVG = (d, s = 22, sw = 1.9) => `<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const G = {
+  user:     '<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>',
+  folder:   '<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',
+  doc:      '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6M9 9h2"/>',
+  notes:    '<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/>',
+  journey:  '<circle cx="5" cy="18" r="2"/><circle cx="19" cy="6" r="2"/><path d="M7 18h6a3 3 0 0 0 0-6h-2a3 3 0 0 1 0-6h6"/>',
+  mail:     '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>',
+  terminal: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9l3 3-3 3M13 15h4"/>',
+  globe:    '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+  gear:     '<circle cx="12" cy="12" r="3.2"/><circle cx="12" cy="12" r="7"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9L7 7M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/>',
+  trash:    '<path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/>',
+  search:   '<circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.3-4.3"/>',
+  wifi:     '<path d="M2.5 9a14 14 0 0 1 19 0M5.5 12.5a9.5 9.5 0 0 1 13 0M8.8 16a5 5 0 0 1 6.4 0"/><circle cx="12" cy="19.2" r=".9" fill="currentColor"/>',
+  battery:  '<rect x="2" y="7" width="18" height="10" rx="2.5"/><path d="M22 11v2"/><rect x="4" y="9" width="14" height="6" rx="1" fill="currentColor" stroke="none"/>',
+  link:     '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
+  down:     '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M12 11v6M9 14l3 3 3-3"/>',
+  left:     '<path d="M15 18l-6-6 6-6"/>',
+  right:    '<path d="M9 18l6-6-6-6"/>',
+  reload:   '<path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/>',
+  lock:     '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+  info:     '<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>',
+  image:    '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/>',
+  floppy:   '<path d="M5 3h11l3 3v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M8 3v5h7V3M7 21v-7h10v7"/>',
+  x:        '<path d="M6 6l12 12M18 6L6 18"/>',
+  minus:    '<path d="M5 12h14"/>',
+  plus:     '<path d="M12 5v14M5 12h14"/>'
+};
+const tile = (c, inner, cls = "", style = "") => `<span class="tile${cls}" style="--c1:${c[0]};--c2:${c[1]};${style}" aria-hidden="true">${inner}</span>`;
+const APPS26 = {
+  about:    { name: "About Me", g: "user",     c: ["#a38bff", "#5a55f0"], w: 780, h: 660, render: aboutApp,    init: initAbout },
+  projects: { name: "Projects", g: "folder",   c: ["#55c8ff", "#1f74ff"], w: 1000, h: 620, render: projectsApp, init: initFinder },
+  research: { name: "Research", g: "doc",      c: ["#ff9460", "#ff3f6c"], w: 1040, h: 720, render: researchApp, init: initResearch },
+  notes:    { name: "Notes",    g: "notes",    c: ["#ffe26b", "#ffb21e"], cls: " dk", w: 920, h: 600, render: notesApp, init: initNotes },
+  journey:  { name: "Journey",  g: "journey",  c: ["#52e3ab", "#0f9f97"], w: 720, h: 660, render: journeyApp },
+  mail:     { name: "Mail",     g: "mail",     c: ["#72d6ff", "#2a79ff"], w: 640, h: 560, render: mailApp,     init: initMail },
+  terminal: { name: "Terminal", g: "terminal", c: ["#4b4b57", "#141419"], cls: " lime", dark: true, w: 720, h: 460, render: termApp, init: initTerm },
+  web:      { name: "Browser",  g: "globe",    c: ["#dcff72", "#86d91c"], cls: " dk", w: 1120, h: 740, render: browserApp, init: initBrowser },
+  settings: { name: "Settings", g: "gear",     c: ["#babac6", "#61616d"], w: 780, h: 560, render: settingsApp, init: initSettings },
+  trash:    { name: "Trash",    g: "trash",    c: ["#f3f3f6", "#b9b9c3"], cls: " dk", w: 560, h: 390, render: trashApp,  init: initTrash }
+};
+const DOCK26 = ["about", "projects", "research", "notes", "journey", "mail", "terminal", "web", "settings", "-", "trash"];
+const appTile = (k, cls = "") => { const a = APPS26[k]; return tile(a.c, SVG(G[a.g]), (a.cls || "") + cls); };
+const PCOL = [["#d8ff5c", "#6fcf1a", " dk"], ["#ff9460", "#ff3f6c", ""], ["#55c8ff", "#1f74ff", ""], ["#a38bff", "#5a55f0", ""], ["#52e3ab", "#0f9f97", ""]];
+const projTile = (p, i, cls = "") => {
+  const c = PCOL[i % PCOL.length], m = String(p.mark || p.title.slice(0, 2)), fs = m.length <= 2 ? 44 : m.length <= 3 ? 36 : m.length <= 5 ? 26 : 20;
+  return tile(c, `<span class="mk" style="font-size:${fs}%;font-size:calc(${fs / 100} * 1em)">${esc(m)}</span>`, c[2] + cls, `font-size:${cls.includes("big") ? 64 : 66}px`);
+};
+let OZ = 10, toastShown = false; const owins = {};
+const OS_TOP = 30, osDockH = () => mobile() ? 84 : 92;
+const reduceMotion = () => matchMedia("(prefers-reduced-motion:reduce)").matches;
+
+/* ---------- app renderers ---------- */
+function aboutApp() {
+  const ini = ME.publicName.split(/\s+/).map(w => w[0]).join("").slice(0, 2);
+  const tabs = [["ov", "Overview"], ["story", "Story"], ["act", "Activities"], ["skills", "Skills"]];
+  return `<div class="ab">
+    <div class="ab-hero"><div class="avatar" aria-hidden="true">${esc(ini)}</div><div><h1>${esc(ME.name)}</h1><p class="role">${esc(ME.role)} · ${esc(ME.location)}</p></div></div>
+    <div class="seg" role="tablist" aria-label="About Me sections">${tabs.map(([k, l], i) => `<button role="tab" id="abt-${k}" aria-controls="abp-${k}" aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}">${l}</button>`).join("")}</div>
+    <section class="tabp" id="abp-ov" role="tabpanel" aria-labelledby="abt-ov">
+      <p class="headline">${acc(ME.headline)}</p><p class="lede2">${esc(ME.lede)}</p>
+      <dl class="kv">${ME.glance.map(g => `<dt>${esc(g.k)}</dt><dd>${esc(g.v)}</dd>`).join("")}</dl>
+      <div class="btns"><button class="b pri" data-os="projects">Open Projects</button><button class="b" data-os="research">Read the research</button><button class="b" data-os="webfull">Read as a web page</button>${GH ? `<a class="b" href="${esc(GH.url)}" ${EXT}>GitHub ↗</a>` : ""}${ME.resumeUrl ? `<a class="b" href="${esc(ME.resumeUrl)}" ${EXT}>Resume ↓</a>` : ""}</div>
+    </section>
+    <section class="tabp" id="abp-story" role="tabpanel" aria-labelledby="abt-story" hidden>
+      <p class="lead2">${acc(ME.aboutLead)}</p>${ME.about.map(p => `<p>${esc(p)}</p>`).join("")}
+      <h3 class="h3">Where I want to go</h3><p>${esc(ME.goal)}</p><p class="mut">${esc(ME.directionNote)}</p>
+      <div class="chipx">${ME.directions.map(d => `<span class="tag">${esc(d)}</span>`).join("")}</div>
+    </section>
+    <section class="tabp" id="abp-act" role="tabpanel" aria-labelledby="abt-act" hidden>
+      ${ME.beyond.map(b => `<div class="rowx"><span class="tag">${esc(b.when)}</span><h3>${esc(b.title)}</h3><p>${esc(b.text)}</p>${b.url ? `<a class="lnk" href="${esc(b.url)}" ${EXT}>${esc(b.urlLabel || b.url)} ↗</a>` : ""}</div>`).join("")}
+      <h3 class="h3">Also</h3><div class="chipx">${ME.additional.map(a => `<span class="tag">${esc(a)}</span>`).join("")}</div>
+      <h3 class="h3">Academic</h3><div class="chipx">${ME.academics.map(a => `<span class="tag">${esc(a)}</span>`).join("")}</div>
+    </section>
+    <section class="tabp" id="abp-skills" role="tabpanel" aria-labelledby="abt-skills" hidden>
+      <dl class="kv">${ME.skills.map(g => `<dt>${esc(g.level)}</dt><dd>${g.items.map(esc).join(" · ")}</dd>`).join("")}</dl>
+      <h3 class="h3">Now</h3><ul class="ul">${ME.now.map(n => `<li>${esc(n)}</li>`).join("")}</ul>
+    </section>
+  </div>`;
+}
+function initAbout(el) {
+  const tabs = [...el.querySelectorAll("[role=tab]")];
+  const show = t => {
+    tabs.forEach(x => { const on = x === t; x.setAttribute("aria-selected", on); x.tabIndex = on ? 0 : -1; el.querySelector("#" + x.getAttribute("aria-controls")).hidden = !on; });
+  };
+  tabs.forEach((t, i) => {
+    t.onclick = () => show(t);
+    t.onkeydown = e => { if (/Arrow(Left|Right)/.test(e.key)) { e.preventDefault(); const n = tabs[(i + (e.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length]; show(n); n.focus(); } };
+  });
+}
+function projectsApp() {
+  return `<div class="split">
+    <nav class="sb" aria-label="Projects sidebar"><p class="h">Favorites</p><span class="cur">${SVG(G.folder, 16)}All projects</span><button data-os="research">${SVG(G.doc, 16)}Research</button>
+      <p class="h">On the web</p>${[...LINKS, ...ME.alsoOnWeb].map(l => `<a href="${esc(l.url)}" ${EXT}>${SVG(G.link, 16)}${esc(l.label)}</a>`).join("")}</nav>
+    <div class="fmain"><div class="ftool"><span>${SVG(G.folder, 16)}Projects</span><span class="mut">${ME.projects.length} items</span></div>
+      <div class="fgrid" role="listbox" aria-label="Projects">${ME.projects.map((p, i) => `<button class="fi" role="option" aria-selected="false" data-proj="${esc(p.id)}">${projTile(p, i)}<span class="fn">${esc(p.title)}</span>${p.status ? `<span class="fst">${esc(p.status)}</span>` : ""}</button>`).join("")}</div>
+      <p class="fhint">${mobile() ? "Tap" : "Double-click"} a project to open it. Press Enter to open the selected one.</p></div>
+    <aside class="fprev" aria-live="polite" aria-label="Preview"></aside>
+  </div>`;
+}
+function initFinder(el) {
+  const prev = el.querySelector(".fprev"), items = [...el.querySelectorAll(".fi")];
+  const select = b => {
+    items.forEach(x => { x.classList.toggle("sel", x === b); x.setAttribute("aria-selected", x === b); });
+    const i = ME.projects.findIndex(x => x.id === b.dataset.proj), p = ME.projects[i];
+    prev.innerHTML = `${projTile(p, i, " big")}<h3>${esc(p.title)}</h3><p class="mut">${esc(p.tagline)}</p>${p.status ? `<span class="tag">${esc(p.status)}</span>` : ""}
+      <dl class="kv">${[["Problem", p.card.problem], ["Build", p.card.build], ["Evidence", p.card.evidence]].filter(x => x[1]).map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join("")}</dl>
+      <button class="b pri" data-open-proj="${esc(p.id)}">Open ${esc(p.title)}</button>`;
+  };
+  items.forEach((b, i) => {
+    b.onclick = () => mobile() ? osProject(b.dataset.proj) : select(b);
+    b.ondblclick = () => osProject(b.dataset.proj);
+    b.onfocus = () => select(b);
+    b.onkeydown = e => {
+      if (e.key === "Enter") { e.preventDefault(); osProject(b.dataset.proj); }
+      if (/Arrow(Left|Right|Up|Down)/.test(e.key)) { e.preventDefault(); const d = /Right|Down/.test(e.key) ? 1 : -1; items[(i + d + items.length) % items.length].focus(); }
+    };
+  });
+  prev.addEventListener("click", e => { const o = e.target.closest("[data-open-proj]"); if (o) osProject(o.dataset.openProj); });
+  select(items[0]);
+}
+function caseDoc(p, i) {
+  return `<article class="doc"><header class="dh">${projTile(p, i, " big")}<div><h1>${esc(p.title)}</h1><p class="sub">${esc(p.tagline)}</p></div></header>
+    <dl class="facts2">${[["Year", p.year], ["Role", p.role], ["Technology", (p.tech || []).join(", ")], ["Status", p.status]].filter(x => x[1]).map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>
+    ${p.image ? `<div class="shot"><img src="${esc(p.image)}" alt="Screenshot of ${esc(p.title)}" loading="lazy"></div>` : ""}
+    ${CASE_FIELDS.filter(([k]) => p[k]).map(([k, l]) => `<h2>${l}</h2><p>${esc(p[k])}</p>`).join("")}
+    ${(p.links || []).filter(l => l.url).length ? `<div class="btns">${p.links.filter(l => l.url).map(l => `<a class="b pri" href="${esc(l.url)}" ${EXT}>${esc(l.label)} ↗</a>`).join("")}</div>` : ""}
+  </article>`;
+}
+function researchApp() {
+  const R = ME.research;
+  return `<div class="split"><nav class="sb outline" aria-label="Research contents"><p class="h">Contents</p></nav>
+    <div class="pvmain"><article class="page"><span class="eyebrow">Research · ${esc(R.status)}</span><h1>${esc(R.title)}</h1>${researchHTML("os")}</article></div></div>`;
+}
+function initResearch(el) {
+  bindRater(el);
+  const nav = el.querySelector(".outline");
+  el.querySelectorAll(".page .rq, .page .flow > li, .page .rater").forEach((it, i) => {
+    it.id = "osr-" + i;
+    const lab = it.querySelector(".lbl, h3"), b = document.createElement("button");
+    b.textContent = lab ? lab.textContent : "Section";
+    b.onclick = () => { it.scrollIntoView({ behavior: reduceMotion() ? "auto" : "smooth", block: "start" }); nav.querySelectorAll("button").forEach(x => x.classList.toggle("on", x === b)); };
+    nav.appendChild(b);
+  });
+}
+const NOTES = () => [
+  { id: "thinking", title: "How I think", pre: ME.principles.map(p => p.title).join(" "), body: `<h1>How I think</h1>${ME.principles.map((p, i) => `<h3>${i + 1}. ${esc(p.title)}</h3><p>${esc(p.text)}</p>`).join("")}` },
+  { id: "fail", title: ME.fail.label, pre: ME.fail.paras[0], body: `<h1>${acc(ME.fail.title)}</h1>${ME.fail.paras.map(p => `<p>${esc(p)}</p>`).join("")}` },
+  { id: "now", title: "Now", pre: ME.now[0], body: `<h1>Now</h1><ul class="ul">${ME.now.map(n => `<li>${esc(n)}</li>`).join("")}</ul><h3>Where I want to go</h3><p>${esc(ME.goal)}</p>` },
+  ...ME.lab.map((x, i) => ({ id: "lab" + i, folder: true, title: x.title, pre: x.question,
+    body: `<h1>${esc(x.title)}</h1>${x.status ? `<p><span class="tag">${esc(x.status)}</span></p>` : ""}${[["Question", x.question], ["Experiment", x.experiment], ["Result", x.result], ["Next", x.next]].filter(r => r[1]).map(([k, v]) => `<h3>${k}</h3><p>${esc(v)}</p>`).join("")}` }))
+];
+function notesApp() {
+  const N = NOTES(), item = n => `<button class="nitem" data-note="${n.id}"><b>${esc(n.title)}</b><span>${esc(n.pre || "")}</span></button>`;
+  return `<div class="split notes"><nav class="sb" aria-label="Notes"><p class="h">Notes</p>${N.filter(n => !n.folder).map(item).join("")}<p class="h">Lab · unfinished experiments</p>${N.filter(n => n.folder).map(item).join("")}</nav><article class="note" aria-live="polite"></article></div>`;
+}
+function initNotes(el, opts) {
+  const N = NOTES(), pane = el.querySelector(".note");
+  const select = id => { const n = N.find(x => x.id === id) || N[0]; el.querySelectorAll(".nitem").forEach(b => b.classList.toggle("on", b.dataset.note === n.id)); pane.innerHTML = n.body; pane.scrollTop = 0; };
+  el.querySelectorAll(".nitem").forEach(b => b.onclick = () => select(b.dataset.note));
+  select(opts.note || "thinking");
+  return { select };
+}
+function journeyApp() {
+  return `<div class="jr"><h1 class="ah1">Journey</h1><p class="mut">How the pieces connect. Exact years are being added.</p>
+    <ol class="tl2">${ME.journey.map((j, i, a) => `<li${i === a.length - 1 ? ' class="nx"' : ""}><span class="when">${esc(j.when)}</span><h3>${esc(j.title)}</h3><p>${esc(j.text)}</p></li>`).join("")}</ol></div>`;
+}
+function mailApp() {
+  const links = `<div class="mlinks"><p class="h">Elsewhere</p><div class="btns">${LINKS.map(l => `<a class="b" href="${esc(l.url)}" ${EXT}>${esc(l.label)} ↗</a>`).join("")}</div></div>`;
+  if (!ME.email) return `<div class="mail"><div class="mempty">${appTile("mail", " big")}<h2>No mail account yet</h2><p class="mut">${esc(CONTACT_NOTE)}</p><p class="mut">For now, the best way to reach me is through these links.</p></div>${links}</div>`;
+  return `<form class="mail"><div class="mtool"><button class="b pri" type="submit">Send</button><span class="mut">Opens your email app</span></div>
+    <div class="mf"><label for="osTo">To:</label><input id="osTo" type="text" value="${esc(ME.email)}" readonly></div>
+    <div class="mf"><label for="osSub">Subject:</label><input id="osSub" type="text" required placeholder="Hello"></div>
+    <textarea id="osMsg" aria-label="Message" required placeholder="${esc(CONTACT_NOTE)}"></textarea>${links}</form>`;
+}
+function initMail(el) {
+  const f = el.querySelector("form.mail"); if (!f) return;
+  f.onsubmit = e => { e.preventDefault(); location.href = `mailto:${ME.email}?subject=${encodeURIComponent(f.querySelector("#osSub").value)}&body=${encodeURIComponent(f.querySelector("#osMsg").value)}`; };
+}
+const HOST = () => ME.osName.replace(/OS$/, "").toLowerCase();
+function termApp() {
+  return `<div class="term"><div class="tout" aria-live="polite"></div><form class="tline"><span class="pr" aria-hidden="true">${esc(HOST())}@${esc(ME.osName.toLowerCase())} ~ %</span><input type="text" aria-label="Terminal command" autocomplete="off" spellcheck="false" autocapitalize="off"></form></div>`;
+}
+function initTerm(el) {
+  const out = el.querySelector(".tout"), inp = el.querySelector("input"), term = el.querySelector(".term"), hist = []; let hi = 0;
+  const prompt = `${esc(HOST())}@${esc(ME.osName.toLowerCase())} ~ %`;
+  const print = (h, cls = "") => { out.insertAdjacentHTML("beforeend", `<div class="o${cls ? " " + cls : ""}">${h}</div>`); term.scrollTop = 1e6; };
+  const findProj = q => ME.projects.find(p => p.title.toLowerCase().includes(q) || (p.keys || []).some(k => q.includes(k)));
+  const CMDS = {
+    help: () => "Commands:\n" + [["whoami", "who owns this computer"], ["about", "the short story"], ["projects", "list projects"], ["open <name>", "open an app or project"], ["research", "my research question"], ["now", "what I'm working on"], ["skills", "what I've built with"], ["contact", "how to reach me"], ["sysinfo", "about this system"], ["date", "today"], ["clear", "clear the screen"], ["web", "read as a web page"], ["1996", "go back in time"]].map(([c, d]) => `  <span class="pr">${esc(c.padEnd(13))}</span>${esc(d)}`).join("\n"),
+    whoami: () => `${esc(ME.name)}\n${esc(ME.role)} · ${esc(ME.location)}`,
+    about: () => esc(plain(ME.aboutLead)),
+    projects: () => ME.projects.map(p => `  ${esc(p.title.padEnd(26))}<span class="dim">${esc(p.status || "")}</span>`).join("\n") + `\n\nTry: <span class="pr">open ${esc(ME.projects[0].title.toLowerCase())}</span>`,
+    research: () => esc(ME.research.question),
+    now: () => ME.now.map(n => "  • " + esc(n)).join("\n"),
+    skills: () => ME.skills.map(g => `  ${esc(g.level)}: ${g.items.map(esc).join(", ")}`).join("\n"),
+    contact: () => ME.email ? esc(ME.email) : LINKS.map(l => `  ${esc(l.label)}: ${esc(l.url)}`).join("\n"),
+    sysinfo: () => [["OS", `${ME.osName} 2026 (updated from ${ME.osName} 95)`], ["User", ME.name], ["Location", ME.location], ["Shell", HOST() + "sh"], ["Stack", ME.site.stack.join(", ")], ["Framework", "none, on purpose"]].map(([k, v]) => `<span class="pr">${esc(k.padEnd(10))}</span>${esc(v)}`).join("\n"),
+    date: () => esc(new Date().toString()),
+    clear: () => { out.innerHTML = ""; return null; },
+    ls: () => Object.values(APPS26).map(a => esc(a.name)).join("   "),
+    web: () => { setTimeout(openWeb, 300); return "Opening the web page…"; },
+    1996: () => { setTimeout(back96, 500); return "Rewinding 30 years…"; }
+  };
+  const run = raw => {
+    const q = raw.trim(); if (!q) return;
+    print(`<span class="pr">${prompt}</span> ${esc(q)}`); hist.push(q); hi = hist.length;
+    const [c, ...rest] = q.toLowerCase().split(/\s+/), arg = rest.join(" ");
+    if (c === "open") {
+      const app = Object.keys(APPS26).find(k => k === arg || APPS26[k].name.toLowerCase() === arg);
+      if (app) { osOpen(app); return print(`Opening ${esc(APPS26[app].name)}…`, "dim"); }
+      const p = arg && findProj(arg); if (p) { osProject(p.id); return print(`Opening ${esc(p.title)}…`, "dim"); }
+      return print(`open: nothing called “${esc(arg)}”. Try <span class="pr">projects</span> or <span class="pr">ls</span>.`);
+    }
+    if (c === "sudo") return print("Nice try. This computer belongs to a student.");
+    const f = CMDS[c]; if (!f) return print(`command not found: ${esc(c)}. Type <span class="pr">help</span>.`);
+    const r = f(); if (r !== null) print(r);
+  };
+  el.querySelector("form").onsubmit = e => { e.preventDefault(); run(inp.value); inp.value = ""; };
+  inp.onkeydown = e => {
+    if (e.key === "ArrowUp" && hi > 0) { e.preventDefault(); inp.value = hist[--hi]; }
+    if (e.key === "ArrowDown") { e.preventDefault(); hi = Math.min(hist.length, hi + 1); inp.value = hist[hi] || ""; }
+  };
+  term.addEventListener("click", () => { if (!getSelection().toString()) inp.focus(); });
+  print(`${esc(ME.osName)} 2026 · type <span class="pr">help</span> to see what this terminal can do.`, "dim");
+  setTimeout(() => inp.focus({ preventScroll: true }), 30);
+}
+function browserApp() {
+  const addr = (ME.siteUrl || "").replace(/^https?:\/\//, "").replace(/\/$/, "");
+  return `<div class="bz"><div class="btb"><button class="nv" disabled aria-label="Back">${SVG(G.left, 16)}</button><button class="nv" disabled aria-label="Forward">${SVG(G.right, 16)}</button><button class="nv" data-reload aria-label="Reload">${SVG(G.reload, 16)}</button>
+    <div class="url">${SVG(G.lock, 14)}<span>${esc(addr)}/#web</span></div><button class="b" data-os="webfull">Full screen</button></div>
+    <iframe title="${esc(ME.publicName)}: web page version"></iframe></div>`;
+}
+function initBrowser(el) {
+  const f = el.querySelector("iframe"), src = location.href.split("#")[0] + "#web";
+  f.src = src; el.querySelector("[data-reload]").onclick = () => { f.src = "about:blank"; setTimeout(() => f.src = src, 30); };
+}
+function settingsApp() {
+  const panes = [["about", "About this site", "info"], ["wall", "Wallpaper", "image"], ["old", "1996", "floppy"]];
+  return `<div class="split"><nav class="sb" role="tablist" aria-label="Settings" aria-orientation="vertical">${panes.map(([k, l, g], i) => `<button role="tab" id="st-${k}" aria-controls="sp-${k}" aria-selected="${i === 0}" class="${i === 0 ? "on" : ""}">${SVG(G[g], 16)}${l}</button>`).join("")}</nav>
+    <div class="pane">
+      <section id="sp-about" role="tabpanel" aria-labelledby="st-about"><div class="osinfo">${tile(["#dcff72", "#2de2e6"], `<b class="lg">${esc(ME.osName.slice(0, 1))}</b>`, " dk big")}<div><h1 class="ah1">${esc(ME.osName)} 2026</h1><p class="mut">Built in 1996 · updated in 2026</p></div></div>
+        <dl class="kv"><dt>Registered to</dt><dd>${esc(ME.name)}</dd><dt>Location</dt><dd>${esc(ME.location)}</dd><dt>Built with</dt><dd>${ME.site.stack.map(esc).join(" · ")}</dd><dt>No framework</dt><dd>${esc(ME.site.why)}</dd><dt>How it was made</dt><dd>${esc(ME.site.process)}</dd></dl></section>
+      <section id="sp-wall" role="tabpanel" aria-labelledby="st-wall" hidden><h1 class="ah1">Wallpaper</h1><p class="mut">Original wallpapers, drawn in CSS.</p>
+        <div class="wps">${ME.wallpapers26.map((w, i) => `<button class="wp" data-wp26="${i}" aria-pressed="false"><i style="background:${esc(w.css)}"></i><span>${esc(w.name)}</span></button>`).join("")}</div></section>
+      <section id="sp-old" role="tabpanel" aria-labelledby="st-old" hidden><h1 class="ah1">Go back to 1996</h1><p>The original ${esc(ME.osName)} 95 desktop is still here, with Minesweeper, Paint and Disky.</p><div class="btns"><button class="b pri" data-os="back96">Back to 1996</button></div></section>
+    </div></div>`;
+}
+function initSettings(el) {
+  const tabs = [...el.querySelectorAll("[role=tab]")];
+  tabs.forEach(t => t.onclick = () => tabs.forEach(x => { const on = x === t; x.classList.toggle("on", on); x.setAttribute("aria-selected", on); el.querySelector("#" + x.getAttribute("aria-controls")).hidden = !on; }));
+  const mark = () => el.querySelectorAll("[data-wp26]").forEach(b => b.setAttribute("aria-pressed", +b.dataset.wp26 === wall26()));
+  el.querySelectorAll("[data-wp26]").forEach(b => b.onclick = () => { setWall26(+b.dataset.wp26); mark(); });
+  mark();
+}
+function trashApp() {
+  return `<div class="trash"><div class="fgrid">${ME.bin.files.map(f => `<div class="fi">${tile(["#f6f6f8", "#d6d6dd"], `<span class="em">${esc(f[0])}</span>`, " dk")}<span class="fn">${esc(f[1])}</span></div>`).join("")}</div>
+    <div class="tfoot"><span class="mut">${ME.bin.files.length} items</span><button class="b" data-empty>Empty Trash</button></div></div>`;
+}
+function initTrash(el) {
+  el.querySelector("[data-empty]").onclick = () => { el.querySelector(".fgrid").outerHTML = `<div class="tempty">${esc(ME.bin.emptied)}</div>`; el.querySelector(".tfoot .mut").textContent = "0 items"; el.querySelector("[data-empty]").disabled = true; };
+}
+
+/* ---------- wallpaper ---------- */
+const wall26 = () => Math.min(ME.wallpapers26.length - 1, Math.max(0, +(store.get("wall26") || 0)));
+function setWall26(i) { const w = $("#os26 .wall"); if (w) w.style.background = ME.wallpapers26[i].css; store.set("wall26", i); }
+const RIBBONS = `<svg viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="osRbA" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".95"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient><filter id="osRbB"><feGaussianBlur stdDeviation="16"/></filter></defs>
+  <g filter="url(#osRbB)" fill="none" stroke="url(#osRbA)" stroke-linecap="round"><path d="M-100 700 C 300 480, 620 920, 1020 620 S 1500 420, 1750 560" stroke-width="110"/><path d="M-100 840 C 360 640, 720 1010, 1120 760 S 1520 620, 1750 700" stroke-width="44" opacity=".7"/><path d="M-100 360 C 300 240, 700 520, 1100 300 S 1500 160, 1750 240" stroke-width="30" opacity=".45"/></g></svg>`;
+
+/* ---------- desktop shell ---------- */
+function buildOS() {
+  const o = $("#os26"), R = ME.research;
+  const DESK = [{ k: "about", label: "About Me" }, { k: "projects", label: "Projects" }, { k: "research", label: "Research.pdf" }, { k: "notes", label: "Notes" }, { k: "journey", label: "Journey" },
+    ...(GH ? [{ url: GH.url, label: "GitHub", t: tile(["#3a3a44", "#111116"], SVG(G.link)) }] : []),
+    ...(ME.resumeUrl ? [{ url: ME.resumeUrl, label: "Resume.pdf", t: tile(["#ffffff", "#dcdce2"], SVG(G.down), " dk") }] : [])];
+  o.innerHTML = `
+  <div class="wall" aria-hidden="true">${RIBBONS}</div>
+  <header class="mb">
+    <div class="l"><button class="logo" id="osLogo" aria-haspopup="true" aria-expanded="false" aria-controls="osMenu" aria-label="${esc(ME.osName)} menu"><i></i></button><span class="app" id="osApp">${esc(ME.osName)}</span>
+      <span class="deco" aria-hidden="true"><span>File</span><span>Edit</span><span>View</span><span>Window</span><span>Help</span></span></div>
+    <div class="r"><button id="osSearch" aria-label="Search (Ctrl+K)">${SVG(G.search, 15)}</button><span class="ic" aria-hidden="true">${SVG(G.wifi, 16)}</span><span class="ic" aria-hidden="true">${SVG(G.battery, 22, 1.6)}</span><span class="clock" id="osClock"></span></div>
+  </header>
+  <div class="dd" id="osMenu" role="menu" hidden>
+    <button role="menuitem" data-os="settings">About this site</button><button role="menuitem" data-os="about">About Me</button><button role="menuitem" data-os="spot">Search…</button><button role="menuitem" data-os="webfull">Read as a web page</button>
+    <hr><button role="menuitem" data-os="back96">Back to 1996…</button>
+  </div>
+  <section class="wgs" aria-label="Widgets">
+    <div class="wg"><div class="tm" id="osWT"></div><div class="dt" id="osWD"></div></div>
+    <div class="wg"><b>Now</b><ul>${ME.now.map(n => `<li>${esc(n)}</li>`).join("")}</ul></div>
+    <div class="wg"><b>Research</b><p>${esc(R.title)}</p><span class="pl">${esc(R.status)}</span></div>
+  </section>
+  <nav class="dicons" aria-label="Desktop">${DESK.map(d => `<button class="di" ${d.k ? `data-di="${d.k}"` : `data-url="${esc(d.url)}"`}>${d.t || appTile(d.k)}<span class="lab">${esc(d.label)}</span></button>`).join("")}</nav>
+  <div class="wins"></div>
+  <div class="toast" id="osToast" role="status" hidden></div>
+  <div class="spot" id="osSpot" hidden><div class="spotbox" role="dialog" aria-label="Search"><div class="spotin">${SVG(G.search, 20)}<input type="text" id="osSpotIn" aria-label="Search apps, projects and notes" placeholder="Search apps, projects and notes…" autocomplete="off"></div><ul class="spotres" id="osSpotRes" role="listbox" aria-label="Results"></ul></div></div>
+  <nav class="dock" aria-label="Dock">${DOCK26.map(k => k === "-" ? '<span class="sep" aria-hidden="true"></span>' : `<button data-dock="${k}" aria-label="${esc(APPS26[k].name)}"><span class="tip" aria-hidden="true">${esc(APPS26[k].name)}</span>${appTile(k)}</button>`).join("")}</nav>`;
+  setWall26(wall26());
+
+  const menu = o.querySelector("#osMenu"), logo = o.querySelector("#osLogo");
+  const setMenu = s => { menu.hidden = !s; logo.setAttribute("aria-expanded", s); if (s) menu.querySelector("button").focus(); };
+  logo.onclick = e => { e.stopPropagation(); setMenu(menu.hidden); };
+  o.querySelector("#osSearch").onclick = e => { e.stopPropagation(); openSpot(); };
+  o.addEventListener("click", e => {
+    if (!e.target.closest("#osMenu,#osLogo") && !menu.hidden) setMenu(false);
+    const cmd = e.target.closest("[data-os]"); if (cmd) { if (!menu.hidden) setMenu(false); return osCmd(cmd.dataset.os); }
+    const d = e.target.closest("[data-dock]"); if (d) return osDockClick(d.dataset.dock);
+    const di = e.target.closest(".di");
+    o.querySelectorAll(".di").forEach(x => x.classList.toggle("sel", x === di));
+    if (di && mobile()) openDesk(di);
+    if (e.target.closest("[data-toastx]")) hideToast();
+  });
+  o.addEventListener("dblclick", e => { const di = e.target.closest(".di"); if (di && !mobile()) openDesk(di); });
+  o.addEventListener("keydown", e => {
+    const di = e.target.closest(".di"); if (di && e.key === "Enter") { e.preventDefault(); openDesk(di); }
+    if (!menu.hidden && /Arrow(Up|Down)/.test(e.key)) {
+      e.preventDefault(); const it = [...menu.querySelectorAll("button")], i = it.indexOf(document.activeElement);
+      it[(i + (e.key === "ArrowDown" ? 1 : -1) + it.length) % it.length].focus();
+    }
+    if (e.key === "Escape") {
+      if (!o.querySelector("#osSpot").hidden) return closeSpot();
+      if (!menu.hidden) { setMenu(false); logo.focus(); return; }
+      if (!o.querySelector("#osToast").hidden && e.target.closest("#osToast")) return hideToast();
+      const w = e.target.closest(".mw"), k = w && Object.keys(owins).find(k => owins[k].el === w);
+      if (k) osClose(k);
+    }
+  });
+  // dock magnification (pointer devices, motion allowed)
+  const dock = o.querySelector(".dock"), dbs = [...dock.querySelectorAll("button")];
+  dock.addEventListener("pointermove", e => {
+    if (e.pointerType !== "mouse" || reduceMotion() || mobile()) return;
+    dbs.forEach(b => { const r = b.getBoundingClientRect(), d = Math.abs(e.clientX - (r.left + r.width / 2)); b.style.setProperty("--s", (1 + .42 * Math.max(0, 1 - d / 120)).toFixed(3)); });
+  });
+  dock.addEventListener("pointerleave", () => dbs.forEach(b => b.style.setProperty("--s", 1)));
+  // search box
+  const sin = o.querySelector("#osSpotIn");
+  sin.oninput = () => renderSpot(sin.value);
+  sin.onkeydown = e => {
+    const li = [...o.querySelectorAll("#osSpotRes li")], i = li.findIndex(x => x.classList.contains("on"));
+    if (/Arrow(Up|Down)/.test(e.key) && li.length) { e.preventDefault(); const n = (i + (e.key === "ArrowDown" ? 1 : -1) + li.length) % li.length; li.forEach((x, j) => { x.classList.toggle("on", j === n); x.setAttribute("aria-selected", j === n); }); li[n].scrollIntoView({ block: "nearest" }); }
+    if (e.key === "Enter" && li.length) { e.preventDefault(); (li[i] || li[0]).click(); }
+  };
+  o.querySelector("#osSpot").addEventListener("click", e => { if (e.target.id === "osSpot") closeSpot(); });
+  // clock + date widget
+  const tick26 = () => {
+    const n = new Date(), c = o.querySelector("#osClock");
+    c.innerHTML = `<span>${esc(n.toLocaleDateString([], { weekday: "short", day: "numeric", month: "short" }))}&nbsp;</span>${esc(n.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }))}`;
+    o.querySelector("#osWT").textContent = n.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }).replace(/\s?[AP]M$/i, "");
+    o.querySelector("#osWD").textContent = n.toLocaleDateString([], { weekday: "long", day: "numeric", month: "long" });
+  };
+  tick26(); setInterval(tick26, 10000);
+  osBuilt = true;
+}
+function openDesk(di) { if (di.dataset.url) window.open(di.dataset.url, "_blank", "noopener"); else osOpen(di.dataset.di); }
+function osCmd(k, opts) {
+  if (k === "webfull") return openWeb();
+  if (k === "back96") return back96();
+  if (k === "spot") return openSpot();
+  return osOpen(k, opts);
+}
+
+/* ---------- search (Ctrl+K) ---------- */
+function spotItems() {
+  return [
+    ...Object.keys(APPS26).map(k => ({ label: APPS26[k].name, kind: "App", icon: appTile(k), run: () => osOpen(k) })),
+    ...ME.projects.map((p, i) => ({ label: p.title, kind: p.anchor ? "Research" : "Project", icon: projTile(p, i), run: () => osProject(p.id) })),
+    ...NOTES().map(n => ({ label: n.title, kind: n.folder ? "Lab note" : "Note", icon: appTile("notes"), run: () => osOpen("notes", { note: n.id }) })),
+    { label: "Read as a web page", kind: "Action", icon: appTile("web"), run: openWeb },
+    { label: "Back to 1996", kind: "Action", icon: tile(["#d0d0d0", "#808080"], SVG(G.floppy)), run: back96 }
+  ];
+}
+let spotList = [];
+function renderSpot(q) {
+  q = q.trim().toLowerCase();
+  spotList = spotItems().filter(x => !q || x.label.toLowerCase().includes(q) || x.kind.toLowerCase().includes(q)).slice(0, q ? 12 : 8);
+  const ul = $("#osSpotRes");
+  ul.innerHTML = spotList.map((x, i) => `<li role="option" aria-selected="${i === 0}" class="${i === 0 ? "on" : ""}" data-i="${i}">${x.icon}<span>${esc(x.label)}</span><small>${esc(x.kind)}</small></li>`).join("");
+  ul.querySelectorAll("li").forEach(li => li.onclick = () => { const x = spotList[+li.dataset.i]; closeSpot(true); x.run(); });
+}
+function openSpot() { const s = $("#osSpot"), i = $("#osSpotIn"); s.hidden = false; i.value = ""; renderSpot(""); i.focus(); }
+function closeSpot(silent) { $("#osSpot").hidden = true; if (!silent) { const w = Object.values(owins).find(x => x.el.classList.contains("active")); (w ? w.el : $("#osSearch")).focus({ preventScroll: true }); } }
+document.addEventListener("keydown", e => {
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k" && $("#os26").classList.contains("on") && !$("#modern").classList.contains("on")) { e.preventDefault(); openSpot(); }
+});
+
+/* ---------- notification ---------- */
+let toastTimer;
+function showToast() {
+  const t = $("#osToast");
+  t.innerHTML = `${appTile("about")}<div><b>Welcome to ${esc(ME.osName)} 2026</b><p>Start with About Me, open Projects, or press Ctrl K to search.</p><div class="btns"><button class="b pri" data-os="projects">Open Projects</button><button class="b" data-toastx>Dismiss</button></div></div><button class="tx" data-toastx aria-label="Dismiss notification">×</button>`;
+  t.hidden = false; clearTimeout(toastTimer); toastTimer = setTimeout(hideToast, 12000);
+}
+function hideToast() { const t = $("#osToast"); if (t) t.hidden = true; clearTimeout(toastTimer); }
+
+/* ---------- window manager ---------- */
+function osOpen(key, opts = {}) {
+  if (owins[key]) {
+    owins[key].el.classList.remove("min"); osFocus(key); owins[key].el.focus({ preventScroll: true });
+    if (opts.note && owins[key].api) owins[key].api.select(opts.note);
+    return;
+  }
+  const a = Object.assign({}, APPS26[key] || {}, opts); if (!a.render) return;
+  const n = Object.keys(owins).length % 6, aw = innerWidth, ah = innerHeight - OS_TOP - osDockH();
+  const W = Math.min(a.w, aw - 24), H = Math.min(a.h, ah - 20);
+  const el = document.createElement("section");
+  el.className = "mw" + (a.dark ? " dark" : ""); el.tabIndex = -1; el.setAttribute("role", "dialog"); el.setAttribute("aria-label", a.name);
+  el.style.cssText = `width:${W}px;height:${H}px;left:${Math.max(12, (aw - W) / 2 + n * 26 - 40)}px;top:${OS_TOP + Math.max(10, (ah - H) / 2 + n * 22 - 16)}px`;
+  el.innerHTML = `<div class="mbar"><div class="lights"><button class="l-close" data-act="close" aria-label="Close ${esc(a.name)}">${SVG(G.x, 9, 3)}</button><button class="l-min" data-act="min" aria-label="Minimize ${esc(a.name)}">${SVG(G.minus, 9, 3)}</button><button class="l-max" data-act="max" aria-label="Zoom ${esc(a.name)}">${SVG(G.plus, 9, 3)}</button></div><span class="t">${esc(a.name)}</span></div>
+    <div class="mbody">${a.render()}</div><div class="mgrip" aria-hidden="true"></div>`;
+  $("#os26 .wins").appendChild(el);
+  owins[key] = { el, name: a.name, dock: a.dockKey || key };
+  el.addEventListener("pointerdown", () => osFocus(key));
+  el.querySelector("[data-act=close]").onclick = e => { e.stopPropagation(); osClose(key); };
+  el.querySelector("[data-act=min]").onclick = e => { e.stopPropagation(); el.classList.add("min"); el.classList.remove("active"); osDock(); };
+  el.querySelector("[data-act=max]").onclick = e => { e.stopPropagation(); el.classList.toggle("max"); };
+  el.querySelector(".mbar").ondblclick = e => { if (!e.target.closest("button") && !mobile()) el.classList.toggle("max"); };
+  osDrag(el, el.querySelector(".mbar"), false); osDrag(el, el.querySelector(".mgrip"), true);
+  osFocus(key); el.focus({ preventScroll: true });
+  if (a.init) owins[key].api = a.init(el, opts) || null;
+}
+function osProject(id) {
+  const i = ME.projects.findIndex(x => x.id === id), p = ME.projects[i]; if (!p) return;
+  if (p.anchor) return osOpen("research");
+  osOpen("case_" + id, { name: p.title, dockKey: "projects", w: 760, h: 660, render: () => caseDoc(p, i) });
+}
+function osFocus(key) {
+  Object.entries(owins).forEach(([k, w]) => w.el.classList.toggle("active", k === key));
+  if (owins[key]) { owins[key].el.style.zIndex = ++OZ; $("#osApp").textContent = owins[key].name; }
+  osDock();
+}
+function osClose(key) {
+  const w = owins[key]; if (!w) return;
+  w.el.remove(); delete owins[key];
+  const rest = Object.keys(owins).filter(k => !owins[k].el.classList.contains("min")).sort((a, b) => owins[b].el.style.zIndex - owins[a].el.style.zIndex);
+  if (rest.length) { osFocus(rest[0]); owins[rest[0]].el.focus({ preventScroll: true }); }
+  else { $("#osApp").textContent = ME.osName; osDock(); ($(`#os26 .dock [data-dock="${w.dock}"]`) || $("#os26 .dock button")).focus({ preventScroll: true }); }
+}
+function osDock() {
+  const open = new Set(Object.values(owins).map(w => w.dock));
+  $("#os26").querySelectorAll(".dock [data-dock]").forEach(b => b.classList.toggle("open", open.has(b.dataset.dock)));
+}
+function osDockClick(key) {
+  const w = owins[key];
+  if (w && w.el.classList.contains("active") && !w.el.classList.contains("min")) { w.el.classList.add("min"); w.el.classList.remove("active"); osDock(); }
+  else osOpen(key);
+}
+function osDrag(el, handle, resize) {
+  handle.addEventListener("pointerdown", e => {
+    if (e.target.closest("button") || mobile() || el.classList.contains("max")) return;
+    e.preventDefault();
+    const sx = e.clientX, sy = e.clientY, r = el.getBoundingClientRect();
+    const move = ev => {
+      const dx = ev.clientX - sx, dy = ev.clientY - sy;
+      if (resize) { el.style.width = Math.max(320, r.width + dx) + "px"; el.style.height = Math.max(200, r.height + dy) + "px"; }
+      else {
+        el.style.left = Math.min(innerWidth - 80, Math.max(-r.width + 100, r.left + dx)) + "px";
+        el.style.top = Math.min(innerHeight - 60, Math.max(OS_TOP, r.top + dy)) + "px";
+      }
+    };
+    const up = () => { removeEventListener("pointermove", move); removeEventListener("pointerup", up); };
+    addEventListener("pointermove", move); addEventListener("pointerup", up);
+  });
+}
+
+/* =====================================================================
+   "Read as a web page": the same content as one scrolling page.
+   ===================================================================== */
+const NAV = [["m-work", "Work"], ["m-research", "Research"], ["m-thinking", "Thinking"], ["m-journey", "Journey"], ["m-lab", "Lab"], ["m-contact", "Contact"]];
 function buildModern() {
   const m = $("#modern"), R = ME.research, F = ME.fail;
   const words = ME.headline.split(" ").map(w => `<span class="w"><span>${acc(w)}</span></span>`).join(" ");
@@ -1349,7 +2211,7 @@ function buildModern() {
       <p class="who rv"><b>${esc(ME.name)}</b><span>${esc(ME.role)}</span></p>
       <p class="lede rv">${esc(ME.lede)}</p>
       <div class="ctas rv"><a class="pill acc" href="#m-work">Explore my work ↓</a><a class="pill" href="#m-research">Research</a>${GH ? pill(GH) : ""}${resume}</div>
-      <dl class="glance rv" aria-label="At a glance">${ME.glance.map(g => `<div><dt>${esc(g.k)}</dt><dd>${esc(g.v)}</dd></div>`).join("")}</dl>
+      ${glanceHTML()}
     </section>
 
     <section class="blk wrap" id="m-about" aria-labelledby="m-about-h">
@@ -1357,62 +2219,29 @@ function buildModern() {
       <div class="about">
         <div class="rv"><p class="big">${acc(ME.aboutLead)}</p>
           <div class="now"><b>Now</b>${ME.now.map(n => `<div>${esc(n)}</div>`).join("")}</div></div>
-        <div class="rv">${ME.about.map(p => `<p>${esc(p)}</p>`).join("")}
-          <h3 class="mini">Where I want to go</h3><p>${esc(ME.goal)}</p>
-          <p style="font-size:14px;margin-bottom:0">${esc(ME.directionNote)}</p>
-          <div class="chips">${ME.directions.map(d => `<span>${esc(d)}</span>`).join("")}</div>
-          <h3 class="mini">Skills, honestly</h3>${ME.skills.map(g => `<div class="sk"><span>${esc(g.level)}</span><p>${g.items.map(esc).join(" · ")}</p></div>`).join("")}
-        </div>
+        <div class="rv">${aboutRightHTML()}</div>
       </div>
     </section>
 
     <section class="blk wrap" id="m-work" aria-labelledby="m-work-h">
       ${sec("m-work", "02 · What I build", "Problems I've tried to build for", "Each project: the problem, what I built, and the evidence so far. Open one for the full story.")}
-      <div class="grid">${ME.projects.map((p, i) => `
-        <article class="card rv${i === 0 ? " feat" : ""}" ${p.anchor ? `data-anchor="${esc(p.anchor)}"` : `data-mcase="${esc(p.id)}"`} tabindex="0" role="button" aria-label="${p.anchor ? "Go to research" : "Open case study"}: ${esc(p.title)}">
-          <div class="media">${p.image ? `<img src="${esc(p.image)}" alt="" loading="lazy">` : `<span class="mark" aria-hidden="true">${esc(p.mark)}</span>`}${p.status ? `<span class="stat">${esc(p.status)}</span>` : ""}</div>
-          <div class="txt"><div class="meta"><div><h3>${esc(p.title)}</h3><p class="tg">${esc(p.tagline)}</p></div><span class="arr" aria-hidden="true">${p.anchor ? "↓" : "→"}</span></div>
-          ${dl([["Problem", p.card.problem], ["Build", p.card.build], ["Evidence", p.card.evidence]], "pbe")}</div>
-        </article>`).join("")}</div>
-      ${ME.alsoOnWeb.length ? `<p class="also rv">Also on the web:${ME.alsoOnWeb.map(l => `<a href="${esc(l.url)}" ${EXT}>${esc(l.label)}</a>`).join("")}${GH ? `<a href="${esc(GH.url)}" ${EXT}>GitHub</a>` : ""}</p>` : ""}
+      ${cardsHTML()}${alsoHTML()}
     </section>
 
     <section class="blk wrap" id="m-thinking" aria-labelledby="m-thinking-h">
-      ${sec("m-thinking", "03 · How I think", "Three working rules")}
-      <div class="princ">${ME.principles.map((p, i) => `<div class="pr rv"><span class="n">0${i + 1}</span><h3>${esc(p.title)}</h3><p>${esc(p.text)}</p></div>`).join("")}</div>
+      ${sec("m-thinking", "03 · How I think", "Three working rules")}${principlesHTML()}
     </section>
 
     <section class="res" id="m-research" aria-labelledby="m-research-h"><div class="wrap">
-      ${sec("m-research", "04 · Research", R.title, R.status)}
-      <div class="rq rv"><span class="lbl">Research question</span><p>${esc(R.question)}</p></div>
-      <div class="rgrid">
-        <ol class="flow">
-          <li class="rv"><span class="lbl">Why it matters</span><p>${esc(R.why)}</p></li>
-          ${R.method.map(s => `<li class="rv"><span class="lbl">${esc(s.k)}</span><p>${esc(s.v)}</p></li>`).join("")}
-          <li class="rv key"><span class="lbl">Early patterns</span><ul>${R.findings.map(f => `<li>${esc(f)}</li>`).join("")}</ul><p class="caveat">${esc(R.findingsNote)}</p></li>
-          <li class="rv"><span class="lbl">Limitations</span><ul>${R.limitations.map(f => `<li>${esc(f)}</li>`).join("")}</ul></li>
-          ${R.learned ? `<li class="rv"><span class="lbl">What I learned</span><p>${esc(R.learned)}</p></li>` : ""}
-          <li class="rv"><span class="lbl">Next questions</span><ul>${R.next.map(f => `<li>${esc(f)}</li>`).join("")}</ul></li>
-        </ol>
-        <aside class="rater rv" aria-labelledby="mRaterH">
-          <h3 id="mRaterH">Try the scenarios</h3><p>${esc(R.raterIntro)}</p>
-          <form class="rt" id="mRater" onsubmit="return false">${R.scenarios.map((s, i) => `
-            <fieldset><legend>${esc(s.text)}</legend><div class="opts">${R.scaleShort.map((l, j) => `<label><input type="radio" name="sc${i}" value="${j}" aria-label="${esc(R.scale[j])}"><span aria-hidden="true">${esc(l)}</span></label>`).join("")}</div>
-            <p class="pat" data-pat="${esc(s.pattern)}" aria-live="polite"></p></fieldset>`).join("")}</form>
-        </aside>
-      </div>
-      ${R.paperUrl ? `<p class="rv" style="margin-top:40px"><a class="pill" href="${esc(R.paperUrl)}" ${EXT}>Read the paper ↗</a></p>` : ""}
+      ${sec("m-research", "04 · Research", R.title, R.status)}${researchHTML("m")}
     </div></section>
 
     <section class="blk wrap" id="m-journey" aria-labelledby="m-journey-h">
-      ${sec("m-journey", "05 · Journey", "How the pieces connect")}
-      <ol class="tl">${ME.journey.map((j, i, a) => `<li class="rv${i === a.length - 1 ? " nx" : ""}"><span class="when">${esc(j.when)}</span><div><h3>${esc(j.title)}</h3><p>${esc(j.text)}</p></div></li>`).join("")}</ol>
+      ${sec("m-journey", "05 · Journey", "How the pieces connect")}${journeyHTML()}
     </section>
 
     <section class="blk wrap" id="m-lab" aria-labelledby="m-lab-h">
-      ${sec("m-lab", "06 · Lab", "Unfinished experiments", "Questions I'm still working on. Some are running, some are only ideas.")}
-      <div class="lab">${ME.lab.map(x => `<article class="lx rv"><div class="lh"><h3>${esc(x.title)}</h3>${x.status ? `<span class="stat">${esc(x.status)}</span>` : ""}</div>
-        ${dl([["Question", x.question], ["Experiment", x.experiment], ["Result", x.result], ["Next", x.next]], "")}</article>`).join("")}</div>
+      ${sec("m-lab", "06 · Lab", "Unfinished experiments", "Questions I'm still working on. Some are running, some are only ideas.")}${labHTML()}
     </section>
 
     <section class="blk wrap" id="m-fail" aria-labelledby="m-fail-h">
@@ -1420,22 +2249,19 @@ function buildModern() {
     </section>
 
     <section class="blk wrap" id="m-beyond" aria-labelledby="m-beyond-h">
-      ${sec("m-beyond", "08 · Beyond the screen", "Teaching, leading, and learning from people")}
-      <div class="bey">${ME.beyond.map(b => `<article class="bx rv"><span class="when">${esc(b.when)}</span><h3>${esc(b.title)}</h3><p>${esc(b.text)}</p>${b.url ? `<a href="${esc(b.url)}" ${EXT}>${esc(b.urlLabel || b.url)} ↗</a>` : ""}</article>`).join("")}</div>
-      <div class="extra rv"><div><h3 class="mini">Also</h3><div class="chips">${ME.additional.map(a => `<span>${esc(a)}</span>`).join("")}</div></div>
-        <div><h3 class="mini">Academic</h3><div class="chips">${ME.academics.map(a => `<span>${esc(a)}</span>`).join("")}</div></div></div>
+      ${sec("m-beyond", "08 · Beyond the screen", "Teaching, leading, and learning from people")}${beyondHTML()}
     </section>
 
     <section class="contact wrap" id="m-contact" aria-labelledby="m-contact-h">
       <span class="num rv">09 · Contact</span>
-      <h2 class="rv" id="m-contact-h">${ME.email ? `<a href="mailto:${esc(ME.email)}">Let's talk.</a>` : GH ? `<a href="${esc(GH.url)}" ${EXT}>Let's talk.</a>` : "Let's talk."}</h2>
-      <p class="lede rv">Working on learning, AI or research, or curious about something here? I'd like to hear from you.</p>
-      <div class="ctas rv">${ME.email ? `<a class="pill acc" href="mailto:${esc(ME.email)}">${esc(ME.email)}</a>` : ""}${LINKS.map(l => pill(l)).join("")}</div>
+      <h2 class="rv" id="m-contact-h">${talkHTML()}</h2>
+      <p class="lede rv">${esc(CONTACT_NOTE)}</p>
+      <div class="ctas rv">${contactPills()}</div>
     </section>
   </main>
   <footer><div class="wrap"><span>© ${new Date().getFullYear()} ${esc(ME.name)}. Built in 1996, updated in 2026. One HTML file, no framework.</span>
     <span class="soc">${LINKS.map(l => `<a href="${esc(l.url)}" ${EXT}>${esc(l.label)}</a>`).join("")}</span></div></footer>
-  <button id="back96" title="Go back to the 1996 desktop">💾 Back to 1996</button>
+  <button id="mBack" title="Back to the ${esc(ME.osName)} 2026 desktop">← Back to desktop</button>
   <div id="mcase" role="dialog" aria-modal="true" aria-labelledby="mcaseT"><div class="sheet" id="mcaseSheet"></div></div>`;
 
   // scroll progress
@@ -1460,12 +2286,8 @@ function buildModern() {
     if (e.key === "Escape") { if (m.querySelector("#mcase").classList.contains("open")) closeMCase(); else setMenu(false); }
   });
   m.querySelector("#mcase").onclick = e => { if (e.target.id === "mcase" || e.target.closest(".close")) closeMCase(); };
-  m.querySelector("#back96").onclick = back96;
-  // research scenario rater (local only; nothing stored or sent)
-  m.querySelector("#mRater").addEventListener("change", e => {
-    const p = e.target.closest("fieldset").querySelector(".pat");
-    p.textContent = R.patternText[p.dataset.pat] || R.patternText.none;
-  });
+  m.querySelector("#mBack").onclick = () => closeWeb();
+  bindRater(m);
   // reveal on scroll
   revealObs = new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting) { x.target.classList.add("seen"); revealObs.unobserve(x.target); } }), { root: m, threshold: .08 });
   m.querySelectorAll(".rv").forEach((el, i) => { el.style.transitionDelay = (i % 4) * 70 + "ms"; revealObs.observe(el); });
@@ -1478,7 +2300,7 @@ function scrollToSection(id, instant) {
   const h = t.querySelector("h2"); if (h) { h.tabIndex = -1; h.focus({ preventScroll: true }); }
 }
 function setModalInert(on) {
-  $("#modern").querySelectorAll(":scope > header, :scope > main, :scope > footer, #back96, .skip").forEach(e => e.inert = on);
+  $("#modern").querySelectorAll(":scope > header, :scope > main, :scope > footer, #mBack, .skip").forEach(e => e.inert = on);
 }
 function openMCase(id) {
   const p = ME.projects.find(x => x.id === id); if (!p) return;
@@ -1487,39 +2309,56 @@ function openMCase(id) {
   box.querySelector("#mcaseSheet").innerHTML = `
     <button class="pill close" aria-label="Close case study">Close ✕</button>
     <span class="num" style="margin-top:8px">Case study</span>
-    <h2 id="mcaseT">${esc(p.title)}</h2><p class="sub">${esc(p.tagline)}</p>
-    ${dl([["Project", p.title], ["Year", p.year], ["Role", p.role], ["Technology", (p.tech || []).join(", ")], ["Status", p.status]], "facts")}
-    ${p.image ? `<div class="shot"><img src="${esc(p.image)}" alt="Screenshot of ${esc(p.title)}" loading="lazy"></div>` : ""}
-    ${CASE_FIELDS.filter(([k]) => p[k]).map(([k, l]) => `<h4>${l}</h4><p>${esc(p[k])}</p>`).join("")}
-    ${(p.links || []).filter(l => l.url).length ? `<div class="lk">${p.links.filter(l => l.url).map(l => pill(l, " acc")).join("")}</div>` : ""}`;
+    <h2 id="mcaseT">${esc(p.title)}</h2><p class="sub">${esc(p.tagline)}</p>${caseHTML(p)}`;
   box.classList.add("open"); box.querySelector(".sheet").scrollTop = 0; setModalInert(true); box.querySelector(".close").focus();
 }
 function closeMCase() {
   $("#mcase").classList.remove("open"); setModalInert(false);
   if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
 }
-function setDesktopInert(on) { ["#desk", "#taskbar", "#helper", "#start", "#balloon"].forEach(s => $(s).inert = on); }
-function enter2026() {
+function openWeb() {
+  if (!osBuilt || !$("#os26").classList.contains("on")) enter2026();
   if (!modernBuilt) buildModern();
   const m = $("#modern");
-  toggleStart(false); helper(false); clearTimeout(idle); setDesktopInert(true);
   m.classList.add("on"); m.scrollTop = 0; m.classList.remove("in");
   requestAnimationFrame(() => requestAnimationFrame(() => m.classList.add("in")));
-  store.set("era", "2026");
+  $("#os26").inert = true;
+  if (location.hash !== "#web") history.replaceState(null, "", "#web");
+  m.tabIndex = -1; m.focus({ preventScroll: true });
+}
+function closeWeb(silent) {
+  const m = $("#modern"); if (!m.classList.contains("on")) return;
+  if (m.querySelector("#mcase").classList.contains("open")) closeMCase();
+  m.classList.remove("on", "in"); $("#os26").inert = false;
+  if (silent) return;
+  history.replaceState(null, "", "#2026");
+  const w = Object.values(owins).find(x => x.el.classList.contains("active"));
+  (w ? w.el : $('#os26 .dock [data-os="web"]')).focus({ preventScroll: true });
+}
+
+/* ---------- switching eras ---------- */
+function setDesktopInert(on) { ["#desk", "#taskbar", "#helper", "#start", "#balloon"].forEach(s => $(s).inert = on); }
+function enter2026() {
+  if (!osBuilt) buildOS();
+  const o = $("#os26");
+  toggleStart(false); helper(false); clearTimeout(idle); setDesktopInert(true);
+  o.classList.add("on"); o.inert = false;
+  store.set("era", "2026");                                   // returning visitors land in 2026
   if (location.hash !== "#2026") history.replaceState(null, "", "#2026");
-  if (jumpTo) { const id = jumpTo; jumpTo = ""; setTimeout(() => scrollToSection(id, true), 50); }
+  if (!Object.keys(owins).length) osOpen("about");
+  if (!toastShown) { toastShown = true; setTimeout(showToast, reduceMotion() ? 0 : 700); }
+  if (jumpTo) { const k = jumpTo; jumpTo = ""; osOpen(k); }
 }
 function back96() {
-  const m = $("#modern");
-  if (m.querySelector("#mcase").classList.contains("open")) closeMCase();
-  m.classList.remove("on", "in"); setDesktopInert(false);
+  closeWeb(true);
+  $("#os26").classList.remove("on"); setDesktopInert(false);
   store.set("era", "1996");
   history.replaceState(null, "", location.pathname + location.search);
   if (!bootedOnce) boot(); else startBtn.focus();
   wake();
 }
 
-/* ---------- start-up: offer the update after boot, or jump to 2026 via #2026 ---------- */
+/* ---------- start-up: #2026 → desktop, #web → web page, installed before → 2026, else boot 1996 ---------- */
 let bootedOnce = false;
 const _finishBoot = boot;
 boot = function () {
@@ -1528,11 +2367,18 @@ boot = function () {
   const waitBoot = setInterval(() => {
     if ($("#boot").style.display !== "none") return;
     clearInterval(waitBoot);
-    setTimeout(() => { if (!$("#modern").classList.contains("on")) updateBalloon(true); }, 5000);
+    setTimeout(() => { if (!era26()) updateBalloon(true); }, 5000);
   }, 200);
 };
-if (location.hash === "#2026") { $("#boot").style.display = "none"; enter2026(); updateBalloon(false); }
-else boot();
+const START_HASH = location.hash;
+const FRAMED = (() => { try { return window.self !== window.top; } catch { return true; } })();
+if (FRAMED && START_HASH === "#web") {             // inside the UmarOS 2026 Browser app
+  $("#boot").style.display = "none"; setDesktopInert(true);
+  buildModern(); const m = $("#modern"); m.classList.add("on", "in", "framed");
+} else if (START_HASH === "#2026" || START_HASH === "#web" || (!START_HASH && store.get("era") === "2026")) {
+  $("#boot").style.display = "none"; updateBalloon(false); enter2026();
+  if (START_HASH === "#web") openWeb();
+} else boot();
 </script>
 </body>
 </html>

@@ -7,9 +7,12 @@ Guide for coding agents working on this portfolio site. Read it fully before edi
 The university-admissions portfolio of Muhammadumar Muhammadtoirov (public name Muhammadumar Toirov), a high-school student from Margilan, Uzbekistan interested in AI, computer science, education and research. It is a single static page, `index.html`, with two "eras":
 
 1. **1996 desktop**: a retro OS called **UmarOS 95** with a boot screen, desktop icons, draggable/resizable windows, taskbar, Start menu, mini-apps (Minesweeper, Paint, Chat), screensaver, joke crash screen and a helper character, Disky.
-2. **2026 site**: a modern dark one-page website (big type, lime accent, aurora glow, scroll reveals, case-study drawer, a light "paper" research section). Visitors reach it through an in-desktop "update" that plays a time-travel animation, or directly via the `#2026` URL hash.
+2. **2026 desktop**: the "update" installs **UmarOS 2026** (`#os26`), a modern desktop in the spirit of current macOS/desktop systems (all drawings original): a colourful CSS wallpaper with silk ribbons, a translucent menu bar (logo menu, active app name, search, clock), glass widgets (clock, Now, Research status), desktop icons, and a dock of colourful app icons with hover magnification. Apps open in light windows with red/yellow/green window buttons: **About Me** (tabs: Overview, Story, Activities, Skills), **Projects** (file browser with sidebar, grid and preview pane; each project opens a case-study document), **Research** (document viewer with an outline and the scenario rater), **Notes** (How I think, What didn't work, Now, and every Lab experiment), **Journey**, **Mail**, **Terminal** (real commands from `ME`), **Browser** (embeds the web-page view), **Settings** (About this site, wallpapers, back to 1996) and **Trash**. Ctrl/Cmd+K opens search; a welcome notification appears on entry. This follows the owner's and mentor's feedback: the site stays a desktop after the update, it just jumps 30 years.
+3. **Web-page view**: the same content as one scrolling page (`#modern`: big type, scroll reveals, case-study drawer, light "paper" research section), opened from "Read as a web page" in the dock or top bar, or directly via `#web`. It sits above the 2026 desktop and has a "Back to desktop" button.
 
-The retro desktop is the hook; the 2026 site is the substance. The site must pass the "30-second test": a reader should quickly learn who he is, what he cares about, what he has built and researched, how it connects, and what's next.
+Visitors reach 2026 through the in-desktop update (time-travel animation), via `#2026`, or automatically on a return visit once they have installed the update (`era` in storage). "Back to 1996" in the 2026 menu and in About this site returns to the retro desktop.
+
+The retro desktop is the hook; the 2026 desktop and web page are the substance. The site must pass the "30-second test": a reader should quickly learn who he is, what he cares about, what he has built and researched, how it connects, and what's next.
 
 The concept is inspired by robbyyeager.com. **All code, text and graphics here are original.** See "Hard rules".
 
@@ -42,8 +45,8 @@ Inside `index.html`, in order (search for these names; line numbers drift):
 |---|---|
 | `<head>` | Static SEO tags, inline SVG favicon, Google Fonts. |
 | `<style>` first half | Retro desktop styles: bevels `.out` / `.in` / `.btn`, windows `.win`, taskbar, Start menu, overlays, helper, Minesweeper, Paint, chat. Mobile breakpoint `max-width:700px`. Note: bare element rules here (`fieldset`, `p`, `h2`, `a`, `label`) are global, so reset them under `#modern` if a 2026 component uses those elements. |
-| `<style>` after `UPDATE → 2026` | Update balloon, installer, `#warp`, and the 2026 site. **Every 2026 rule is scoped under `#modern`** (or `#mcase`, `#back96`, which live inside it). Breakpoint `max-width:860px`. |
-| HTML body | Static shells: `#boot`, `#desk` with `#icons`, `#helper`, `#start`, `#taskbar`, overlays, `#balloon`, `#warp`, empty `#modern`. OS name text is filled in by JS from `ME.osName`. |
+| `<style>` after `UPDATE → 2026` | Update balloon, installer, `#warp`, the web-page view (**every rule under `#modern`**, breakpoint `max-width:860px`), then the UmarOS 2026 desktop (**every rule under `#os26`**, light windows; container queries at 780/560px inside windows; full-screen windows at `max-width:700px`). Inside `#os26`, avoid class names the 1996 CSS styles globally: `.body .icon .files .file .status .tags .stats .btn .in .out .win .menubar .hero .log`. |
+| HTML body | Static shells: `#boot`, `#desk` with `#icons`, `#helper`, `#start`, `#taskbar`, overlays, `#balloon`, `#warp`, empty `#os26` and `#modern`. OS name text is filled in by JS from `ME.osName`. |
 | `CONTENT_TO_VERIFY` comment | Owner TODO list of unverified facts and drafted reflections. Not rendered. |
 | `ME` | **The content config** (see below). |
 | helpers | `$`, `esc`, `acc`, `plain`, `mobile`, `store`, `EXT`, `LINKS`, `GH`, `CASE_FIELDS`. |
@@ -52,8 +55,14 @@ Inside `index.html`, in order (search for these names; line numbers drift):
 | `INIT`, `openCase`, `initChat`, `initMines`, `initPaint`, `setWall` | Desktop app logic. |
 | `system`, `startSaver`, `wake`, `helper`, `boot` | System actions, screensaver (90 s idle), Disky, boot. |
 | `initUpdate`, `updateBalloon`, `timeTravel` | Update installer and warp. |
-| `buildModern`, `scrollToSection`, `openMCase`, `closeMCase`, `enter2026`, `back96` | The 2026 site, built once from `ME` on first entry. |
-| end of script | `boot` wrapped to show the update balloon; `#2026` hash skips to the modern site. |
+| web-page builders | `cardsHTML`, `researchHTML`, `bindRater`, `principlesHTML`, `journeyHTML`, `labHTML`, `beyondHTML`, `caseHTML`, `glanceHTML`, `aboutRightHTML`, `contactPills` (the Research app reuses `researchHTML` + `bindRater`). |
+| `G`, `SVG`, `tile`, `appTile`, `projTile` | 24×24 stroke glyphs and the gradient app-icon tiles. |
+| `APPS26`, `DOCK26`, `*App()` / `init*()` | The desktop's apps: each entry is `{ name, g (glyph), c (two gradient colours), cls?, dark?, w, h, render, init? }`. `init(el, opts)` may return an API (Notes returns `{ select }`). `NOTES()` builds the Notes list from `ME`. |
+| `buildOS`, `osCmd`, `osOpen`, `osProject`, `osFocus`, `osClose`, `osDock`, `osDockClick`, `osDrag` | Desktop shell and window manager (windows are `.mw` in `#os26 .wins`, tracked in `owins`; case-study windows are `case_<id>`). |
+| `openSpot`, `renderSpot`, `spotItems`, `showToast`, `setWall26` | Search, welcome notification, wallpaper. |
+| `buildModern`, `scrollToSection`, `openMCase`, `closeMCase`, `openWeb`, `closeWeb` | The web-page view, built once on first open. |
+| `enter2026`, `back96`, `era26` | Switching eras. `era26()` is true while either 2026 view is showing. |
+| end of script | `boot` wrapped to show the update balloon. Start-up routing: `#2026` → desktop, `#web` → web page, stored `era=2026` → desktop, otherwise boot 1996. |
 
 ## The `ME` object
 
@@ -85,7 +94,9 @@ Inside `index.html`, in order (search for these names; line numbers drift):
 
 **Add a system action:** add the key to the list at the top of `openApp` and handle it in `system()`.
 
-**Add a 2026 section:** add markup in the `main` template in `buildModern()`, with `id="m-something"` and a heading made by `sec()` (it adds the `id="m-something-h"` used by `aria-labelledby`). Add it to `NAV` if it belongs in the header. Anchors use `href="#m-..."`; a delegated handler scrolls the `#modern` container. Add class `rv` for scroll reveal. Styles go under `#modern` in the 2026 CSS block.
+**Add a 2026 app:** write `fooApp()` (and `initFoo(el, opts)` if it needs behaviour) that renders from `ME` with `esc()`, add `foo: { name, g, c, w, h, render: fooApp, init: initFoo }` to `APPS26` (add a glyph to `G` if needed), and add the key to `DOCK26`. Optionally add a desktop icon in `buildOS` (`DESK`). Style it under `#os26`. If the content should also be on the web page, add a section in `buildModern()` with `id="m-foo"`, a `sec()` heading and a `NAV` entry.
+
+**Commands:** on the desktop, `data-os="key"` on any element runs `osCmd`: an app key opens that app, `webfull` opens the full-screen web page, `spot` opens search, `back96` returns to 1996. In 1996, `data-jump="key"` time-travels and opens that desktop app.
 
 ## Layering (z-index)
 
@@ -97,16 +108,17 @@ Inside `index.html`, in order (search for these names; line numbers drift):
 | 5500 | Update balloon |
 | 6000 | Start menu |
 | 8000 | `#shutdown`, `#bsod`, `#saver` |
-| 9000 | `#modern`, with internal layers 0–60 |
+| 9000 | `#os26` (2026 desktop): wallpaper, widgets and desktop icons 0–1, windows from 10 up, menu bar and dock 4000, menu 4500, notification 4600, search 4800 |
+| 9100 | `#modern` (web-page view), with internal layers 0–60 |
 | 9500 | `#warp` |
 | 9999 | `#boot` |
 
 ## Behaviour details worth knowing
 
-- **Mobile (≤700px):** windows full-screen, no drag/resize, icons open on one tap, Disky hidden. 2026 (≤860px): single-column layout and a Menu button for the nav.
-- **Reduced motion:** no auto screensaver, warp skipped, no reveals or hero word animation, no drawer slide.
-- **Keyboard:** Enter opens icons and menu items; arrow keys/Home/End move through the Start menu; Escape closes the Start menu, the focused window, the case drawer or the mobile menu. While the 2026 site is shown, the desktop is `inert`; while the drawer is open, the rest of `#modern` is `inert` and focus returns to the card on close.
-- **Persistence (`store`):** `noWelcome`, `wall`, `era` (written, not used to auto-restore).
+- **Mobile (≤700px):** 1996 and 2026 windows go full-screen with no drag/resize; 1996 icons open on one tap; the 2026 desktop icons become a home-screen grid and open on one tap; Disky and the 2026 widgets are hidden; the dock scrolls sideways. Web page (≤860px): single column and a Menu button. The 2026 widgets hide below 1100px and the decorative menu-bar menus below 900px.
+- **Reduced motion:** no auto screensaver, warp skipped, no window pop-in, notification slide or dock magnification, no reveals or hero word animation, no drawer slide.
+- **Keyboard:** Enter opens icons, files and menu items; arrow keys move through the 1996 Start menu, the 2026 logo menu, About Me tabs, project files and search results; Ctrl/Cmd+K opens search; Escape closes search, the open menu, the focused window (focus moves to the next window), the case drawer or the mobile nav. Inert layering: the 1996 desktop is `inert` while 2026 shows, `#os26` is `inert` under the full-screen web page, and the web page is `inert` behind its drawer.
+- **Persistence (`store`):** `noWelcome`, `wall`, `wall26` (2026 wallpaper), `era`. `era=2026` makes a return visit skip the boot and open the 2026 desktop; "Back to 1996" sets it back to `1996`.
 - **Easter eggs:** clicking the clock 7 times shows the joke crash screen; 90 s idle starts the starfield.
 - **Research scenario rater** is local only: nothing is stored or sent. It shows the qualitative early pattern from `research.patternText`, never numbers.
 - **Contact** uses `mailto:` only. A real form backend (e.g. Formspree) must be discussed with the owner first.
@@ -126,6 +138,8 @@ There is no test suite. Before finishing any change:
    "$EDGE" --headless=new --disable-gpu --hide-scrollbars --window-size=1400,900 --virtual-time-budget=5000  --screenshot="$TMP/2026.png" "file:///C:/Users/Muhammadumar/portfolio/index.html#2026"
    ```
 3. **Pitfalls:**
+   - To see other desktop windows, inject a script into a scratch copy that calls `osOpen("projects")`, `osProject("ilmhub")`, `osOpen("notes", { note: "fail" })`, `openSpot()`, `openWeb()` etc. Call `hideToast()` to hide the welcome notification. `#web` opens the web page directly.
+   - The Browser app loads the page itself at `#web` in an iframe; that framed copy shows only the web page (`FRAMED`), so no nested desktop.
    - Headless Edge won't render narrower than about 500px. For phone width, screenshot a scratch page containing `<iframe style="width:390px;height:844px">` pointing at the site.
    - `#modern` scrolls internally, so a tall window won't show lower sections. Make a scratch copy that injects a script (after load) to add `seen` to all `.rv` elements and set `#modern`'s `scrollTop`, plus `*{transition:none!important;animation:none!important}`. Insert it before the **last** `</body>`.
    - `--force-prefers-reduced-motion` tests reduced motion.
