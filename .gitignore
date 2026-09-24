@@ -13,3 +13,7 @@ scratch/
 
 # Claude Code local settings
 .claude/
+
+# Vercel link data and local env files (may contain tokens)
+.vercel/
+.env*
