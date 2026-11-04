@@ -1,4 +1,5 @@
 .env*
 .claude/
 AGENTS.md
-*.png
+# screenshots in the project root only; images in img/ must deploy
+/*.png
