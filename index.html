@@ -129,10 +129,8 @@ label{display:block;margin:8px 0 3px}
 #me96[hidden]{display:none}
 #me96 .fr{padding:4px}
 #me96 img{display:block;width:240px;height:304px}
-#me96 .nm{margin-top:14px;font:30px/1.05 "Pixelify Sans",var(--ui);text-shadow:2px 2px 0 #000}
+#me96 .nm{margin-top:14px;max-width:min(100%,320px);font:30px/1.1 "Pixelify Sans",var(--ui);text-shadow:2px 2px 0 #000;text-wrap:balance}
 #me96 .rl{margin-top:6px;font:22px/1 VT323,monospace;text-shadow:1px 1px 0 #000}
-.ph96{float:right;margin:0 0 8px 14px;padding:2px;background:#fff}
-.ph96 img{display:block;width:120px;height:152px}
 /* Gallery, Imaging, DOS prompt */
 .gtool{display:flex;gap:6px;align-items:center;padding:3px 0;flex:none;font-size:12px}
 .gtool .btn{min-width:0;padding:3px 10px}
@@ -437,6 +435,15 @@ label{display:block;margin:8px 0 3px}
 #modern .rv{opacity:0;transform:translateY(32px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
 #modern .rv.seen{opacity:1;transform:none}
 /* case study drawer */
+#mlb{position:fixed;inset:0;z-index:70;display:flex;align-items:center;justify-content:center;gap:14px;padding:64px 16px 28px;background:rgba(6,6,10,.94)}
+#mlb[hidden]{display:none}
+#mlb figure{margin:0;min-width:0;max-width:min(1200px,100%);display:flex;flex-direction:column;align-items:center}
+#mlb img{display:block;max-width:100%;max-height:calc(100vh - 150px);max-height:calc(100dvh - 150px);object-fit:contain;border-radius:8px}
+#mlb figcaption{margin-top:12px;color:#d8d8de;font:14px/1.45 Inter,system-ui,sans-serif;text-align:center}
+#mlb button{flex:none;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.1);color:#fff;font:22px/1 Inter,system-ui,sans-serif;cursor:pointer}
+#mlb button:hover{background:rgba(255,255,255,.2)}
+#mlb .lbx{position:absolute;top:14px;right:14px;font-size:18px}
+@media (max-width:860px){#mlb .lbp,#mlb .lbn{position:absolute;bottom:20px}#mlb .lbp{left:20px}#mlb .lbn{right:20px}#mlb{padding-bottom:90px}}
 #mcase{position:fixed;inset:0;z-index:50;display:none;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 #mcase.open{display:block}
 #mcase .sheet{position:absolute;right:0;top:0;bottom:0;width:min(760px,100%);background:#111113;border-left:1px solid var(--line);overflow-y:auto;padding:40px;animation:slide .6s cubic-bezier(.16,1,.3,1)}
@@ -540,7 +547,7 @@ label{display:block;margin:8px 0 3px}
 #os26 .wava{position:relative;flex:none;width:var(--d);height:var(--d);margin-top:calc(var(--d) * .35);border-radius:50%;background:radial-gradient(circle at 50% 30%,rgba(255,255,255,.3),rgba(255,255,255,.07) 72%);border:1px solid rgba(255,255,255,.3);box-shadow:0 24px 70px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.3);backdrop-filter:blur(20px) saturate(1.3);-webkit-backdrop-filter:blur(20px) saturate(1.3)}
 #os26 .wclip{position:absolute;left:0;bottom:0;width:100%;height:135%;clip-path:inset(0 round 0 0 50% 50% / 0 0 37.04% 37.04%)}
 #os26 .wclip img{position:absolute;bottom:0;left:50%;height:100%;width:auto;max-width:none;transform:translateX(-50%)}
-#os26 .wname{margin-top:22px;font:600 clamp(28px,3vw,46px)/1.1 "Segoe UI Variable Display","Segoe UI",system-ui,sans-serif;letter-spacing:-.01em;text-shadow:0 2px 18px rgba(0,0,0,.45)}
+#os26 .wname{margin-top:22px;max-width:100%;font:600 clamp(28px,3vw,46px)/1.1 "Segoe UI Variable Display","Segoe UI",system-ui,sans-serif;letter-spacing:-.01em;text-shadow:0 2px 18px rgba(0,0,0,.45);text-wrap:balance;overflow-wrap:anywhere}
 #os26 .wrole{margin-top:8px;font-size:clamp(14px,1.25vw,18px);opacity:.92;text-shadow:0 1px 8px rgba(0,0,0,.5)}
 #os26 .wloc{display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:5px 12px;border-radius:999px;font-size:12.5px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 #os26 .wloc svg{flex:none}
@@ -928,7 +935,7 @@ label{display:block;margin:8px 0 3px}
 /* Photos */
 #os26 .wphotos{flex:1;display:flex;min-height:0;background:#202024;color:#eee}
 #os26 .wphotos .wpv{flex:1;display:grid;place-items:center;padding:16px;min-width:0}
-#os26 .wphotos .wpv img{max-width:100%;max-height:100%;object-fit:contain;border-radius:4px;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+#os26 .wphotos .wpv img{position:absolute;inset:0;margin:auto;max-width:calc(100% - 112px);max-height:calc(100% - 32px);object-fit:contain;border-radius:4px;box-shadow:0 10px 30px rgba(0,0,0,.4)}
 #os26 .wphotos aside{width:260px;flex:none;padding:20px;background:#2a2a2e;border-left:1px solid rgba(255,255,255,.06);overflow:auto}
 #os26 .wphotos aside h3{font-size:16px;font-weight:600;margin-bottom:6px}
 #os26 .wphotos aside p{color:#c8c8d0;font-size:13.5px}
@@ -1029,7 +1036,7 @@ html.phone #phone{display:block;position:fixed;inset:0;z-index:20000;overflow:hi
 #phone .phs{position:absolute;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:calc(var(--st) + 16px) 16px calc(var(--sb) + 156px)}
 #phone .pwid{display:block;width:100%;border-radius:24px;background:rgba(255,255,255,.14);backdrop-filter:blur(26px) saturate(1.8);-webkit-backdrop-filter:blur(26px) saturate(1.8);border:1px solid rgba(255,255,255,.26);padding:14px 16px;margin-bottom:18px;box-shadow:inset 0 1px 1px rgba(255,255,255,.45),inset 0 -1px 1px rgba(255,255,255,.1),0 10px 30px rgba(0,0,0,.2);text-align:left}
 #phone .pwid1{display:flex;align-items:center;gap:14px}
-#phone .pwn{display:block;font-size:19px;font-weight:700;line-height:1.15}
+#phone .pwn{display:block;font-size:18px;font-weight:700;line-height:1.15;overflow-wrap:anywhere}
 #phone .pwr{display:block;font-size:14px;opacity:.92;margin-top:3px}
 #phone .ploc{display:flex;align-items:center;gap:4px;font-size:12.5px;opacity:.82;margin-top:6px}
 #phone .pava{position:relative;display:block;flex:none;border-radius:50%;overflow:hidden;background:radial-gradient(circle at 50% 30%,#8fdcff,#1e5fd0 72%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.35)}
@@ -1645,7 +1652,7 @@ const ME = {
     files: [["📄", "waiting_for_acceptance.exe"], ["📝", "perfect_plan_v7.doc"], ["📝", "excuses.txt"]],
     emptied: "The Recycle Bin is empty. Building instead."
   },
-  photo96: "img/me-1996.png",   // 1996-style portrait (240×304, dithered 96-colour palette) on the 1996 desktop and in Welcome
+  photo96: "img/me-1996.png",   // 1996-style portrait (240×304, dithered 96-colour palette) on the 1996 desktop
   wallpapers: [
     { name: "Classic Teal", css: "#008080" },
     { name: "Clouds",       css: "linear-gradient(#5aa0e6,#bfe0ff)" },
@@ -1694,9 +1701,8 @@ $("#balloonTxt").textContent = `${ME.osName} 2026 is available. Click here to in
 
 /* ---------- apps ---------- */
 const APPS = {
-  welcome:  { icon: "👋", title: "Welcome", w: 500, h: 380, render: () => `
+  welcome:  { icon: "👋", title: "Welcome", w: 480, h: 350, render: () => `
     <div class="body pad">
-      ${ME.photo96 ? `<span class="in ph96"><img src="${esc(ME.photo96)}" alt="${esc(ME.publicName)}" width="120" height="152"></span>` : ""}
       <h1 class="big">${esc(ME.name)}</h1>
       <p><b>${esc(ME.role)}</b> · ${esc(ME.location)}</p>
       <p>${esc(plain(ME.headline))} ${esc(ME.lede)}</p>
@@ -1758,7 +1764,7 @@ const APPS = {
     <div class="status"><div class="gcount"></div><div>${mobile() ? "Tap" : "Double-click"} to open</div></div>` },
   imgview:  { icon: "🖼️", title: "Imaging", w: 640, h: 540, render: () => `
     <div class="menubar"><span>File</span><span>Edit</span><span>View</span><span>Zoom</span></div>
-    <div class="gtool"><button class="btn" data-pv="-1">◀ Previous</button><button class="btn" data-pv="1">Next ▶</button><a class="btn" data-full ${EXT}>Full size</a></div>
+    <div class="gtool"><button class="btn" data-pv="-1">◀ Previous</button><button class="btn" data-pv="1">Next ▶</button></div>
     <div class="body in pvbox"><img alt=""></div>
     <div class="status"><div class="pvcap"></div><div class="pvn"></div></div>` },
   dos:      { icon: "⌨️", title: `${ME.osName.toUpperCase()}-DOS Prompt`, label: "DOS Prompt", w: 580, h: 380, desk: true, render: () => `
@@ -1949,11 +1955,11 @@ const INIT = {
     show();
   },
   imgview: el => {
-    const img = el.querySelector(".pvbox img"), cap = el.querySelector(".pvcap"), num = el.querySelector(".pvn"), full = el.querySelector("[data-full]"), title = el.querySelector(".tbar .t");
+    const img = el.querySelector(".pvbox img"), cap = el.querySelector(".pvcap"), num = el.querySelector(".pvn"), title = el.querySelector(".tbar .t");
     const step = d => { const n = ALBUMS()[PV.a].items.length; PV.i = (PV.i + d + n) % n; el.show(); };
     el.show = () => {
       const al = ALBUMS()[PV.a], g = al.items[PV.i];
-      img.src = g.src; img.alt = g.cap; cap.textContent = g.cap; num.textContent = `${PV.i + 1} of ${al.items.length}`; full.href = g.src;
+      img.src = g.src; img.alt = g.cap; cap.textContent = g.cap; num.textContent = `${PV.i + 1} of ${al.items.length}`;
       title.textContent = `${al.title} - Imaging`;
     };
     el.querySelectorAll("[data-pv]").forEach(b => b.onclick = () => step(+b.dataset.pv));
@@ -1970,7 +1976,7 @@ const INIT = {
 function openCase(id) {
   const p = ME.projects.find(x => x.id === id); if (!p) return;
   if (p.anchor) return openApp("research");
-  openApp("case_" + id, { icon: p.icon, title: `${p.title}${p.status ? " - " + p.status : ""}`, label: p.title, w: 580, h: 500, render: () => `
+  openApp("case_" + id, { init: el => el.addEventListener("click", e => { const a = e.target.closest("[data-ph96]"); if (!a) return; e.preventDefault(); const [al, j] = a.dataset.ph96.split(":").map(Number); openPhoto96(al, j); }), icon: p.icon, title: `${p.title}${p.status ? " - " + p.status : ""}`, label: p.title, w: 580, h: 500, render: () => `
     <div class="body in pad case">
       ${p.cover ? `<img src="${esc(p.cover)}" alt="${esc(p.title)}" loading="lazy" style="width:100%;display:block;margin-bottom:14px">` : `<div class="hero out" aria-hidden="true">${esc(p.icon)}</div>`}
       <h1 class="big">${esc(p.title)}</h1>
@@ -1978,7 +1984,7 @@ function openCase(id) {
       <fieldset><legend>Evidence</legend>${esc(p.card.evidence)}</fieldset>
       <div class="tags">${(p.tech || []).map(t => `<span class="out">${esc(t)}</span>`).join("")}</div>
       ${CASE_FIELDS.filter(([k]) => p[k]).map(([k, l]) => `<h2>${l}</h2><p>${esc(p[k])}</p>`).join("")}
-      ${(p.gallery || []).length ? `<h2>Proof</h2>${p.gallery.map(g => `<p><a href="${esc(g.src)}" ${EXT}><img src="${esc(g.src)}" alt="${esc(g.cap)}" loading="lazy" style="width:100%;border:1px solid #808080"></a><br><i>${esc(g.cap)}</i></p>`).join("")}` : ""}
+      ${(p.gallery || []).length ? `<h2>Proof</h2>${p.gallery.map((g, j) => `<p><a href="${esc(g.src)}" data-ph96="${ALBUMS().findIndex(a => a.proj === p.id)}:${j}"><img src="${esc(g.src)}" alt="${esc(g.cap)}" loading="lazy" style="width:100%;border:1px solid #808080"></a><br><i>${esc(g.cap)}</i></p>`).join("")}` : ""}
       ${(p.links || []).filter(l => l.url).map(l => `<p><a href="${esc(l.url)}" ${EXT}>${esc(l.label)} ↗</a></p>`).join("")}
     </div>` });
 }
@@ -1995,7 +2001,7 @@ function openPhoto96(a, i) {
 const me96On = () => store.get("me96") !== "0";
 function showMe96() {
   const box = $("#me96"); if (!box || !ME.photo96) return;
-  if (!box.innerHTML) box.innerHTML = `<div class="out fr"><img src="${esc(ME.photo96)}" alt="" width="240" height="304"></div><div class="nm">${esc(ME.publicName)}</div><div class="rl">${esc(ME.role)}</div>`;
+  if (!box.innerHTML) box.innerHTML = `<div class="out fr"><img src="${esc(ME.photo96)}" alt="" width="240" height="304"></div><div class="nm">${esc(ME.name)}</div><div class="rl">${esc(ME.role)}</div>`;
   box.hidden = !me96On();
 }
 showMe96();
@@ -2347,7 +2353,9 @@ const aboutRightHTML = () => `${ME.about.map(p => `<p>${esc(p)}</p>`).join("")}
   <h3 class="mini">Skills, honestly</h3>${ME.skills.map(g => `<div class="sk"><span>${esc(g.level)}</span><p>${g.items.map(esc).join(" · ")}</p></div>`).join("")}`;
 // proof helpers shared by every view
 const FACT_ROWS = p => [["Category", p.category], ["When", p.year], ["Time", p.commitment], ["Role", p.role], ["Status", p.status]].filter(x => x[1]);
-const galleryHTML = (items, cls) => items && items.length ? `<div class="${cls}">${items.map(g => `<figure><a href="${esc(g.src)}" ${EXT} aria-label="Open full size: ${esc(g.cap)}"><img src="${esc(g.src)}" alt="${esc(g.cap)}" loading="lazy"></a><figcaption>${esc(g.cap)}</figcaption></figure>`).join("")}</div>` : "";
+const galleryHTML = (items, cls) => items && items.length ? `<div class="${cls}">${items.map(g => `<figure><a href="${esc(g.src)}" ${EXT} aria-label="Open photo: ${esc(g.cap)}"><img src="${esc(g.src)}" alt="${esc(g.cap)}" loading="lazy"></a><figcaption>${esc(g.cap)}</figcaption></figure>`).join("")}</div>` : "";
+// where a photo lives: [album index, photo index] in ALBUMS(), or null
+const findPhoto = src => { const A = ALBUMS(); for (let a = 0; a < A.length; a++) { const j = A[a].items.findIndex(g => g.src === src); if (j >= 0) return [a, j]; } return null; };
 const ALBUMS = () => [...ME.projects.filter(p => p.gallery && p.gallery.length).map(p => ({ title: p.title, items: p.gallery, proj: p.id })), ...(ME.albums || [])];
 const cardsHTML = () => `<div class="grid">${ME.projects.map((p, i) => `
   <article class="card rv${i === 0 ? " feat" : ""}" ${p.anchor ? `data-anchor="${esc(p.anchor)}"` : `data-mcase="${esc(p.id)}"`} tabindex="0" role="button" aria-label="${p.anchor ? "Go to research" : "Open case study"}: ${esc(p.title)}">
@@ -2559,6 +2567,15 @@ function initFiles(el, opts) {
       ${p ? `<dl>${[["Role", p.role], ["When", p.year], ["Time", p.commitment], ["Problem", p.card.problem], ["What I did", p.card.build], ["Evidence", p.card.evidence], ["Proof", p.gallery ? p.gallery.length + " photo" + (p.gallery.length > 1 ? "s" : "") + " inside" : ""]].filter(r => r[1]).map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join("")}</dl>` : `<dl>${[["Type", it.kind], ["Album", it.album], ["Inside", it.count]].filter(r => r[1]).map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join("")}</dl>`}
       <div class="wbtns"><button class="wb acc" data-openit="${esc(it.id)}">Open</button></div>`;
   };
+  let lastClick = { id: "", t: 0 };
+  const statHTML = (n, sel) => `<span>${n} item${n === 1 ? "" : "s"}</span>${sel ? "<span>1 item selected</span>" : ""}`;
+  // change the selection in place (no redraw), update the details pane and the status bar
+  const select = id => {
+    st.sel = id;
+    view.querySelectorAll("[data-it]").forEach(x => x.classList.toggle("sel", x.dataset.it === id));
+    const list = items(), it = list.find(x => x.id === id);
+    det.innerHTML = details(it); openB.disabled = !it; stat.innerHTML = statHTML(list.length, !!it);
+  };
   const render = () => {
     const list = items();
     const inAlbum = st.loc.startsWith("al:");
@@ -2576,7 +2593,7 @@ function initFiles(el, opts) {
       : `<div class="wlist"><table><thead><tr><th>Name</th><th>Type</th><th>Status</th></tr></thead><tbody>${list.map(row).join("")}</tbody></table></div>`;
     const selIt = list.find(it => it.id === st.sel);
     det.innerHTML = details(selIt); openB.disabled = !selIt;
-    stat.innerHTML = `<span>${list.length} item${list.length === 1 ? "" : "s"}</span>${selIt ? "<span>1 item selected</span>" : ""}`;
+    stat.innerHTML = statHTML(list.length, !!selIt);
     setTitle(el, locName(st.loc));
   };
   const go = (loc, push = true) => { if (push && loc !== st.loc) { st.back.push(st.loc); st.fwd = []; } st.loc = loc; st.sel = null; st.q = ""; find.value = ""; render(); };
@@ -2589,15 +2606,20 @@ function initFiles(el, opts) {
     const fc = e.target.closest("[data-fc]"); if (fc) { if (fc.dataset.fc === "open" && st.sel) activate(st.sel); else if (fc.dataset.fc !== "open") { st.view = fc.dataset.fc; render(); } return; }
     const oi = e.target.closest("[data-openit]"); if (oi) return activate(oi.dataset.openit);
     const it = e.target.closest("[data-it]");
-    if (it) { if (mobile()) return activate(it.dataset.it); st.sel = it.dataset.it; render(); const again = view.querySelector(`[data-it="${CSS.escape(st.sel)}"]`); if (again) again.focus({ preventScroll: true }); }
+    if (it) {
+      if (mobile()) return activate(it.dataset.it);
+      const id = it.dataset.it, now = Date.now(), dbl = lastClick.id === id && now - lastClick.t < 500;
+      lastClick = dbl ? { id: "", t: 0 } : { id, t: now };
+      if (dbl) return activate(id);
+      select(id); it.focus({ preventScroll: true });
+    }
   });
-  el.addEventListener("dblclick", e => { const it = e.target.closest("[data-it]"); if (it) activate(it.dataset.it); });
   el.addEventListener("keydown", e => {
     const it = e.target.closest("[data-it]");
     if (it && e.key === "Enter") { e.preventDefault(); activate(it.dataset.it); }
     if (it && /Arrow(Left|Right|Up|Down)/.test(e.key)) {
       e.preventDefault(); const all = [...view.querySelectorAll("[data-it]")], i = all.indexOf(it), n = all[(i + (/Right|Down/.test(e.key) ? 1 : -1) + all.length) % all.length];
-      st.sel = n.dataset.it; render(); view.querySelector(`[data-it="${CSS.escape(st.sel)}"]`).focus();
+      select(n.dataset.it); n.focus();
     }
     if (e.key === "Backspace" && e.target.tagName !== "INPUT" && st.back.length) { e.preventDefault(); st.fwd.push(st.loc); go(st.back.pop(), false); }
   });
@@ -2816,7 +2838,7 @@ function buildOS() {
   <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>${Object.entries(GRADS).map(([id, c]) => `<linearGradient id="${id}" x1="0" y1="0" x2="${id === "wlg" ? 1 : 0}" y2="1">${c.map((col, i) => `<stop offset="${i / (c.length - 1)}" stop-color="${col}"/>`).join("")}</linearGradient>`).join("")}</defs></svg>
   <div class="wwall" aria-hidden="true"></div>
   <div class="wself"><div class="wava" aria-hidden="true"><span class="wclip"><img class="wme" src="${esc(D.me)}" alt=""></span></div>
-    <div class="wname">${esc(ME.publicName)}</div><div class="wrole">${esc(ME.role)}</div><div class="wloc">${SVG(G.pin, 14)}${esc(ME.location)}</div></div>
+    <div class="wname">${esc(ME.name)}</div><div class="wrole">${esc(ME.role)}</div><div class="wloc">${SVG(G.pin, 14)}${esc(ME.location)}</div></div>
   <button class="wpic" data-fl="pic" aria-expanded="false" aria-label="About this picture">${SVG(G.camera, 15)}<span>About this picture</span></button>
   <div class="wfly wflyl wpicf" data-flyout="pic" hidden><b></b><p style="margin:6px 0 12px;font-size:13px"></p><button class="wb" data-os="about">Get to know me</button></div>
   <nav class="wicons" aria-label="Desktop">${DESK().map((d, i) => `<button class="wdi" data-i="${i}">${ic(d.art, d.sc ? SHORTCUT : "")}<span class="wlab">${esc(d.label)}</span></button>`).join("")}</nav>
@@ -2883,6 +2905,8 @@ function buildOS() {
 
   // clicks: commands, flyouts, desktop icons
   o.addEventListener("click", e => {
+    const ga = e.target.closest(".wgal a,.figs a");
+    if (ga) { const at = findPhoto(ga.getAttribute("href")); if (at) { e.preventDefault(); return osOpen("photos", { album: at[0], photo: at[1] }); } }
     const fl = e.target.closest("[data-fl]");
     if (fl) { e.stopPropagation(); return toggleFly(fl.dataset.fl); }
     const qt = e.target.closest("[data-qt]"); if (qt) return qt.setAttribute("aria-pressed", qt.getAttribute("aria-pressed") !== "true");
@@ -3192,7 +3216,8 @@ function buildModern() {
   <footer><div class="wrap"><span>© ${new Date().getFullYear()} ${esc(ME.name)}. Built in 1996, updated in 2026. One HTML file, no framework.</span>
     <span class="soc">${LINKS.map(l => `<a href="${esc(l.url)}" ${EXT}>${esc(l.label)}</a>`).join("")}</span></div></footer>
   <button id="mBack" title="Back to the ${esc(ME.osName)} 2026 desktop">← Back to desktop</button>
-  <div id="mcase" role="dialog" aria-modal="true" aria-labelledby="mcaseT"><div class="sheet" id="mcaseSheet"></div></div>`;
+  <div id="mcase" role="dialog" aria-modal="true" aria-labelledby="mcaseT"><div class="sheet" id="mcaseSheet"></div></div>
+  <div id="mlb" role="dialog" aria-modal="true" aria-label="Photo" hidden><button class="lbx" aria-label="Close photo">✕</button><button class="lbp" aria-label="Previous photo">‹</button><figure><img alt=""><figcaption></figcaption></figure><button class="lbn" aria-label="Next photo">›</button></div>`;
 
   // scroll progress
   const prog = m.querySelector("#mProg");
@@ -3205,7 +3230,15 @@ function buildModern() {
     if (el.dataset.mcase) openMCase(el.dataset.mcase);
     else if (el.dataset.anchor) scrollToSection(el.dataset.anchor);
   };
+  // photos open in a lightbox inside the page (arrows / swipe-free buttons, Escape or ✕ closes)
+  const lb = m.querySelector("#mlb"), lbImg = lb.querySelector("img"), lbCap = lb.querySelector("figcaption"); let lbAt = null, lbFrom = null;
+  const lbShow = () => { const A = ALBUMS()[lbAt[0]], g = A.items[lbAt[1]]; lbImg.src = g.src; lbImg.alt = g.cap; lbCap.textContent = `${g.cap} · ${lbAt[1] + 1} / ${A.items.length}`; };
+  const lbStep = d => { const n = ALBUMS()[lbAt[0]].items.length; lbAt[1] = (lbAt[1] + d + n) % n; lbShow(); };
+  const lbClose = () => { lb.hidden = true; lbAt = null; if (lbFrom) lbFrom.focus({ preventScroll: true }); };
+  lb.onclick = e => { if (e.target.closest(".lbp")) return lbStep(-1); if (e.target.closest(".lbn")) return lbStep(1); if (e.target === lb || e.target.closest(".lbx")) lbClose(); };
   m.addEventListener("click", e => {
+    const ga = e.target.closest(".gal a,.figs a");
+    if (ga) { const at = findPhoto(ga.getAttribute("href")); if (at) { e.preventDefault(); lbAt = at; lbFrom = ga; lb.hidden = false; lbShow(); lb.querySelector(".lbx").focus(); return; } }
     const a = e.target.closest('a[href^="#m-"]');
     if (a) { e.preventDefault(); setMenu(false); scrollToSection(a.getAttribute("href").slice(1)); return; }
     const c = e.target.closest("[data-mcase],[data-anchor]"); if (c) activate(c);
@@ -3213,6 +3246,7 @@ function buildModern() {
   m.addEventListener("keydown", e => {
     const c = e.target.closest("[data-mcase],[data-anchor]");
     if (c && e.target === c && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); activate(c); }
+    if (lbAt) { if (e.key === "Escape") { e.preventDefault(); return lbClose(); } if (/Arrow(Left|Right)/.test(e.key)) { e.preventDefault(); return lbStep(e.key === "ArrowRight" ? 1 : -1); } }
     if (e.key === "Escape") { if (m.querySelector("#mcase").classList.contains("open")) closeMCase(); else setMenu(false); }
   });
   m.querySelector("#mcase").onclick = e => { if (e.target.id === "mcase" || e.target.closest(".close")) closeMCase(); };
@@ -3380,7 +3414,7 @@ function pAbout() {
   const acts = [ME.email && ["mailto:" + ME.email, PG.mail, "Mail"], ME.resumeUrl && [ME.resumeUrl, PG.file, "Resume"],
     ...LINKS.map(l => [l.url, /github/i.test(l.label) ? PG.code : /linkedin/i.test(l.label) ? PG.brief : PG.link, l.label])].filter(Boolean);
   pPush("About Me", `
-    <div class="pcard pcontact">${pAva(116)}<h2>${esc(ME.publicName)}</h2><p class="pmut">${esc(ME.name)}</p><p>${esc(ME.role)}</p><p class="pmut">${esc(ME.location)}</p>
+    <div class="pcard pcontact">${pAva(116)}<h2>${esc(ME.name)}</h2><p class="pmut">${esc(ME.publicName)}</p><p>${esc(ME.role)}</p><p class="pmut">${esc(ME.location)}</p>
       <div class="pacts">${acts.map(([u, g, l]) => `<a class="pact" href="${esc(u)}" ${u.startsWith("mailto:") ? "" : EXT}>${SVG(g, 21, 2)}<span>${esc(l)}</span></a>`).join("")}</div></div>
     ${pText("About", `<p class="plead">${esc(plain(ME.aboutLead))}</p>${ME.about.map(p => `<p>${esc(p)}</p>`).join("")}`)}
     <h3 class="ph">Now</h3>${pList(ME.now.map(n => `<div class="prow"><span>${esc(n)}</span></div>`))}
@@ -3493,13 +3527,13 @@ function buildPhone() {
     <img class="plme" src="${esc(ME.desktop.me)}" alt="">
     <span class="plk" aria-hidden="true">${SVG(G.lock, 20, 2)}</span>
     <p class="pdate"></p><p class="ptime" aria-hidden="true"></p>
-    <p class="plwid">${esc(ME.publicName)}<span>${esc(ME.role)}</span></p>
+    <p class="plwid">${esc(ME.name)}<span>${esc(ME.role)}</span></p>
     <div class="pnotif" data-lockopen><span class="pnic" aria-hidden="true">U</span><span style="flex:1;min-width:0"><b>${esc(ME.osName)}<small>now</small></b><strong>Welcome to my phone</strong><em>I'm ${esc(ME.shortName)}, a student from ${esc(city)}. Tap to get to know me.</em></span></div>
     <p class="phint" aria-hidden="true">Swipe up or tap to open</p><span class="pbar" aria-hidden="true"></span>
   </section>
   <section class="phome" aria-label="Home screen">
     <div class="phs">
-      <button class="pwid pwid1" data-papp="about" aria-label="About Me: ${esc(ME.publicName)}">${pAva(84)}<span class="pcol"><b class="pwn">${esc(ME.publicName)}</b><span class="pwr">${esc(ME.role)}</span><span class="ploc">${SVG(G.pin, 13, 2.2)}${esc(ME.location)}</span></span></button>
+      <button class="pwid pwid1" data-papp="about" aria-label="About Me: ${esc(ME.name)}">${pAva(84)}<span class="pcol"><b class="pwn">${esc(ME.name)}</b><span class="pwr">${esc(ME.role)}</span><span class="ploc">${SVG(G.pin, 13, 2.2)}${esc(ME.location)}</span></span></button>
       <div class="pgridh">
         <button class="pwid pwid2" data-pnext="about"><span class="pw2h">Get to know me</span><span class="pring" aria-hidden="true"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="3.5"/><circle class="prp" cx="18" cy="18" r="15" fill="none" stroke="#4cd964" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="94.25" stroke-dashoffset="94.25"/></svg><b class="pcount">0/5</b></span><span class="pnext"></span></button>
         ${PGRID.map(k => pIcon(k)).join("")}
