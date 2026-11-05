@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<!-- Phones get one version only: the phone-style UmarOS Mobile (#phone). Decided here, before the first paint,
+     so a phone never flashes the 1996 boot. The 2026 Browser app frames #web and must keep the web page. -->
+<script id="phoneCheck">(function(){try{var d=document.documentElement,s=Math.min(screen.width,screen.height);if(!(self!==top&&location.hash==="#web")&&(matchMedia("(max-width:700px)").matches||(matchMedia("(pointer:coarse)").matches&&s<600)))d.classList.add("phone")}catch(e){}})();</script>
 <!-- SEO: crawlers and link previews don't run JavaScript, so these static tags (and the JSON-LD and
      <noscript> summary below) are the one place the owner's details appear outside ME. Keep them in sync with
      ME.name / ME.publicName / ME.seoTitle / ME.siteUrl / ME.links. The full legal name comes first because that
@@ -985,6 +988,164 @@ label{display:block;margin:8px 0 3px}
 #mBack:focus-visible{outline:2px solid #c6ff3a;outline-offset:3px}
 #modern.framed #mBack{display:none}
 @media (max-width:860px){#mBack{left:12px;bottom:12px;padding:8px 13px}}
+/* =====================================================================
+   PHONE: UmarOS Mobile, the only version on phones (html.phone, set in <head>).
+   Every rule under #phone, classes start with p. Original design in the style of today's phones.
+   ===================================================================== */
+#phone{display:none}
+html.phone,html.phone body{height:100%;overflow:hidden;background:#000}
+html.phone body>*:not(#phone){display:none!important}
+html.phone #phone{display:block;position:fixed;inset:0;z-index:20000;overflow:hidden;color:#000;font:16px/1.4 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,"Helvetica Neue",system-ui,sans-serif;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%;--blue:#007aff;--mut:#6e6e73;--bg:#f2f2f7;--sep:rgba(60,60,67,.2);--st:env(safe-area-inset-top,0px);--sb:env(safe-area-inset-bottom,0px)}
+#phone *{box-sizing:border-box}
+#phone p,#phone h1,#phone h2,#phone h3,#phone label{margin:0;padding:0}
+#phone a{color:inherit;text-decoration:none}
+#phone button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-align:inherit;touch-action:manipulation}
+#phone button:focus-visible,#phone a:focus-visible,#phone input:focus-visible,#phone textarea:focus-visible,#phone .plock:focus-visible{outline:3px solid #0a84ff;outline-offset:2px}
+#phone .psr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+#phone .pwall{position:absolute;inset:0;background:#0a1f57 center/cover no-repeat}
+/* lock screen */
+#phone .plock{position:absolute;inset:0;z-index:30;color:#fff;display:flex;flex-direction:column;align-items:center;padding:calc(var(--st) + 22px) 16px calc(var(--sb) + 12px);touch-action:none;overflow:hidden;cursor:pointer;user-select:none;-webkit-user-select:none;transition:transform .5s cubic-bezier(.3,.7,.2,1),opacity .5s}
+#phone .plock:before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.3),transparent 32%,transparent 62%,rgba(0,0,0,.4));pointer-events:none}
+#phone.unlocked .plock{transform:translateY(-100%);opacity:0;pointer-events:none}
+#phone .plme{position:absolute;left:50%;bottom:0;transform:translateX(-50%);height:min(57%,520px);width:auto;max-width:none;pointer-events:none;filter:drop-shadow(0 10px 30px rgba(0,0,0,.35))}
+#phone .plk,#phone .pdate,#phone .ptime,#phone .plwid,#phone .pnotif,#phone .phint,#phone .pbar{position:relative}
+#phone .plk{opacity:.9}
+#phone .pdate{margin-top:8px;font-size:19px;font-weight:600;text-shadow:0 1px 8px rgba(0,0,0,.3)}
+#phone .ptime{font-size:min(96px,24vw);line-height:1.02;font-weight:700;letter-spacing:-.03em;text-shadow:0 2px 20px rgba(0,0,0,.25);font-variant-numeric:tabular-nums}
+#phone .plwid{margin-top:10px;padding:8px 16px;border-radius:16px;background:rgba(255,255,255,.16);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);font-size:15px;font-weight:600;text-align:center}
+#phone .plwid span{display:block;font-weight:400;font-size:13px;opacity:.88}
+#phone .pnotif{margin-top:auto;width:100%;max-width:390px;display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:22px;background:rgba(245,245,250,.75);backdrop-filter:blur(24px) saturate(1.6);-webkit-backdrop-filter:blur(24px) saturate(1.6);color:#000;text-align:left;box-shadow:0 8px 30px rgba(0,0,0,.25)}
+#phone .pnic{width:38px;height:38px;border-radius:10px;flex:none;display:grid;place-items:center;background:linear-gradient(160deg,#4cc2ff,#0055c4);color:#fff;font-weight:800;font-size:20px}
+#phone .pnotif b{display:flex;justify-content:space-between;font-size:14px;font-weight:600;color:#333}
+#phone .pnotif b small{font-weight:400;font-size:13px;color:#666}
+#phone .pnotif strong{display:block;font-size:15.5px;margin-top:1px}
+#phone .pnotif em{display:block;font-style:normal;font-size:15px;line-height:1.3}
+#phone .phint{margin-top:14px;font-size:14px;font-weight:600;opacity:.95;text-shadow:0 1px 8px rgba(0,0,0,.7);animation:pHint 2.4s ease-in-out infinite}
+#phone .pbar{margin-top:10px;width:134px;height:5px;border-radius:3px;background:#fff;flex:none}
+@keyframes pHint{50%{transform:translateY(-4px);opacity:.55}}
+/* home screen */
+#phone .phome{position:absolute;inset:0;z-index:10;color:#fff;opacity:0;transform:scale(1.06);transition:opacity .45s,transform .5s cubic-bezier(.3,.7,.2,1);user-select:none;-webkit-user-select:none}
+#phone.unlocked .phome{opacity:1;transform:none}
+#phone .phs{position:absolute;inset:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:calc(var(--st) + 18px) 18px calc(var(--sb) + 124px)}
+#phone .pwid{display:block;width:100%;border-radius:24px;background:rgba(255,255,255,.16);backdrop-filter:blur(28px) saturate(1.4);-webkit-backdrop-filter:blur(28px) saturate(1.4);border:1px solid rgba(255,255,255,.18);padding:16px;margin-bottom:16px;box-shadow:0 10px 30px rgba(0,0,0,.18);text-align:left}
+#phone .pwid1{display:flex;align-items:center;gap:14px}
+#phone .pwn{display:block;font-size:20px;font-weight:700;line-height:1.15}
+#phone .pwr{display:block;font-size:14px;opacity:.92;margin-top:3px}
+#phone .ploc{display:flex;align-items:center;gap:4px;font-size:12.5px;opacity:.82;margin-top:6px}
+#phone .pava{position:relative;display:block;flex:none;border-radius:50%;overflow:hidden;background:radial-gradient(circle at 50% 30%,#8fdcff,#1e5fd0 72%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.35)}
+#phone .pava img{position:absolute;left:50%;top:7%;height:165%;width:auto;max-width:none;transform:translateX(-50%)}
+#phone .pwid2 header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+#phone .pwid2 header b{font-size:16px}
+#phone .pwid2 header span{font-size:13px;opacity:.8}
+#phone .pstep{display:flex;align-items:center;gap:12px;width:100%;padding:7px 0;font-size:15.5px}
+#phone .pstep i{width:26px;height:26px;border-radius:50%;flex:none;display:grid;place-items:center;font-style:normal;font-size:13px;font-weight:700;background:rgba(255,255,255,.22)}
+#phone .pstep i em{font-style:normal}
+#phone .pstep i svg,#phone .pstep.done i em{display:none}
+#phone .pstep.done i{background:#34c759}
+#phone .pstep.done i svg{display:block}
+#phone .pstep small{margin-left:auto;opacity:.72;font-size:13px}
+#phone .pgridh{display:grid;grid-template-columns:repeat(4,1fr);gap:18px 6px;margin:6px 0 16px}
+#phone .pico{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0}
+#phone .pict{width:min(62px,15.5vw);aspect-ratio:1;border-radius:24%;display:grid;place-items:center;color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.28);transition:filter .15s,transform .15s}
+#phone .pico:active .pict{filter:brightness(.8);transform:scale(.94)}
+#phone .pil{font-size:12px;text-align:center;text-shadow:0 1px 3px rgba(0,0,0,.5);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+#phone .psearchpill{display:flex;align-items:center;gap:6px;margin:0 auto;padding:7px 14px;border-radius:18px;background:rgba(255,255,255,.2);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);font-size:14px;font-weight:600}
+#phone .pdock{position:absolute;left:12px;right:12px;bottom:calc(var(--sb) + 10px);display:flex;justify-content:space-around;padding:14px 8px;border-radius:34px;background:rgba(255,255,255,.2);backdrop-filter:blur(30px) saturate(1.5);-webkit-backdrop-filter:blur(30px) saturate(1.5);border:1px solid rgba(255,255,255,.16)}
+/* app screens */
+#phone .pstack{position:absolute;inset:0;z-index:40;pointer-events:none}
+#phone .pscr{position:absolute;inset:0;background:var(--bg);pointer-events:auto;display:flex;flex-direction:column;opacity:0;transform:scale(.9) translateY(5%);border-radius:0;transition:transform .4s cubic-bezier(.3,.7,.2,1),opacity .3s,filter .4s}
+#phone .pscr.slide{opacity:1;transform:translateX(100%)}
+#phone .pscr.in{opacity:1;transform:none}
+#phone .pscr.under{transform:translateX(-22%);filter:brightness(.9)}
+#phone .pscr.out{opacity:0;transform:scale(.92)}
+#phone .pscr.slide.out{opacity:1;transform:translateX(100%)}
+#phone .pnav{position:relative;z-index:2;flex:none;height:calc(var(--st) + 50px);padding:var(--st) 8px 0;display:flex;align-items:center;background:rgba(242,242,247,.86);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:.5px solid transparent;transition:border-color .2s}
+#phone .pscr.scrolled .pnav{border-bottom-color:var(--sep)}
+#phone .pback{display:flex;align-items:center;gap:1px;color:var(--blue);font-size:17px;padding:6px 6px 6px 2px;min-height:44px;max-width:28%}
+#phone .pdark .pback{color:#fff}
+#phone .pback span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#phone .pnt{position:absolute;left:50%;bottom:13px;transform:translateX(-50%);font-size:17px;font-weight:600;max-width:46%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:0;transition:opacity .2s}
+#phone .pscr.scrolled .pnt{opacity:1}
+#phone .pbody{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:0 16px calc(var(--sb) + 40px)}
+#phone .plt{font-size:34px;font-weight:700;letter-spacing:-.02em;line-height:1.15;margin:4px 4px 14px}
+#phone .psub{color:var(--mut);font-size:15px;margin:-8px 4px 16px}
+#phone .ph{font-size:13px;font-weight:400;color:var(--mut);text-transform:uppercase;letter-spacing:.02em;margin:24px 16px 7px}
+#phone .pgrp{background:#fff;border-radius:12px;overflow:hidden}
+#phone .prow{display:flex;align-items:center;gap:12px;width:100%;min-height:46px;padding:11px 16px;position:relative;font-size:16px;text-align:left}
+#phone .prow+.prow:before{content:"";position:absolute;top:0;left:16px;right:0;border-top:.5px solid var(--sep)}
+#phone .plink:active{background:#e5e5ea}
+#phone .prow>svg:last-child{margin-left:auto;color:#c4c4c7;flex:none}
+#phone .pcol{display:flex;flex-direction:column;min-width:0;flex:1}
+#phone .pcol b{font-weight:600}
+#phone .pmut{color:var(--mut);font-size:14px}
+#phone .pone{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#phone .ptext{padding:14px 16px;font-size:16px;line-height:1.5}
+#phone .ptext p+p{margin-top:10px}
+#phone .plead{font-weight:600}
+#phone .pthumb{width:52px;height:52px;border-radius:10px;object-fit:cover;flex:none;background:#ddd}
+#phone .pmark{display:grid;place-items:center;font-weight:800;font-size:14px;color:#fff;background:linear-gradient(160deg,#4cc2ff,#0055c4)}
+#phone .pcard{background:#fff;border-radius:16px;padding:18px 16px;text-align:center}
+#phone .pcontact{display:flex;flex-direction:column;align-items:center;gap:3px;padding-top:22px}
+#phone .pcontact h2{font-size:26px;font-weight:700;margin-top:12px;line-height:1.2}
+#phone .pcontact p{font-size:15px}
+#phone .pacts{display:flex;gap:8px;margin-top:16px;width:100%}
+#phone .pact{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 2px;border-radius:12px;background:#f2f2f7;color:var(--blue);font-size:12px;font-weight:500}
+#phone .pact span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#phone .phero{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:16px;display:block;margin-bottom:14px;background:#ddd}
+#phone .pchips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 4px}
+#phone .pchips span{background:#fff;border-radius:10px;padding:7px 11px;font-size:14px;font-weight:600}
+#phone .pchips small{display:block;font-size:11px;font-weight:500;color:var(--mut);text-transform:uppercase;letter-spacing:.04em}
+#phone .pev{margin-top:12px;background:#e6f0ff;border-radius:14px;padding:13px 15px;font-size:16px;line-height:1.45;color:#002e66}
+#phone .pev small{display:block;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#0060df;margin-bottom:2px}
+#phone .pphg{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;border-radius:12px;overflow:hidden}
+#phone .pphg button{aspect-ratio:1;display:block;background:#ddd;overflow:hidden}
+#phone .pphg img{width:100%;height:100%;object-fit:cover;display:block}
+#phone .pbtns{display:flex;flex-direction:column;gap:10px;margin-top:22px}
+#phone .pbtn{display:flex;justify-content:center;align-items:center;gap:8px;min-height:50px;border-radius:14px;background:var(--blue);color:#fff;font-weight:600;font-size:17px;text-align:center}
+#phone .pbtn.pgray{background:#fff;color:var(--blue)}
+#phone .ptag{display:inline-block;padding:4px 10px;border-radius:999px;background:#e3f6e8;color:#14692f;font-size:13px;font-weight:600}
+#phone .ptt{font-size:20px;line-height:1.3;margin:10px 0 6px;font-weight:700}
+#phone .pfig{background:#fff;border-radius:12px;padding:10px;margin:0 0 10px}
+#phone .pfig img{width:100%;display:block;border-radius:6px}
+#phone .pfig figcaption{font-size:13px;color:var(--mut);margin-top:6px}
+#phone .palb{display:grid;grid-template-columns:1fr 1fr;gap:18px 14px}
+#phone .palb button{display:block;text-align:left;min-width:0}
+#phone .palb img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;display:block;background:#ddd}
+#phone .palb b{display:block;font-size:15px;font-weight:600;margin-top:6px;line-height:1.25}
+#phone .palb span{font-size:14px;color:var(--mut)}
+#phone .pnote{background:#fff;border-radius:12px;padding:16px;white-space:pre-wrap;font-size:16px;line-height:1.55}
+#phone .ptl{list-style:none;margin:0;padding:0 0 0 4px}
+#phone .ptl li{position:relative;padding:0 0 22px 24px;border-left:2px solid #c7d7f0;margin-left:7px}
+#phone .ptl li:before{content:"";position:absolute;left:-8px;top:2px;width:14px;height:14px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 4px var(--bg)}
+#phone .ptl li:last-child{border-left-color:transparent}
+#phone .ptl small{display:block;font-size:12.5px;font-weight:700;color:#0060df;text-transform:uppercase;letter-spacing:.05em}
+#phone .ptl b{display:block;font-size:17px;margin:2px 0 4px}
+#phone .ptl p{font-size:15.5px;line-height:1.5;color:#333}
+#phone .paw{width:30px;height:30px;border-radius:8px;flex:none;display:grid;place-items:center;background:linear-gradient(160deg,#ffd60a,#ff9500);color:#fff}
+#phone .pmail .prow span{flex:none}
+#phone .pmail input,#phone .pmail textarea,#phone .psearch input{flex:1;min-width:0;width:100%;border:0;background:transparent;font:inherit;font-size:16px;color:#000;outline:none;box-shadow:none;padding:0;-webkit-appearance:none;appearance:none;user-select:text;-webkit-user-select:text}
+#phone .pmail textarea{display:block;padding:12px 16px;border-top:.5px solid var(--sep);resize:none;min-height:190px;line-height:1.45}
+#phone .pfull{width:100%;margin-top:14px}
+#phone .psearch{display:flex;align-items:center;gap:8px;height:42px;padding:0 12px;border-radius:12px;background:#e3e3e8;color:var(--mut);margin:0 0 16px}
+#phone .psearch input{font-size:17px}
+#phone .pwps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+#phone .pwps button{text-align:center;font-size:13px;min-width:0}
+#phone .pwps i{display:block;aspect-ratio:9/16;border-radius:12px;background-size:cover!important;background-position:center!important;margin-bottom:6px;box-shadow:0 0 0 1px rgba(0,0,0,.1)}
+#phone .pwps button[aria-pressed=true] i{box-shadow:0 0 0 3px var(--blue)}
+/* photo viewer */
+#phone .pscr.pdark{background:#000;color:#fff}
+#phone .pdark .pnav{background:rgba(0,0,0,.7)}
+#phone .pdark .pnt{opacity:1;color:#fff}
+#phone .pdark .plt{display:none}
+#phone .pdark .pbody{display:flex;padding:0 0 calc(var(--sb) + 14px)}
+#phone .pview{flex:1;display:flex;flex-direction:column;min-height:100%}
+#phone .pvimg{flex:1;display:grid;place-items:center;touch-action:pan-y;min-height:0;padding:8px 0}
+#phone .pvimg img{max-width:100%;max-height:calc(100vh - 240px);max-height:calc(100dvh - 240px);object-fit:contain;display:block;user-select:none;-webkit-user-drag:none}
+#phone .pvcap{padding:12px 20px 4px;font-size:15px;line-height:1.4;text-align:center;color:#e5e5ea;min-height:52px}
+#phone .pvnav{display:flex;justify-content:space-between;align-items:center;padding:6px 20px}
+#phone .pvnav button{width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.14);display:grid;place-items:center}
+#phone .pvn{font-size:14px;color:#bbb}
+@media (prefers-reduced-motion:reduce){#phone .plock,#phone .phome,#phone .pscr{transition:none}#phone .phint{animation:none}}
 </style>
 </head>
 <body>
@@ -1000,7 +1161,7 @@ label{display:block;margin:8px 0 3px}
     <p>This portfolio is an interactive desktop. Turn on JavaScript to explore it.</p>
   </main>
 </noscript>
-<noscript><p style="background:#fff;color:#000;padding:20px;font:16px sans-serif">This portfolio is an interactive page and needs JavaScript. You can find the author's work on GitHub: <a href="https://github.com/Toiroff">github.com/Toiroff</a>.</p></noscript>
+<div id="phone"></div>
 
 <!-- ======================= BOOT ======================= -->
 <div id="boot" role="status" aria-live="polite">
@@ -3119,6 +3280,251 @@ function back96() {
   wake();
 }
 
+/* =====================================================================
+   PHONE: UmarOS Mobile, the only version on phones. Lock screen → home screen (profile widget,
+   "Get to know me" widget, app icons, dock) → full-screen apps with a back stack that follows the
+   browser's history, so the phone's own back gesture works. All content from ME. No Apple names or logos.
+   ===================================================================== */
+let PHONE = false;
+const PG = {
+  user: '<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>',
+  folder: '<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',
+  flask: '<path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4A2 2 0 0 0 19 18l-5-9V3"/><path d="M7.5 15h9"/>',
+  note: '<path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 12h7M9 16h7"/>',
+  mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/>',
+  file: '<path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/><circle cx="12" cy="11.5" r="2"/><path d="M8.5 17.5c.8-2 2-3 3.5-3s2.7 1 3.5 3"/>',
+  code: '<path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/>',
+  brief: '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/>',
+  link: '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
+  chev: '<path d="M9 6l6 6-6 6"/>', back: '<path d="M15 5l-7 7 7 7"/>', check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>'
+};
+const PL = LINKS.find(l => /linkedin/i.test(l.label));
+const PAPPS = {
+  about:    { name: "About Me", bg: "linear-gradient(160deg,#b47cff,#6a4bff)", g: PG.user, open: () => pAbout() },
+  projects: { name: "Projects", bg: "linear-gradient(160deg,#5ac8fa,#1d7cf2)", g: PG.folder, open: () => pProjects() },
+  research: { name: "Research", bg: "linear-gradient(160deg,#4cd964,#14a045)", g: PG.flask, open: () => pResearch() },
+  photos:   { name: "Photos", bg: "linear-gradient(160deg,#ffb340,#ff3b6b)", g: G.image, open: () => pAlbums() },
+  notes:    { name: "Notes", bg: "linear-gradient(160deg,#ffd84d,#f5a300)", g: PG.note, open: () => pNotes() },
+  journey:  { name: "Journey", bg: "linear-gradient(160deg,#64d2ff,#0a84ff)", g: G.route, open: () => pJourney() },
+  awards:   { name: "Awards", bg: "linear-gradient(160deg,#ffcf3a,#ff8a00)", g: G.award, open: () => pAwards() },
+  resume:   ME.resumeUrl ? { name: "Resume", bg: "linear-gradient(160deg,#ff6961,#d70015)", g: PG.file, url: ME.resumeUrl } : null,
+  mail:     { name: "Mail", bg: "linear-gradient(160deg,#5ac8fa,#0062e0)", g: PG.mail, open: () => pMail() },
+  settings: { name: "Settings", bg: "linear-gradient(160deg,#a1a1a6,#5b5b60)", g: G.gear, open: () => pSettings() },
+  github:   GH ? { name: "GitHub", bg: "linear-gradient(160deg,#48484a,#1c1c1e)", g: PG.code, url: GH.url } : null,
+  linkedin: PL ? { name: "LinkedIn", bg: "linear-gradient(160deg,#2e86de,#0a4f9e)", g: PG.brief, url: PL.url } : null
+};
+const PGRID = ["research", "notes", "journey", "awards", "resume", "settings", "github", "linkedin"].filter(k => PAPPS[k]);
+const PDOCK = ["about", "projects", "photos", "mail"];
+const PSTEPS = [["about", "Who I am"], ["projects", "What I've built"], ["research", "What I research"], ["notes", "How I think"], ["mail", "Say hello"]];
+const pSeen = new Set(), PST = [];
+const pIcon = (k, label = true) => { const a = PAPPS[k]; return `<button class="pico" data-papp="${k}" aria-label="${esc(a.name)}"><span class="pict" style="background:${a.bg}">${SVG(a.g, 30, 1.9)}</span>${label ? `<span class="pil" aria-hidden="true">${esc(a.name)}</span>` : ""}</button>`; };
+const pAva = s => `<span class="pava" style="width:${s}px;height:${s}px"><img src="${esc(ME.desktop.me)}" alt=""></span>`;
+const pChev = () => SVG(PG.chev, 16, 2.4);
+const pWallIdx = () => Math.max(0, wallList().findIndex(w => w.name === store.get("wallP")));
+const pApplyWall = () => { const w = $("#phone .pwall"); if (w) w.style.background = wallCSS(wallList()[pWallIdx()]); };
+const pGrid = (items, a) => `<div class="pphg">${items.map((g, j) => `<button data-ph="${a}:${j}" aria-label="${esc(g.cap)}"><img src="${esc(g.src)}" alt="" loading="lazy"></button>`).join("")}</div>`;
+const pList = rows => `<div class="pgrp">${rows.join("")}</div>`;
+const pText = (h, body) => `<h3 class="ph">${esc(h)}</h3><div class="pgrp ptext">${body}</div>`;
+
+function pTick() {
+  const d = new Date(), t = $("#phone .ptime"), dt = $("#phone .pdate");
+  if (t) t.textContent = d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }).replace(/\s?[AP]M$/i, "");
+  if (dt) dt.textContent = d.toLocaleDateString([], { weekday: "long", month: "long", day: "numeric" });
+}
+function pSteps() {
+  document.querySelectorAll("#phone .pstep").forEach(b => b.classList.toggle("done", pSeen.has(b.dataset.step)));
+  const c = $("#phone .pcount"); if (c) c.textContent = `${PSTEPS.filter(s => pSeen.has(s[0])).length} of 5`;
+}
+function pUnlock() {
+  const r = $("#phone"); if (r.classList.contains("unlocked")) return;
+  r.classList.add("unlocked");
+  setTimeout(() => { const f = r.querySelector(".pwid1"); if (f) f.focus({ preventScroll: true }); }, 450);
+}
+function pOpenApp(k) {
+  const a = PAPPS[k]; if (!a) return;
+  if (PSTEPS.some(s => s[0] === k)) { pSeen.add(k); pSteps(); }
+  if (a.url) return window.open(a.url, "_blank", "noopener");
+  a.open();
+}
+// a full-screen screen; the first one zooms up from the home screen, later ones slide in from the right
+function pPush(title, html, init, kind = "") {
+  const prev = PST[PST.length - 1], el = document.createElement("section"), backTo = !prev ? "Home" : prev.title.length > 14 ? "Back" : prev.title;
+  el.className = `pscr ${prev ? "slide" : ""} ${kind}`; el.setAttribute("role", "dialog"); el.setAttribute("aria-label", title);
+  el.innerHTML = `<header class="pnav"><button class="pback" aria-label="Back to ${esc(prev ? prev.title : "Home")}">${SVG(PG.back, 24, 2.4)}<span>${esc(backTo)}</span></button><b class="pnt" aria-hidden="true">${esc(title)}</b></header>
+    <div class="pbody"><h1 class="plt">${esc(title)}</h1>${html}</div>`;
+  $("#phone .pstack").appendChild(el);
+  PST.push({ el, title });
+  history.pushState({ pd: PST.length }, "");
+  el.querySelector(".pbody").addEventListener("scroll", e => el.classList.toggle("scrolled", e.target.scrollTop > 40), { passive: true });
+  el.querySelector(".pback").onclick = () => history.back();
+  if (init) init(el);
+  requestAnimationFrame(() => requestAnimationFrame(() => { el.classList.add("in"); if (prev) prev.el.classList.add("under"); }));
+  setTimeout(() => el.querySelector(".pback").focus({ preventScroll: true }), 60);
+}
+function pPop() {
+  const s = PST.pop(); if (!s) return;
+  s.el.classList.remove("in"); s.el.classList.add("out");
+  setTimeout(() => s.el.remove(), reduceMotion() ? 0 : 420);
+  const prev = PST[PST.length - 1]; if (prev) prev.el.classList.remove("under");
+}
+
+function pAbout() {
+  const acts = [ME.email && ["mailto:" + ME.email, PG.mail, "Mail"], ME.resumeUrl && [ME.resumeUrl, PG.file, "Resume"],
+    ...LINKS.map(l => [l.url, /github/i.test(l.label) ? PG.code : /linkedin/i.test(l.label) ? PG.brief : PG.link, l.label])].filter(Boolean);
+  pPush("About Me", `
+    <div class="pcard pcontact">${pAva(116)}<h2>${esc(ME.publicName)}</h2><p class="pmut">${esc(ME.name)}</p><p>${esc(ME.role)}</p><p class="pmut">${esc(ME.location)}</p>
+      <div class="pacts">${acts.map(([u, g, l]) => `<a class="pact" href="${esc(u)}" ${u.startsWith("mailto:") ? "" : EXT}>${SVG(g, 21, 2)}<span>${esc(l)}</span></a>`).join("")}</div></div>
+    ${pText("About", `<p class="plead">${esc(plain(ME.aboutLead))}</p>${ME.about.map(p => `<p>${esc(p)}</p>`).join("")}`)}
+    <h3 class="ph">Now</h3>${pList(ME.now.map(n => `<div class="prow"><span>${esc(n)}</span></div>`))}
+    ${pText("Where I want to go", `<p>${esc(ME.goal)}</p>`)}
+    <h3 class="ph">Skills</h3>${pList(ME.skills.map(g => `<div class="prow"><span class="pcol"><b>${esc(g.level)}</b><span class="pmut">${g.items.map(esc).join(", ")}</span></span></div>`))}
+    <h3 class="ph">Academics</h3>${pList(ME.academics.map(a => `<div class="prow"><span>${esc(a)}</span></div>`))}
+    <div class="pbtns"><button class="pbtn pgray" data-papp="journey">My journey</button><button class="pbtn pgray" data-papp="awards">Honors &amp; awards</button></div>`);
+}
+function pProjects() {
+  pPush("Projects", `<p class="psub">My activities, with photos as proof.</p>${pList(ME.projects.map(p => `<button class="prow plink" data-proj="${esc(p.id)}">${p.cover ? `<img class="pthumb" src="${esc(p.cover)}" alt="" loading="lazy">` : `<span class="pthumb pmark">${esc(p.mark || "")}</span>`}<span class="pcol"><b>${esc(p.title)}</b><span class="pmut pone">${esc(p.role || p.tagline || "")}</span></span>${pChev()}</button>`))}`);
+}
+function pProject(id) {
+  const p = ME.projects.find(x => x.id === id); if (!p) return;
+  if (p.anchor) return pResearch();
+  const links = (p.links || []).filter(l => l.url), ai = ALBUMS().findIndex(a => a.proj === p.id);
+  pPush(p.title, `${p.cover ? `<img class="phero" src="${esc(p.cover)}" alt="${esc(p.title)}">` : ""}
+    <p class="psub" style="margin-top:0">${esc(p.tagline)}</p>
+    <div class="pchips">${FACT_ROWS(p).map(([k, v]) => `<span><small>${esc(k)}</small>${esc(v)}</span>`).join("")}</div>
+    ${p.card.evidence ? `<div class="pev"><small>Evidence</small>${esc(p.card.evidence)}</div>` : ""}
+    ${CASE_FIELDS.filter(([k]) => p[k]).map(([k, l]) => pText(l, `<p>${esc(p[k])}</p>`)).join("")}
+    ${p.gallery && p.gallery.length ? `<h3 class="ph">Proof · ${p.gallery.length} photo${p.gallery.length > 1 ? "s" : ""}</h3>${pGrid(p.gallery, ai)}` : ""}
+    ${links.length ? `<div class="pbtns">${links.map(l => `<a class="pbtn" href="${esc(l.url)}" ${EXT}>${esc(l.label)} ↗</a>`).join("")}</div>` : ""}`);
+}
+function pResearch() {
+  const R = ME.research, li = a => a.map(f => `<p>• ${esc(f)}</p>`).join("");
+  pPush("Research", `<div class="pcard" style="text-align:left"><span class="ptag">${esc(R.status)}</span><h2 class="ptt">${esc(R.title)}</h2>${R.authors ? `<p class="pmut">${esc(R.authors)}</p>` : ""}</div>
+    ${pText("Question", `<p><b>${esc(R.question)}</b></p>`)}${pText("Why it matters", `<p>${esc(R.why)}</p>`)}
+    <h3 class="ph">Method</h3>${pList(R.method.map(m => `<div class="prow"><span class="pcol"><b>${esc(m.k)}</b><span class="pmut">${esc(m.v)}</span></span></div>`))}
+    ${pText("Findings", li(R.findings) + (R.findingsNote ? `<p class="pmut">${esc(R.findingsNote)}</p>` : ""))}
+    ${(R.figures || []).length ? `<h3 class="ph">Figures</h3>${R.figures.map(f => `<figure class="pfig"><img src="${esc(f.src)}" alt="${esc(f.cap)}" loading="lazy"><figcaption>${esc(f.cap)}</figcaption></figure>`).join("")}` : ""}
+    ${pText("Limitations", li(R.limitations))}${R.learned ? pText("What I learned", `<p>${esc(R.learned)}</p>`) : ""}${pText("What I'd study next", li(R.next))}
+    ${R.paperUrl ? `<div class="pbtns"><a class="pbtn" href="${esc(R.paperUrl)}" ${EXT}>Read the paper ↗</a></div>` : ""}`);
+}
+function pAlbums() {
+  pPush("Photos", `<p class="psub">Proof from every activity.</p><div class="palb">${ALBUMS().map((a, i) => `<button data-alb="${i}"><img src="${esc(a.items[0].src)}" alt="" loading="lazy"><b>${esc(a.title)}</b><span>${a.items.length}</span></button>`).join("")}</div>`);
+}
+function pAlbum(i) {
+  const a = ALBUMS()[i]; if (!a) return;
+  pPush(a.title, `<p class="psub">${a.items.length} photo${a.items.length > 1 ? "s" : ""}</p>${pGrid(a.items, i)}`);
+}
+function pViewer(a, j) {
+  const A = ALBUMS()[a]; if (!A) return;
+  pPush(A.title, `<div class="pview"><div class="pvimg"><img alt=""></div><p class="pvcap" aria-live="polite"></p>
+    <div class="pvnav"><button data-pv="-1" aria-label="Previous photo">${SVG(PG.back, 22, 2.4)}</button><span class="pvn"></span><button data-pv="1" aria-label="Next photo">${SVG(PG.chev, 22, 2.4)}</button></div></div>`, el => {
+    let i = j, x0 = null;
+    const img = el.querySelector(".pvimg img"), cap = el.querySelector(".pvcap"), n = el.querySelector(".pvn"), box = el.querySelector(".pvimg");
+    const show = () => { const g = A.items[i]; img.src = g.src; img.alt = g.cap; cap.textContent = g.cap; n.textContent = `${i + 1} of ${A.items.length}`; };
+    const step = d => { i = (i + d + A.items.length) % A.items.length; show(); };
+    el.querySelectorAll("[data-pv]").forEach(b => b.onclick = () => step(+b.dataset.pv));
+    box.addEventListener("pointerdown", e => { x0 = e.clientX; });
+    box.addEventListener("pointerup", e => { if (x0 !== null && Math.abs(e.clientX - x0) > 40) step(e.clientX < x0 ? 1 : -1); x0 = null; });
+    el.addEventListener("keydown", e => { if (/Arrow(Left|Right)/.test(e.key)) { e.preventDefault(); step(e.key === "ArrowRight" ? 1 : -1); } });
+    show();
+  }, "pdark");
+}
+function pNotes() {
+  pPush("Notes", pList(NOTES().map(n => `<button class="prow plink" data-note="${esc(n.id)}"><span class="pcol"><b>${esc(n.title.replace(/\.txt$/, ""))}</b><span class="pmut pone">${esc(n.body.split("\n").filter(Boolean).slice(1, 2).join(" "))}</span></span>${pChev()}</button>`)));
+}
+function pNote(id) {
+  const n = NOTES().find(x => x.id === id); if (!n) return;
+  pPush(n.title.replace(/\.txt$/, ""), `<div class="pnote">${esc(n.body)}</div>`);
+}
+function pJourney() {
+  pPush("Journey", `<p class="psub">How the pieces connect.</p><ol class="ptl">${ME.journey.map(j => `<li><small>${esc(j.when)}</small><b>${esc(j.title)}</b><p>${esc(j.text)}</p></li>`).join("")}</ol>`);
+}
+function pAwards() {
+  const cert = ALBUMS().findIndex(a => /olympiad/i.test(a.title));
+  pPush("Awards", `<p class="psub">Honors and recognition.</p>${pList(ME.honors.map(h => `<div class="prow"><span class="paw">${SVG(G.award, 18, 2)}</span><span>${esc(h)}</span></div>`))}
+    ${cert >= 0 ? `<div class="pbtns"><button class="pbtn pgray" data-alb="${cert}">See the certificates</button></div>` : ""}`);
+}
+function pMail() {
+  pPush("New Message", `${ME.email ? `<form class="pmail">${pList([`<label class="prow"><span class="pmut">To:</span><input value="${esc(ME.email)}" readonly aria-label="To"></label>`, `<label class="prow"><span class="pmut">Subject:</span><input name="s" placeholder="Hello" aria-label="Subject" required></label>`]).replace("</div>", `<textarea name="b" rows="8" placeholder="Hi ${esc(ME.shortName)}, ..." aria-label="Message" required></textarea></div>`)}
+    <button class="pbtn pfull" type="submit">${SVG(G.send, 18, 2)}Send</button></form>` : ""}
+    <h3 class="ph">Or find me here</h3>${pList(LINKS.map(l => `<a class="prow plink" href="${esc(l.url)}" ${EXT}><span>${esc(l.label)}</span>${pChev()}</a>`))}`, el => {
+    const f = el.querySelector("form");
+    if (f) f.onsubmit = e => { e.preventDefault(); location.href = `mailto:${ME.email}?subject=${encodeURIComponent(f.s.value)}&body=${encodeURIComponent(f.b.value)}`; };
+  });
+}
+function pSettings() {
+  const W = wallList();
+  pPush("Settings", `${pList([`<div class="prow">${pAva(58)}<span class="pcol"><b>${esc(ME.name)}</b><span class="pmut">${esc(ME.osName)} Mobile</span></span></div>`])}
+    <h3 class="ph">Wallpaper</h3><div class="pwps">${W.map((w, i) => `<button data-pw="${i}" aria-pressed="${i === pWallIdx()}"><i style="background:${esc(wallCSS(w))}"></i><span>${esc(w.name)}</span></button>`).join("")}</div>
+    ${pText("About this site", `<p><b>Built with:</b> ${ME.site.stack.map(esc).join(", ")}</p><p>${esc(ME.site.why)}</p><p>${esc(ME.site.process)}</p>`)}
+    ${pText("On a computer", `<p class="pmut">Open this site on a computer to see it as a 1996 desktop that updates itself to 2026.</p>`)}`, el => {
+    el.querySelectorAll("[data-pw]").forEach(b => b.onclick = () => {
+      store.set("wallP", W[+b.dataset.pw].name); pApplyWall();
+      el.querySelectorAll("[data-pw]").forEach(x => x.setAttribute("aria-pressed", x === b));
+    });
+  });
+}
+function pSearch() {
+  pPush("Search", `<label class="psearch">${SVG(G.search, 17, 2.2)}<input type="search" placeholder="Apps, projects, notes, photos" aria-label="Search"></label><div class="pres"></div>`, el => {
+    const inp = el.querySelector("input"), out = el.querySelector(".pres");
+    const items = [...Object.entries(PAPPS).filter(([, a]) => a).map(([k, a]) => ({ t: a.name, s: "App", go: "app:" + k })),
+      ...ME.projects.map(p => ({ t: p.title, s: "Project", go: "proj:" + p.id })), ...NOTES().map(n => ({ t: n.title.replace(/\.txt$/, ""), s: "Note", go: "note:" + n.id })),
+      ...ALBUMS().map((a, i) => ({ t: a.title, s: "Photos", go: "alb:" + i }))];
+    const render = () => {
+      const q = inp.value.trim().toLowerCase(), r = items.filter(x => !q || x.t.toLowerCase().includes(q)).slice(0, 40);
+      out.innerHTML = pList(r.length ? r.map(x => `<button class="prow plink" data-go="${esc(x.go)}"><span class="pcol"><b>${esc(x.t)}</b><span class="pmut">${x.s}</span></span>${pChev()}</button>`) : [`<div class="prow"><span class="pmut">No results for “${esc(inp.value)}”</span></div>`]);
+    };
+    inp.oninput = render; render(); setTimeout(() => inp.focus(), 420);
+  });
+}
+
+function buildPhone() {
+  PHONE = true;
+  const r = $("#phone"), city = ME.location.split(",")[0];
+  r.innerHTML = `<h1 class="psr">${esc(ME.name)} (${esc(ME.publicName)})</h1><div class="pwall"></div>
+  <section class="plock" tabindex="0" role="button" aria-label="Unlock: open the home screen">
+    <img class="plme" src="${esc(ME.desktop.me)}" alt="">
+    <span class="plk" aria-hidden="true">${SVG(G.lock, 20, 2)}</span>
+    <p class="pdate"></p><p class="ptime" aria-hidden="true"></p>
+    <p class="plwid">${esc(ME.publicName)}<span>${esc(ME.role)}</span></p>
+    <div class="pnotif" data-lockopen><span class="pnic" aria-hidden="true">U</span><span style="flex:1;min-width:0"><b>${esc(ME.osName)}<small>now</small></b><strong>Welcome to my phone</strong><em>I'm ${esc(ME.shortName)}, a student from ${esc(city)}. Tap to get to know me.</em></span></div>
+    <p class="phint" aria-hidden="true">Swipe up or tap to open</p><span class="pbar" aria-hidden="true"></span>
+  </section>
+  <section class="phome" aria-label="Home screen">
+    <div class="phs">
+      <button class="pwid pwid1" data-papp="about" aria-label="About Me: ${esc(ME.publicName)}">${pAva(84)}<span class="pcol"><b class="pwn">${esc(ME.publicName)}</b><span class="pwr">${esc(ME.role)}</span><span class="ploc">${SVG(G.pin, 13, 2.2)}${esc(ME.location)}</span></span></button>
+      <div class="pwid pwid2"><header><b>Get to know me</b><span class="pcount">0 of 5</span></header>${PSTEPS.map(([k, t], i) => `<button class="pstep" data-papp="${k}" data-step="${k}"><i aria-hidden="true"><em>${i + 1}</em>${SVG(PG.check, 15, 2.8)}</i><span>${esc(t)}</span><small>${esc(PAPPS[k].name)}</small></button>`).join("")}</div>
+      <div class="pgridh">${PGRID.map(k => pIcon(k)).join("")}</div>
+      <button class="psearchpill">${SVG(G.search, 14, 2.4)}Search</button>
+    </div>
+    <nav class="pdock" aria-label="Dock">${PDOCK.map(k => pIcon(k, false)).join("")}</nav>
+  </section>
+  <div class="pstack"></div>`;
+  pApplyWall(); pTick(); setInterval(pTick, 15000);
+
+  // lock screen: tap, swipe up, Enter or Space opens; tapping the notification also opens About Me
+  const lock = r.querySelector(".plock"); let y0 = null;
+  lock.addEventListener("pointerdown", e => { y0 = e.clientY; });
+  lock.addEventListener("pointerup", e => {
+    if (y0 === null) return; const dy = y0 - e.clientY; y0 = null;
+    if (dy > 50 || Math.abs(dy) < 12) { pUnlock(); if (Math.abs(dy) < 12 && e.target.closest("[data-lockopen]")) setTimeout(() => pOpenApp("about"), 380); }
+  });
+  lock.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pUnlock(); } });
+
+  r.addEventListener("click", e => {
+    const t = e.target.closest("[data-papp],[data-proj],[data-ph],[data-alb],[data-note],[data-go],.psearchpill"); if (!t || t.closest(".plock")) return;
+    const d = t.dataset;
+    if (d.papp) return pOpenApp(d.papp);
+    if (d.proj) return pProject(d.proj);
+    if (d.ph) { const [a, j] = d.ph.split(":").map(Number); return pViewer(a, j); }
+    if (d.alb) return pAlbum(+d.alb);
+    if (d.note) return pNote(d.note);
+    if (d.go) { const [k, v] = d.go.split(/:(.*)/); return k === "app" ? pOpenApp(v) : k === "proj" ? pProject(v) : k === "note" ? pNote(v) : pAlbum(+v); }
+    if (t.classList.contains("psearchpill")) return pSearch();
+  });
+  // the phone's back gesture / browser back closes screens in order
+  addEventListener("popstate", () => { const d = (history.state && history.state.pd) || 0; while (PST.length > d) pPop(); });
+}
+
 /* ---------- start-up: every visit boots the 1996 desktop first. Explicit share links still work: #2026 → desktop, #web → web page ---------- */
 let bootedOnce = false;
 const _finishBoot = boot;
@@ -3133,7 +3539,9 @@ boot = function () {
 };
 const START_HASH = location.hash;
 const FRAMED = (() => { try { return window.self !== window.top; } catch { return true; } })();
-if (FRAMED && START_HASH === "#web") {             // inside the UmarOS 2026 Browser app
+if (document.documentElement.classList.contains("phone")) {   // phones: UmarOS Mobile only (see #phoneCheck in <head>)
+  buildPhone();
+} else if (FRAMED && START_HASH === "#web") {             // inside the UmarOS 2026 Browser app
   $("#boot").style.display = "none"; setDesktopInert(true);
   buildModern(); const m = $("#modern"); m.classList.add("on", "in", "framed");
 } else if (START_HASH === "#2026" || START_HASH === "#web") {
