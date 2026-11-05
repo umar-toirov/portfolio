@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://umar-toirov.vercel.app/sitemap.xml
+Sitemap: https://www.muhammadtoirov.uz/sitemap.xml

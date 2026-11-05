@@ -35,6 +35,7 @@ The concept is inspired by robbyyeager.com. **All code, text and graphics here a
 portfolio/
 ├── index.html   # everything: CSS, HTML shell, JS
 ├── Muhammadumar-resume.pdf
+├── vercel.json  # permanent redirect from the old umar-toirov.vercel.app address to the domain
 ├── robots.txt   # allows everything, points to the sitemap
 ├── sitemap.xml  # the page and the resume PDF (bump lastmod when content changes)
 ├── img/         # og.jpg (1200×630 link preview), me-2026.webp, me-1996.png, wallpaper-silk.webp, wallpaper-2026.webp, beijing.webp, beijing-scene.webp
@@ -165,4 +166,4 @@ There is no test suite. Before finishing any change:
 
 ## Open items / owner TODO
 
-See the `CONTENT_TO_VERIFY` comment at the top of the script for the full list. The main ones: email, LinkedIn, resume PDF, exact dates, project roles and outcomes, research sample size and final results, screenshots, and review of drafted reflections. Hosting and domain are not set up; confirm with the owner before deploying anything.
+See the `CONTENT_TO_VERIFY` comment at the top of the script for the full list. The main ones: email, LinkedIn, resume PDF, exact dates, project roles and outcomes, research sample size and final results, screenshots, and review of drafted reflections. The site is live at **https://www.muhammadtoirov.uz** (Vercel, auto-deploys from `main`; the bare domain redirects to www, and `vercel.json` permanently redirects the old umar-toirov.vercel.app address there). Push only when the owner asks.

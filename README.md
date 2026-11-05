@@ -10,7 +10,7 @@ It opens as **UmarOS 95**, a working desktop from 1996: windows you can drag and
 
 In a hurry? Everything is also available as one scrolling page.
 
-- Live site: https://umar-toirov.vercel.app (every visit starts in 1996)
+- Live site: https://www.muhammadtoirov.uz (every visit starts in 1996)
 - Share links: `/#2026` opens the desktop, `/#web` the web-page version
 
 ## Why 1996?
