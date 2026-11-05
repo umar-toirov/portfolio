@@ -1,14 +1,25 @@
 {
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/",
       "has": [
         {
           "type": "host",
           "value": "umar-toirov.vercel.app"
         }
       ],
-      "destination": "https://www.muhammadtoirov.uz/:path*",
+      "destination": "https://www.muhammadtoirov.uz/",
+      "permanent": true
+    },
+    {
+      "source": "/:path+",
+      "has": [
+        {
+          "type": "host",
+          "value": "umar-toirov.vercel.app"
+        }
+      ],
+      "destination": "https://www.muhammadtoirov.uz/:path+",
       "permanent": true
     }
   ]
