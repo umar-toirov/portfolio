@@ -36,6 +36,8 @@ portfolio/
 ├── index.html   # everything: CSS, HTML shell, JS
 ├── Muhammadumar-resume.pdf
 ├── vercel.json  # permanent redirect from the old umar-toirov.vercel.app address to the domain
+├── favicon.ico  # site icon 16/32/48 (search results need a real file, not a data: URI)
+├── favicon.svg  # the same icon as SVG; img/icon-192.png and img/apple-touch-icon.png are the large versions
 ├── robots.txt   # allows everything, points to the sitemap
 ├── sitemap.xml  # the page and the resume PDF (bump lastmod when content changes)
 ├── img/         # og.jpg (1200×630 link preview), me-2026.webp, me-1996.png, wallpaper-silk.webp, wallpaper-2026.webp, beijing.webp, beijing-scene.webp
